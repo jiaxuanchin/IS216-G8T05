@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <style>
+      img{
+        width:100%;
+      }
+    </style>
+
+
+    <div id="map"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+    <title>Itinerary</title>
+    <!-- search link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/autofill.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWAdiErZx7DlZYzpcxulO8_OLY2rYUm4&callback=initMap&libraries=places&v=weekly" defer></script>
+    
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+     <!-- theme meta -->
+     <meta name="theme-name" content="revolve" />
+
+     <!--Favicon-->
+     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+   
+    <!-- calendar -->
+    <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
+    <meta name="description" content="Javascript date range picker - lightweight, no jQuery. Date Range Picker can be attached to input element to pop up one or more calendars for selecting dates.">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/lightpick@latest/css/lightpick.css">
+
+    <!-- other link -->
+    
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- nav -->
+     <!-- THEME CSS
+	================================================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Themify -->
+    <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+    <!-- <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css"> -->
+    <!-- <link rel="stylesheet" href="plugins/slick-carousel/slick.css"> -->
+    <!-- Slick Carousel -->
+    <!-- <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css"> -->
+    <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+
+  <body>
+    <!--header-->
+<header class="header-top bg-grey justify-content-center">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-2 col-md-4 text-center d-none d-lg-block">
+          <a class="navbar-brand " href="index.html">
+            <img src="images/logo.png" alt="" class="img-fluid">
+          </a>
+      </div>
+
+      <div class="col-lg-7 col-md-12" >
+        <nav class="navbar navbar-expand-lg navigation-2 navigation">
+          <a class="navbar-brand text-uppercase d-lg-none" href="#">
+            <img src="images/logo.png" alt="" class="img-fluid">
+          </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="ti-menu"></span>
+            </button>
+
+              <div class="collapse navbar-collapse" id="navbar-collapse">
+                  <ul id="menu" class="menu navbar-nav mx-auto">
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Home
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="index.html">Home 1</a>
+                              <a class="dropdown-item" href="index-2.html">Home 2</a>
+                              <a class="dropdown-item" href="index-3.html">Home 3</a>
+                              <a class="dropdown-item" href="index-4.html">Home 4</a>
+                              <a class="dropdown-item" href="index-5.html">Home 5</a>
+                              <a class="dropdown-item" href="index-6.html">Home 6</a>
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Favourites
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <a class="dropdown-item" href="standard-fullwidth.html">Standard Fullwidth</a>
+                            <a class="dropdown-item" href="standard-left-sidebar.html">Standard Left Sidebar</a>
+                            <a class="dropdown-item" href="standard-right-sidebar.html">Standard Right Sidebar</a>
+                          </div>
+                      </li>
+
+                      <li class="nav-item"><a href="about.html" class="nav-link text-white">Current Trips</a></li>
+                      <li class="nav-item"><a href="fashion.html" class="nav-link text-white">Add New Trip</a></li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Profile
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                            <a class="dropdown-item" href="post-video.html">Video Formats</a>
+                            <a class="dropdown-item" href="post-audio.html">Audio Format</a>
+                            <a class="dropdown-item" href="post-link.html">Quote Format</a>
+                            <a class="dropdown-item" href="post-gallery.html">Gallery Format</a>
+                            <a class="dropdown-item" href="post-image.html">Image Format</a>
+                          </div>
+                      </li>
+                      
+                     
+                  </ul>
+
+                  
+              </div>
+          </nav>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-6">
+          <div class="header-socials-2 text-right d-none d-lg-block">
+           
+
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width: 100px"/>
+                    <button type="button" class="btn btn-primary "><i class="ti-search"></i></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</header>
+
+
+    <!--  heading-->
+    <div class="trip-name">
+        <div class="card w-50 h-200 mx-auto shadow">
+          <div class="card-body ">
+            <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1>
+            <h5 class="card-content" style="text-align:left"> 
+              <i style="font-size:24px" class="fa">&#xf073;</i> 
+              10/14-10/18
+            </h5> 
+            <br>
+            <div class="people">
+              <i style='font-size:24px' style="right: 0;" class='fas'>&#xf406;</i>
+              <i style='font-size:24px' class='fas'>&#xf234;</i>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="itinerary-heading">
+      <div class="container">
+        <div class="row">
+
+          <div class="col">
+            <h1><strong>Itinerary</strong></h1>
+          </div>
+
+          <div class="col">
+              <div class="row">
+                <div class="col d-flex" >
+                  
+                  <!----------------------- CALENDAR ----------------------->
+                  <div class="container d-flex">
+                    <button type="button" id="demo-2" class="btn btn-outline-secondary" class="form-control form-control-sm" >
+                      <i style="font-size:24px" class="fa">&#xf073; 
+                      <p id="result-2" style="display:inline">&nbsp;</p></i> 
+                    </button>
+                  </div>
+
+                  <!-- end calendar -->
+
+                </div>
+              </div>
+          </div>
+       
+        </div>
+      </div>  
+    </div>
+    
+    <!------------------------------------ ACCORDION--------------------------------------------->
+
+    <div class="container">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+
+          <!-------------- item1 ------------>
+          <div class="accordion-item">
+              <!-- header -->
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <h4>4th October, Tues </h4>
+                </button>
+              </h2>
+
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body"> 
+                      
+                      <div class="row d-flex">
+                          <div class="col-12">
+                            <!-- subheading -->
+                            <div class="sub-heading mb-2">
+                              <input type="text" id="TextInput" class="form-control" placeholder="Add a subheading(pencil icon)" >
+                            </div>  
+      
+                            <!------------- SEARCH BOX ------------->
+                          
+
+                            <!--PLACE INFO START-->
+                            <div id="place_info">
+                              
+                            </div>
+
+                            <div id="recommended" style="height: 200px">
+                              
+                            </div>
+                            <!--PLACE INFO END-->
+
+                            <!--ADD PLACE INPUT BOX-->
+                            <div class="search-box mb-2 ">
+                              <input type="text" id="origin_input" class="form-control" placeholder="Add a place" >
+                              <input type="hidden" id="origin_lat" name="origin_lat" value="None" /> 
+                              <input type="hidden" id="origin_lng" name="origin_lng" value="None" /> 
+                              <input type="hidden" id="place_id" name="place_id" value="None" /> 
+                              
+                              <!-- <form action="#" method="get" id="form3">
+                                <input type="hidden" id="id3" value="1">
+                                <div id="divPlace"></div>
+                              </form> -->
+                            
+                              <br>
+                              <button class="btn btn-dark" id="button_drive">car</button>
+                              <button class="btn btn-dark" id ='Transit'>public transport</button>
+                              <button class="btn btn-dark" id="walking">walking</button>
+                             
+                              <div id="distance"></div>
+                            </div>
+
+                            <br>
+                            <!-------------BUTTONS --------------->
+                            <p>
+                              <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
+                              <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
+                            </p>
+
+                            <!------------- NOTE ------------------>
+                            <form action="#" method="get" id="form1">
+                              <input type="hidden" id="id" value="1">
+                              <div id="divTxt"></div>
+                            </form>
+                            
+                            <!-------------CHECKLIST -------------->
+                            <form action="#" method="get" id="form2">
+                              <input type="hidden" id="id2" value="1">
+                              <div id="divCheckBox"></div>
+                            </form>
+
+                          </div> <!--end col-->
+      
+                          <!--            
+                            <div class="col-6">
+                              <div class="place-image">
+                                <div class="card" style="width: 18rem;">
+                                  <img src="img/korea4.jpg" class="card-img-top" alt="...">
+                                </div>
+                              </div>
+                            </div> -->    
+      
+                      </div> <!--end row-->
+
+                  </div> <!--end accordion body-->
+              </div> <!--end accordion collaspe-->
+            </div> <!--end DAY 1-->
+
+      </div> <!--end accordion-->
+  </div> <!--end container-->
+
+
+  <!--footer-->
+<section class="footer-2 section-padding gray-bg pb-3">
+  <div class="row">
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
+          <h4 class="mb-4 font-weight-bold">
+              <i class="fa fa-map-marker fx-2" aria-hidden="true"></i> 
+              <span style="color:#575769">81 Victoria St, Singapore 188065</span>
+          </h4>
+          <br>
+          <h4 class="mb-4 font-weight-bold">
+              <i class="fa fa-phone fx-2" aria-hidden="true"></i> 
+              <span style="color:#575769">+65 6782 9653</span>
+          </h4>
+          <br>
+          <h4 class="mb-4 font-weight-bold">
+              <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
+              <span style="color:#575769">support@adventuretime.com</span>
+          </h4>
+      </div>
+      <!-- Grid column -->
+
+      <hr class="w-100 clearfix d-md-none" />
+
+      <!-- Grid column -->
+      <hr class="w-100 clearfix d-md-none" />
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
+        <h2 class="mb-4 font-weight-bold">About the company</h2>
+        <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential travellers to travel with ease!</p>
+        <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+      </div>
+      
+
+    </div>
+    
+</section>	
+
+
+    
+      <!-- add/remove note/checklist -->
+      <script>
+        // function addPlace(){
+        //   var id3 = document.getElementById("divPlace").value;
+        //   $("#divPlace").append(
+        //     "<p id='row" + id3 +"'><label for='place" + id3 +"'> &nbsp;&nbsp;<input type='text' size='20' class='form-control' id='origin_input' placeholder='add a place'"+
+        //       id3 +
+        //       "'>&nbsp;&nbsp<a href='#' onClick='removePlace(\"#row" +
+        //       id3 +
+        //       "\"); return false;'><i class='fa fa-trash'></i></a><p>"
+        //   );
+        //   id3 = id3 - 1 + 2;
+        //   document.getElementById("id3").value = id3;
+        // }
+
+        // function removePlace(){
+        //   $(id3).remove();
+        // }
+
+        function addFormField() {
+          var id = document.getElementById("id").value;
+          $("#divTxt").append(
+            "<p id='row" + id +"'><label for='txt" + id +"'> &nbsp;&nbsp;<input type='text' size='20' name='txt[]' id='txt'"+
+              id +
+              "'>&nbsp;&nbsp<a href='#' onClick='removeFormField(\"#row" +
+              id +
+              "\"); return false;'><i class='fa fa-trash'></i></a><p>"
+          );
+          id = id - 1 + 2;
+          document.getElementById("id").value = id;
+        }
+    
+        function removeFormField(id) {
+          $(id).remove();
+        }
+
+        function addCheckbox() {
+          var id2 = document.getElementById("id2").value;
+          $("#divCheckBox").append(
+            "<p id='row" + id2 +"'><label for='txt" + id2 +"'> &nbsp;&nbsp;<input type='checkbox' size='40' name='CheckBox[]' id='CheckBox'"+ id2 + "'> <input type='text' size='15' name='txt[]' id='txt'"+
+              id2 +
+              "'>&nbsp;&nbsp<a href='#' onClick='removeCheckBox(\"#row" +
+              id2 +
+              "\"); return false;'><i class='fa fa-trash'></i></a><p>"
+          );
+          id2 = id2 - 1 + 2;
+          document.getElementById("id2").value = id2;
+        }
+
+        function removeCheckBox(id2) {
+          $(id2).remove();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- calendar script -->
+    <script></script>
+    <script async src="https://buttons.github.io/buttons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
+    <script type="text/javascript" src="calendar/docs/demo.js"></script>
+    <!-- THEME JAVASCRIPT FILES
+================================================== -->
+<!-- initialize jQuery Library -->
+<script src="plugins/jquery/jquery.js"></script>
+<!-- Bootstrap jQuery -->
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/bootstrap/js/popper.min.js"></script>
+<!-- Owl caeousel -->
+<!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script> -->
+<!-- <script src="plugins/slick-carousel/slick.min.js"></script> -->
+<script src="plugins/magnific-popup/magnific-popup.js"></script>
+<!-- Instagram Feed Js -->
+<script src="plugins/instafeed-js/instafeed.min.js"></script>
+<!-- Google Map -->
+<script src="plugins/google-map/gmap.js"></script>
+<!-- main js -->
+<script src="js/custom.js"></script>
+
+    
+    <!-- CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+<!-- search bar script -->
+<script>
+  let button_drive = document.getElementById('button_drive')
+  button_drive.addEventListener('click',getDistance_Drive)
+
+  let button_transit = document.getElementById('Transit')
+  button_transit.addEventListener('click',getDistance_transit)
+
+ let button_walk = document.getElementById('walking')
+ button_walk.addEventListener('click',getDistance_walk)
+
+  let lati = document.getElementById('origin_lat')
+  lati.addEventListener('change',sayHi)
+
+  let long = document.getElementById('origin_lng')
+  long.addEventListener('change',sayHi)
+</script>
