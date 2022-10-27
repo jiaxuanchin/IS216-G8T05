@@ -179,8 +179,8 @@ function fill_info(){
                                 <div class="col-4">
                                   <img src=${picture_url} alt="">
                                 </div>
-                                <div>-----------------------------</div>
-                              </div>
+                               
+    </div>
      `
      let parent = document.getElementById('place_info')
      parent.appendChild(fill)
@@ -236,7 +236,7 @@ function callback(results, status) {
         track += 1
         fill = `
         recommended places 
-        <div id="recommended" style="height: 200px">
+        <div id="recommended" >
                               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                   <div class="carousel-item active">
