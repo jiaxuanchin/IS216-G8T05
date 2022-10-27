@@ -177,10 +177,10 @@ function fill_info(){
                                   ${name}
                                 </div>
                                 <div class="col-4">
-                                  <img src=${picture_url} alt="">
+                                  <img src=${picture_url} alt="" style="width: 200px; height: 200px;">
                                 </div>
-                               
-    </div>
+                                
+                              </div>
      `
      let parent = document.getElementById('place_info')
      parent.appendChild(fill)
@@ -236,25 +236,40 @@ function callback(results, status) {
         track += 1
         fill = `
         recommended places 
-        <div id="recommended" >
+        <div id="recommended">
                               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                   <div class="carousel-item active">
-                                    <img src="${photo}" class="d-block" alt="..." style="width:20%; max-height: 180px">
-                                    <div class="carousel-caption d-none d-md-block">
-                                      <h5>${name}</h5>
-                                  
+                                  <div class="card mb-3" style="max-width: 300px;">
+                                    <div class="row g-0">
+                                      <div class="col-md-6">
+                                        <img src="${photo}"  alt="..." style="width:150px; max-height:150px">
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="card-body">
+                                          <p class="card-title">${name}</p>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
+                                </div>
         `
       }
       else{
         fill += `<div class="carousel-item">
-        <img src="${photo}" class="d-block" alt="..." style="width:20%; max-height: 180px">
-        <div class="carousel-caption d-none d-md-block">
-                                      <h5>${name}</h5>
-                              
+                                  <div class="card mb-3" style="max-width: 300px;">
+                                    <div class="row g-0">
+                                      <div class="col-md-6">
+                                        <img src="${photo}"  alt="..." style="width:150px; max-height:150px">
                                       </div>
+                                      
+                                      <div class="col-md-6">
+                                        <div class="card-body">
+                                          <p class="card-title">${name}</>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
       </div>`
       }
     }
