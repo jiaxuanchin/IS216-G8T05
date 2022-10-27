@@ -175,9 +175,37 @@ function fill_info(){
      <div class="row my-2">
                                 <div class="col-8">
                                   ${name}
+                                  <div>
+                                  <br>
+                                  <!-------------BUTTONS --------------->
+                                  <p>
+                                    <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
+                                    <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
+                                  </p>
+      
+                                  <!------------- NOTE ------------------>
+                                  <form action="#" method="get" id="form1">
+                                    <input type="hidden" id="id" value="1">
+                                    <div id="divTxt"></div>
+                                  </form>
+                                  
+                                  <!-------------CHECKLIST -------------->
+                                  <form action="#" method="get" id="form2">
+                                    <input type="hidden" id="id2" value="1">
+                                    <div id="divCheckBox"></div>
+                                  </div>
+
+                                  </form>
+
+                                  <button class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+                                  <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+                                  <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+                                
+                                  <div id="distance"></div>
                                 </div>
+
                                 <div class="col-4">
-                                  <img src=${picture_url} alt="" style="width: 200px; height: 200px;">
+                                  <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
                                 </div>
                                 
                               </div>
@@ -236,17 +264,17 @@ function callback(results, status) {
         track += 1
         fill = `
         recommended places 
-        <div id="recommended">
+        <div id="recommended" >
                               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                   <div class="carousel-item active">
-                                  <div class="card mb-3" style="max-width: 300px;">
+                                  <div class="card mb-3" style="max-width: 250px;">
                                     <div class="row g-0">
                                       <div class="col-md-6">
                                         <img src="${photo}"  alt="..." style="width:150px; max-height:150px">
                                       </div>
                                       <div class="col-md-6">
-                                        <div class="card-body">
+                                        <div class="card-body" >
                                           <p class="card-title">${name}</p>
                                         </div>
                                       </div>

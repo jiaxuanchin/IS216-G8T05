@@ -7,9 +7,11 @@
         width:100%;
       }
 
-      .carousel-control-prev-icon, .carousel-control-next-icon{
-        background-color: lightgrey;
+      .card{
+        font-size: 10;
       }
+
+
     </style>
 
 
@@ -178,7 +180,6 @@
                               
                             </div>
 
-      
                             <!--PLACE INFO END-->
 
                             <!--ADD PLACE INPUT BOX-->
@@ -189,40 +190,15 @@
                               <input type="hidden" id="place_id" name="place_id" value="None" /> 
                               
                               <br>
-                              <button class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-                              <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-                              <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-                             
-                              <div id="distance"></div>
+                              
                               <div id="recommended" ></div>
  
                             </div>
 
-                            <br>
-                            <!-------------BUTTONS --------------->
-                            <p>
-                              <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
-                              <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
-                            </p>
-
-                            <!------------- NOTE ------------------>
-                            <form action="#" method="get" id="form1">
-                              <input type="hidden" id="id" value="1">
-                              <div id="divTxt"></div>
-                            </form>
-                            
-                            <!-------------CHECKLIST -------------->
-                            <form action="#" method="get" id="form2">
-                              <input type="hidden" id="id2" value="1">
-                              <div id="divCheckBox"></div>
-                            </form>
+                            <br>                       
 
                           </div> <!--end col-->
-      
-                          
-      
                       </div> <!--end row-->
-
                   </div> <!--end accordion body-->
               </div> <!--end accordion collaspe-->
             </div> <!--end DAY 1-->
