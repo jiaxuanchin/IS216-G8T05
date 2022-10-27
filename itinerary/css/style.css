@@ -87,11 +87,10 @@ body, p {
   font-weight: 400;
 }
 
-/* .trip-name{
-  text-align: center;
-  background-image: url("img/korea");
-  padding: 50px;
-} */
+#button_drive, #Transit, #walking{
+  background-color: white;
+  font-size:xx-small;
+}
 
 html {
   overflow-x: hidden;
@@ -219,7 +218,7 @@ blockquote {
   padding: 10px 30px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #fff;
+  color: #474545;
   transition: 350ms;
   letter-spacing: 1px;
   font-size: 13px;

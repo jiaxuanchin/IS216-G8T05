@@ -24,9 +24,6 @@
 
      <!-- theme meta -->
      <meta name="theme-name" content="revolve" />
-
-     <!--Favicon-->
-     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
    
     <!-- calendar -->
     <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
@@ -42,110 +39,70 @@
     <script src="https://unpkg.com/vue@next"></script>
 
     <!-- nav -->
-     <!-- THEME CSS
-	================================================== -->
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-    <!-- Themify -->
-    <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
-    <!-- <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css"> -->
-    <!-- <link rel="stylesheet" href="plugins/slick-carousel/slick.css"> -->
-    <!-- Slick Carousel -->
-    <!-- <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css"> -->
-    <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
-    <!-- main stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <!--icon-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- THEME CSS
+        ================================================== -->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+        <!-- Themify -->
+        <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+        <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css">
+        <link rel="stylesheet" href="plugins/slick-carousel/slick.css">
+        <!-- Slick Carousel -->
+        <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css">
+        <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
+        <!-- main stylesheet -->
+        <link rel="stylesheet" href="css/style.css">
+        <!--icon-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
 
   <body>
-    <!--header-->
-<header class="header-top bg-grey justify-content-center">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-2 col-md-4 text-center d-none d-lg-block">
-          <a class="navbar-brand " href="index.html">
-            <img src="images/logo.png" alt="" class="img-fluid">
-          </a>
-      </div>
-
-      <div class="col-lg-7 col-md-12" >
-        <nav class="navbar navbar-expand-lg navigation-2 navigation">
-          <a class="navbar-brand text-uppercase d-lg-none" href="#">
-            <img src="images/logo.png" alt="" class="img-fluid">
-          </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="ti-menu"></span>
+  <!--header-->
+  <header class="header-top bg-grey justify-content-center">
+    <nav class="navbar navbar-expand-md navigation-2 navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand text-uppercase" href="home2.html">
+            <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ti-menu" style="color: white;"></span>
             </button>
-
-              <div class="collapse navbar-collapse" id="navbar-collapse">
-                  <ul id="menu" class="menu navbar-nav mx-auto">
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Home
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="index.html">Home 1</a>
-                              <a class="dropdown-item" href="index-2.html">Home 2</a>
-                              <a class="dropdown-item" href="index-3.html">Home 3</a>
-                              <a class="dropdown-item" href="index-4.html">Home 4</a>
-                              <a class="dropdown-item" href="index-5.html">Home 5</a>
-                              <a class="dropdown-item" href="index-6.html">Home 6</a>
-                          </div>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Favourites
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" href="standard-fullwidth.html">Standard Fullwidth</a>
-                            <a class="dropdown-item" href="standard-left-sidebar.html">Standard Left Sidebar</a>
-                            <a class="dropdown-item" href="standard-right-sidebar.html">Standard Right Sidebar</a>
-                          </div>
-                      </li>
-
-                      <li class="nav-item"><a href="about.html" class="nav-link text-white">Current Trips</a></li>
-                      <li class="nav-item"><a href="fashion.html" class="nav-link text-white">Add New Trip</a></li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Profile
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                            <a class="dropdown-item" href="post-video.html">Video Formats</a>
-                            <a class="dropdown-item" href="post-audio.html">Audio Format</a>
-                            <a class="dropdown-item" href="post-link.html">Quote Format</a>
-                            <a class="dropdown-item" href="post-gallery.html">Gallery Format</a>
-                            <a class="dropdown-item" href="post-image.html">Image Format</a>
-                          </div>
-                      </li>
-                      
-                     
-                  </ul>
-
-                  
-              </div>
-          </nav>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-6">
-          <div class="header-socials-2 text-right d-none d-lg-block">
-           
-
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" style="width: 100px"/>
-                    <button type="button" class="btn btn-primary "><i class="ti-search"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul id="menu" class="menu navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a href="home2.html" class="nav-link text-white">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="fav.html" class="nav-link text-white">Favourites</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="current_trips.html" class="nav-link text-white">Current Trips</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="#" class="nav-link text-white">Add New Trip</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="#" class="nav-link text-white">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="#" class="nav-link text-white">Log out</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
+                </form>
             </div>
-          </div>
         </div>
-    </div>
-  </div>
+    </nav>
 </header>
 
+<!-- content -->
 
-    <!--  heading-->
+
+    
     <div class="trip-name">
         <div class="card w-50 h-200 mx-auto shadow">
           <div class="card-body ">
@@ -203,13 +160,13 @@
               <!-- header -->
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  <h4>4th October, Tues </h4>
+                  <h4 id="result-3"> </h4>
+            
                 </button>
               </h2>
 
               <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body"> 
-                      
                       <div class="row d-flex">
                           <div class="col-12">
                             <!-- subheading -->
@@ -237,17 +194,14 @@
                               <input type="hidden" id="origin_lng" name="origin_lng" value="None" /> 
                               <input type="hidden" id="place_id" name="place_id" value="None" /> 
                               
-                              <!-- <form action="#" method="get" id="form3">
-                                <input type="hidden" id="id3" value="1">
-                                <div id="divPlace"></div>
-                              </form> -->
-                            
                               <br>
-                              <button class="btn btn-dark" id="button_drive">car</button>
-                              <button class="btn btn-dark" id ='Transit'>public transport</button>
-                              <button class="btn btn-dark" id="walking">walking</button>
+                              <button class="btn" id="button_drive"><i style='font-size:24px' class='fas'>&#xf5de;</i>car</button>
+                              <button class="btn " id ='Transit'><i style='font-size:24px' class='fas'>&#xf55e;</i>public transport</button>
+                              <button class="btn" id="walking"><i style='font-size:24px' class='fas'>&#xf70c;</i>walking</button>
                              
                               <div id="distance"></div>
+
+                              
                             </div>
 
                             <br>
@@ -271,14 +225,7 @@
 
                           </div> <!--end col-->
       
-                          <!--            
-                            <div class="col-6">
-                              <div class="place-image">
-                                <div class="card" style="width: 18rem;">
-                                  <img src="img/korea4.jpg" class="card-img-top" alt="...">
-                                </div>
-                              </div>
-                            </div> -->    
+                          
       
                       </div> <!--end row-->
 
@@ -290,7 +237,7 @@
   </div> <!--end container-->
 
 
-  <!--footer-->
+<!--footer-->
 <section class="footer-2 section-padding gray-bg pb-3">
   <div class="row">
       <!-- Grid column -->
@@ -319,78 +266,23 @@
 
       <!-- Grid column -->
       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
-        <h2 class="mb-4 font-weight-bold">About the company</h2>
-        <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential travellers to travel with ease!</p>
-        <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+      <h2 class="mb-4 font-weight-bold">About the company</h2>
+      <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential travellers to travel with ease!</p>
+      <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
+      <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
+      <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
+      <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
       </div>
+  </div>   
+</section>
+
+
+    
       
-
-    </div>
-    
-</section>	
-
-
-    
-      <!-- add/remove note/checklist -->
-      <script>
-        // function addPlace(){
-        //   var id3 = document.getElementById("divPlace").value;
-        //   $("#divPlace").append(
-        //     "<p id='row" + id3 +"'><label for='place" + id3 +"'> &nbsp;&nbsp;<input type='text' size='20' class='form-control' id='origin_input' placeholder='add a place'"+
-        //       id3 +
-        //       "'>&nbsp;&nbsp<a href='#' onClick='removePlace(\"#row" +
-        //       id3 +
-        //       "\"); return false;'><i class='fa fa-trash'></i></a><p>"
-        //   );
-        //   id3 = id3 - 1 + 2;
-        //   document.getElementById("id3").value = id3;
-        // }
-
-        // function removePlace(){
-        //   $(id3).remove();
-        // }
-
-        function addFormField() {
-          var id = document.getElementById("id").value;
-          $("#divTxt").append(
-            "<p id='row" + id +"'><label for='txt" + id +"'> &nbsp;&nbsp;<input type='text' size='20' name='txt[]' id='txt'"+
-              id +
-              "'>&nbsp;&nbsp<a href='#' onClick='removeFormField(\"#row" +
-              id +
-              "\"); return false;'><i class='fa fa-trash'></i></a><p>"
-          );
-          id = id - 1 + 2;
-          document.getElementById("id").value = id;
-        }
-    
-        function removeFormField(id) {
-          $(id).remove();
-        }
-
-        function addCheckbox() {
-          var id2 = document.getElementById("id2").value;
-          $("#divCheckBox").append(
-            "<p id='row" + id2 +"'><label for='txt" + id2 +"'> &nbsp;&nbsp;<input type='checkbox' size='40' name='CheckBox[]' id='CheckBox'"+ id2 + "'> <input type='text' size='15' name='txt[]' id='txt'"+
-              id2 +
-              "'>&nbsp;&nbsp<a href='#' onClick='removeCheckBox(\"#row" +
-              id2 +
-              "\"); return false;'><i class='fa fa-trash'></i></a><p>"
-          );
-          id2 = id2 - 1 + 2;
-          document.getElementById("id2").value = id2;
-        }
-
-        function removeCheckBox(id2) {
-          $(id2).remove();
-        }
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- calendar script -->
-    <script></script>
+    <!-- <script></script> -->
     <script async src="https://buttons.github.io/buttons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
@@ -403,8 +295,8 @@
 <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="plugins/bootstrap/js/popper.min.js"></script>
 <!-- Owl caeousel -->
-<!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script> -->
-<!-- <script src="plugins/slick-carousel/slick.min.js"></script> -->
+<script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="plugins/slick-carousel/slick.min.js"></script>
 <script src="plugins/magnific-popup/magnific-popup.js"></script>
 <!-- Instagram Feed Js -->
 <script src="plugins/instafeed-js/instafeed.min.js"></script>
@@ -435,4 +327,5 @@
 
   let long = document.getElementById('origin_lng')
   long.addEventListener('change',sayHi)
+
 </script>

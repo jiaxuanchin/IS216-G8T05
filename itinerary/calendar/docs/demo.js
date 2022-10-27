@@ -1,10 +1,12 @@
+
 var rangeText = function (start, end) {
         var str = '';
-        str += start ? start.format('Do MMMM YYYY') + ' to ' : '';
+        str += start ? start.format('Do MMMM YYYY') + ' - ' : '';
         str += end ? end.format('Do MMMM YYYY') : '...';
 
         return str;
-    },
+    }
+
     css = function(url){
         var head  = document.getElementsByTagName('head')[0];
         var link  = document.createElement('link');
@@ -52,6 +54,20 @@ new Lightpick({
     singleDate: false,
     onSelect: function(start, end){
         document.getElementById('result-2').innerHTML = rangeText(start, end);
+        
+        var str = rangeText(start, end).split("-")
+        var start_date  = str[0]
+        var end_date = str[1]
+
+      
+
+        document.getElementById('result-3').innerHTML =start_date;
+
+        // document.getElementById('result-4').innerHTML = diff_in_day;
+        
     }
+
+    
 });
+
 

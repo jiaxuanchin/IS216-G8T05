@@ -275,6 +275,44 @@ parent.innerHTML = fill
 }
 
 
-  
+function addFormField() {
+  var id = document.getElementById("id").value;
+  $("#divTxt").append(
+    "<p id='row" + id +"'><label for='txt" + id +"'> &nbsp;&nbsp;<input type='text' size='20' name='txt[]' id='txt'"+
+      id +
+      "'>&nbsp;&nbsp<a href='#' onClick='removeFormField(\"#row" +
+      id +
+      "\"); return false;'><i class='fa fa-trash'></i></a><p>"
+  );
+  id = id - 1 + 2;
+  document.getElementById("id").value = id;
+}
 
+function removeFormField(id) {
+  $(id).remove();
+}
 
+function addCheckbox() {
+  var id2 = document.getElementById("id2").value;
+  $("#divCheckBox").append(
+    "<p id='row" + id2 +"'><label for='txt" + id2 +"'> &nbsp;&nbsp;<input type='checkbox' size='40' name='CheckBox[]' id='CheckBox'"+ id2 + "'> <input type='text' size='15' name='txt[]' id='txt'"+
+      id2 +
+      "'>&nbsp;&nbsp<a href='#' onClick='removeCheckBox(\"#row" +
+      id2 +
+      "\"); return false;'><i class='fa fa-trash'></i></a><p>"
+  );
+  id2 = id2 - 1 + 2;
+  document.getElementById("id2").value = id2;
+}
+
+function removeCheckBox(id2) {
+  $(id2).remove();
+}
+
+var j=1;
+function addPlace() {
+  var node = document.createElement("li"); 
+  node.innerHTML = "<input id='origin_input" + j +"' placeholder='Add a place" + j + "' onFocus='geolocate()' type='text' />";               
+  document.getElementById("divPlace").appendChild(node);
+  j++; 
+}
