@@ -309,10 +309,3 @@ function removeCheckBox(id2) {
   $(id2).remove();
 }
 
-var j=1;
-function addPlace() {
-  var node = document.createElement("li"); 
-  node.innerHTML = "<input id='origin_input" + j +"' placeholder='Add a place" + j + "' onFocus='geolocate()' type='text' />";               
-  document.getElementById("divPlace").appendChild(node);
-  j++; 
-}
