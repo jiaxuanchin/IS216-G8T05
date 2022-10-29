@@ -1,47 +1,113 @@
 //map with auto-fill to get long lang and place ID (Google API)
-function initMap() {
-    
-    //auto complete for origin
-    let origin = document.getElementById('origin_input')
-    const origin_auto = new google.maps.places.Autocomplete(origin, {
-        fields: ["place_id", "geometry", "name", "formatted_address"],
-      });
-    //this line below execute after choosing the autofill option
-    origin_auto.addListener("place_changed", () => {
-       
-    
-        const place = origin_auto.getPlace();
-        if (!place.place_id) {
-          return;
-        }
-        //stored value in hidden input field
-        let to_add = document.getElementById('origin_lat')
-        to_add.value =place.geometry.location.lat()
-        to_add = document.getElementById('origin_lng')
-        to_add.value = place.geometry.location.lng()
-        document.getElementById('place_id').value = place.place_id
+   function fill_origin(){
+    let origin_list = document.getElementsByClassName('origin_fill')
+    for(origin of origin_list){
+      const origin_auto = new google.maps.places.Autocomplete(origin, {
+          fields: ["place_id", "geometry", "name", "formatted_address"],
+        });
+      //this line below execute after choosing the autofill option
+      origin_auto.addListener("place_changed", () => {
+          const place = origin_auto.getPlace();
+          if (!place.place_id) {
+            return;
+          }
+          //stored value in hidden input field
+          let to_add = document.getElementById('origin_lat')
+          to_add.value =place.geometry.location.lat()
+          to_add = document.getElementById('origin_lng')
+          to_add.value = place.geometry.location.lng()
+          document.getElementById('place_id').value = place.place_id
+          //fill on place_info
+          track = 0
+          for(original of origin_list){
+              if(original.value.includes(place.name)){
+                document.getElementById('recommended_track').value=track
+                fill_info(track)
+                fill_rec(track)
+              }
+              track+=1
+          }
+          
 
-        //fill on place_info
-        fill_info()
-        fill_rec()
-      })
+
+          let auto_complete_list = document.getElementsByClassName('origin_fill')
+          for(item of auto_complete_list){
+            item.value = ''
+          }
+        })
+     
+    }
+  
   }
-   window.initMap = initMap;
+
+  function fill_template(){
+    for(let i=0;i<2;i++){
+      item = document.createElement('div')
+      item.innerHTML = `
+      <div class="accordion-item">
+              <!-- header -->
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <h4 id="result-3"> </h4>
+            
+                </button>
+              </h2>
+
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body"> 
+                      <div class="row d-flex">
+                          <div class="col-12">
+
+                            <!------------- SEARCH BOX ------------->
+                            <!--PLACE INFO START-->
+                             <div class="place_info">
+                              
+                            </div>
+
+                            <!--PLACE INFO END-->
+
+                            <!--ADD PLACE INPUT BOX-->
+                            <div class="search-box mb-2 ">
+                              <input type="text" id="${i}" class="form-control origin_fill" placeholder="Add a place">
+                              <br>
+                              
+                              <div class="row recommend_header"></div>
+                              <div class="recommended" ></div>
+ 
+                            </div>
+
+                            <br>                       
+                          </div> <!--end col-->
+                      </div> <!--end row-->
+                  </div> <!--end accordion body-->
+              </div> <!--end accordion collaspe-->
+            </div> <!--end DAY 1--></div>
+      `
+      document.getElementById('accordionFlushExample').appendChild(item)
+      fill_origin()
+     
+    }
+  }
 
 
 //get distance by driving (Google API)
 function getDistance_Drive(item){
     //get value from hidden input field
-    let distance_list = document.getElementsByClassName('get_distance')
+    let distance_list = document.getElementsByClassName('get_distance') // list for all days
+    distance_list = item.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('get_distance') //list for only one day
     for(places in distance_list){
+      console.log(distance_list[places])
       if(distance_list[places].innerHTML != undefined){
         id=distance_list[places].innerHTML.split(',')[0]
       if(id==item.value){
+        id_save = id
         origin_lat = distance_list[places].innerHTML.split(',')[1]
         origin_lng = distance_list[places].innerHTML.split(',')[2]
         if((Number(places)+1) <= distance_list.length-1){
-          destination_lat = distance_list[Number(places+1)].innerHTML.split(',')[1]
-          destination_lng = distance_list[Number(places+1)].innerHTML.split(',')[2]
+       
+          destination_lat = distance_list[Number(places)+1].innerHTML.split(',')[1]
+          destination_lng = distance_list[Number(places)+1].innerHTML.split(',')[2]
+      
         }
         else{
           console.log('out of bound')
@@ -69,31 +135,35 @@ function getDistance_Drive(item){
     }
     let distance = response.rows[0].elements[0].distance.text //get distance
     let duration = response.rows[0].elements[0].duration.text //get duration
-    let to_add = document.getElementById('distance')
-    to_add.innerHTML = 'distance = '+distance + ' duration = '+duration
-    console.log(distance)
- 
+    let to_add = document.getElementsByClassName('distance')
+    for(item of to_add){
+      console.log(item)
+      if(item.id == id_save){
+        item.innerHTML = 'distance = '+distance + ' duration = '+duration
+      }
     }
     }
-    else{
-        let to_add = document.getElementById('distance')
-        to_add.innerHTML = 'fill the form first!'
     }
     
 }
 
-function getDistance_walk(){
+function getDistance_walk(item){
   //get value from hidden input field
-  let distance_list = document.getElementsByClassName('get_distance')
+  let distance_list = document.getElementsByClassName('get_distance') // list for all days
+  distance_list = item.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('get_distance') //list for only one day
   for(places in distance_list){
+    console.log(distance_list[places])
     if(distance_list[places].innerHTML != undefined){
       id=distance_list[places].innerHTML.split(',')[0]
     if(id==item.value){
+      id_save = id
       origin_lat = distance_list[places].innerHTML.split(',')[1]
       origin_lng = distance_list[places].innerHTML.split(',')[2]
       if((Number(places)+1) <= distance_list.length-1){
-        destination_lat = distance_list[Number(places+1)].innerHTML.split(',')[1]
-        destination_lng = distance_list[Number(places+1)].innerHTML.split(',')[2]
+     
+        destination_lat = distance_list[Number(places)+1].innerHTML.split(',')[1]
+        destination_lng = distance_list[Number(places)+1].innerHTML.split(',')[2]
+    
       }
       else{
         console.log('out of bound')
@@ -121,31 +191,35 @@ function getDistance_walk(){
   }
   let distance = response.rows[0].elements[0].distance.text //get distance
   let duration = response.rows[0].elements[0].duration.text //get duration
-  let to_add = document.getElementById('distance')
-  to_add.innerHTML = 'distance = '+distance + ' duration = '+duration
-  console.log(distance)
-
+  let to_add = document.getElementsByClassName('distance')
+  for(item of to_add){
+    console.log(item)
+    if(item.id == id_save){
+      item.innerHTML = 'distance = '+distance + ' duration = '+duration
+    }
   }
   }
-  else{
-      let to_add = document.getElementById('distance')
-      to_add.innerHTML = 'fill the form first!'
   }
   
 }
 
-function getDistance_transit(){
+function getDistance_transit(item){
   //get value from hidden input field
-  let distance_list = document.getElementsByClassName('get_distance')
+  let distance_list = document.getElementsByClassName('get_distance') // list for all days
+  distance_list = item.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('get_distance') //list for only one day
   for(places in distance_list){
+    console.log(distance_list[places])
     if(distance_list[places].innerHTML != undefined){
       id=distance_list[places].innerHTML.split(',')[0]
     if(id==item.value){
+      id_save = id
       origin_lat = distance_list[places].innerHTML.split(',')[1]
       origin_lng = distance_list[places].innerHTML.split(',')[2]
       if((Number(places)+1) <= distance_list.length-1){
-        destination_lat = distance_list[Number(places+1)].innerHTML.split(',')[1]
-        destination_lng = distance_list[Number(places+1)].innerHTML.split(',')[2]
+     
+        destination_lat = distance_list[Number(places)+1].innerHTML.split(',')[1]
+        destination_lng = distance_list[Number(places)+1].innerHTML.split(',')[2]
+    
       }
       else{
         console.log('out of bound')
@@ -173,20 +247,39 @@ function getDistance_transit(){
   }
   let distance = response.rows[0].elements[0].distance.text //get distance
   let duration = response.rows[0].elements[0].duration.text //get duration
-  let to_add = document.getElementById('distance')
-  to_add.innerHTML = 'distance = '+distance + ' duration = '+duration
-  console.log(distance)
-
+  let to_add = document.getElementsByClassName('distance')
+  for(item of to_add){
+    console.log(item)
+    if(item.id == id_save){
+      item.innerHTML = 'distance = '+distance + ' duration = '+duration
+    }
   }
   }
-  else{
-      let to_add = document.getElementById('distance')
-      to_add.innerHTML = 'fill the form first!'
   }
   
 }
 
-function fill_info(){
+function fill_info(track){
+  if(document.getElementsByClassName('recommend_header')[track].innerHTML==''){
+    document.getElementsByClassName('recommend_header')[track].innerHTML = `
+    <div class="col-8">Recommended places</div>
+                              <div class="col-4">
+                                <select name="category" class="category">
+                                  <option value="restaurant">restaurant</option>
+                                  <option value="bar">bar</option>
+                                  <option value="museum">museum</option>
+                                  <option value="amusement_park">amusement park</option>
+                                  <option value="book_store">book_store</option>
+                                  <option value="shopping_mall">shopping mall</option>
+                                  <option value="night_club">night club</option>
+                                  <option value="movie_theater">movie theater</option>
+                                </select>
+                              </div>
+    `
+    let category = document.getElementsByClassName('category')[track]
+    category.addEventListener('change',fill_rec)
+  }
+
   let id = document.getElementById('place_id').value
   let lati = document.getElementById('origin_lat').value 
   let lng = document.getElementById('origin_lng').value 
@@ -246,7 +339,7 @@ function fill_info(){
                                   <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
                                   <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
                                 
-                                  <div id="distance"></div>
+                                  <div class="distance" id=${id}></div>
                                 </div>
 
                                 <div class="col-4">
@@ -255,17 +348,19 @@ function fill_info(){
                                 
                               </div>
      `
-     let parent = document.getElementById('place_info')
+     let parent = document.getElementsByClassName('place_info')[track]
      parent.appendChild(fill)
-     document.getElementById('origin_input').value = ''
     }
   }
 }
 
 function fill_rec(){
+  let num = document.getElementById('recommended_track').value
+  let parent = document.getElementsByClassName('recommended')[num]
   let id = document.getElementById('place_id').value
   let lati = document.getElementById('origin_lat').value 
   let lng = document.getElementById('origin_lng').value 
+  let category = document.getElementsByClassName('category')[num].value
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: Number(lati), lng: Number(lng) },
     zoom: 13,
@@ -282,7 +377,7 @@ function fill_rec(){
   var request = {
     location: location,
     radius: '500',
-    type: ['restaurant']
+    type: [category]
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -291,8 +386,7 @@ function fill_rec(){
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    document.getElementById('recommended').innerHTML = ''
-    let parent = document.getElementById('recommended')
+    let num = document.getElementById('recommended_track').value
     let name = ''
     let photo = ''
     let fill = document.createElement('div')
@@ -308,7 +402,6 @@ function callback(results, status) {
       if(track==1){
         track += 1
         fill = `
-        recommended places 
         <div id="recommended" >
                               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
@@ -321,7 +414,7 @@ function callback(results, status) {
                                       <div class="col-md-6">
                                         <div class="card-body" >
                                           <p class="card-title">${name}</p>
-                                          <button value=${place_id} onclick='add_rec(this)' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
                                         </div>
                                       </div>
                                     </div>
@@ -340,7 +433,7 @@ function callback(results, status) {
                                       <div class="col-md-6">
                                         <div class="card-body">
                                           <p class="card-title">${name}</>
-                                          <button value=${place_id} onclick='add_rec(this)' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
                                         </div>
                                       </div>
                                     </div>
@@ -366,7 +459,7 @@ parent.innerHTML = fill
 
 
 
-function add_rec(place_id){
+function add_rec(place_id,track){
   let id = document.getElementById('place_id').value
   let lati = document.getElementById('origin_lat').value 
   let lng = document.getElementById('origin_lng').value 
@@ -425,7 +518,7 @@ function add_rec(place_id){
                                   <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
                                   <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
                                 
-                                  <div id="distance"></div>
+                                  <div class="distance" id=${place_id}></div>
                                 </div>
 
                                 <div class="col-4">
@@ -434,9 +527,10 @@ function add_rec(place_id){
                                 
                               </div>
      `
-     let parent = document.getElementById('place_info')
+     
+     //let parent = document.getElementById('place_info')
+     let parent = document.getElementsByClassName('place_info')[track]
      parent.appendChild(fill)
-     document.getElementById('origin_input').value = ''
     }
   }
 }
@@ -474,4 +568,5 @@ function addCheckbox() {
 function removeCheckBox(id2) {
   $(id2).remove();
 }
+
 
