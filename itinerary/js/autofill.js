@@ -60,7 +60,7 @@
 
                             <!------------- SEARCH BOX ------------->
                             <!--PLACE INFO START-->
-                             <div class="place_info">
+                            <div class="place_info">
                               
                             </div>
 
@@ -492,43 +492,38 @@ function add_rec(place_id,track){
      let fill = document.createElement('div')
      fill.innerHTML = `
      <div class="row my-2">
-                                <div class="col-8">
-                                  ${name}
-                                  <div>
-                                  <br>
-                                  <!-------------BUTTONS --------------->
-                                  <p>
-                                    <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
-                                    <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
-                                  </p>
-      
-                                  <!------------- NOTE ------------------>
-                                  <form action="#" method="get" id="form1">
-                                    <input type="hidden" id="id" value="1">
-                                    <div id="divTxt"></div>
-                                  </form>
-                                  
-                                  <!-------------CHECKLIST -------------->
-                                  <form action="#" method="get" id="form2">
-                                    <input type="hidden" id="id2" value="1">
-                                    <div id="divCheckBox"></div>
-                                  </div>
+        <div class="col-4">
+          ${name}
+    
+          <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+    
+          <button class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+          <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+          <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+        
+          <div class="distance" id=${place_id}></div>
+        </div>
+    
+        <div class="col-4">
+          <!------------- NOTE ------------------>
+          <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
+          <form action="#" method="get" id="form1">
+            <input type="hidden" id="id" value="1">
+            <div id="divTxt"></div>
+          </form>
+        </div> 
 
-                                  </form>
-
-                                  <button class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-                                  <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-                                  <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-                                
-                                  <div class="distance" id=${place_id}></div>
-                                </div>
-
-                                <div class="col-4">
-                                  <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-                                </div>
-                                
-                              </div>
-     `
+        <div class="col-4">
+          <!-------------CHECKLIST -------------->
+          <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
+          <form action="#" method="get" id="form2">
+            <input type="hidden" id="id2" value="1">
+            <div id="divCheckBox"></div>
+          </form>
+        </div>
+        
+    </div>
+    `
      
      //let parent = document.getElementById('place_info')
      let parent = document.getElementsByClassName('place_info')[track]
