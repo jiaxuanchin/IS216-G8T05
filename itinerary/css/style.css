@@ -92,6 +92,7 @@ body, p {
 #button_drive, #Transit, #walking{
   background-color: white;
   font-size:xx-small;
+  padding: 0px;
 }
 
 html {

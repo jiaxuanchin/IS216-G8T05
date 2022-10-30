@@ -60,7 +60,7 @@
 
                             <!------------- SEARCH BOX ------------->
                             <!--PLACE INFO START-->
-                            <div class="place_info">
+                             <div class="place_info">
                               
                             </div>
 
@@ -90,7 +90,6 @@
 
     
   }
-
 
 //get distance by driving (Google API)
 function getDistance_Drive(item){
@@ -308,47 +307,55 @@ function fill_info(track){
      }
      let name = place.name
 
-     let fill = document.createElement('div')
+     let fill = document.createElement('div');
+     fill.className = "container";
      fill.innerHTML = `
-     <div class="row my-2">
-                                <div class="col-8">
-                                  ${name}
-                                  <div>
-                                  <br>
-                                  <!-------------BUTTONS --------------->
-                                  <p>
-                                    <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
-                                    <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
-                                  </p>
+      <div class="row my-2">
+        <div class="col">
+          ${name}
+        <div>
+      </div>
+
+     <div class="row"> 
+      <div class="col-4">
+        <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+  
+        <div hidden class='get_distance'>${id},${lati},${lng}</div>
+
+        <p>
+        <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+        <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+        <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
       
-                                  <!------------- NOTE ------------------>
-                                  <form action="#" method="get" id="form1">
-                                    <input type="hidden" id="id" value="1">
-                                    <div id="divTxt"></div>
-                                  </form>
-                                  
-                                  <!-------------CHECKLIST -------------->
-                                  <form action="#" method="get" id="form2">
-                                    <input type="hidden" id="id2" value="1">
-                                    <div id="divCheckBox"></div>
-                                  </div>
+        <div class="distance" id=${id}></div>
+        </p>
+      </div>
 
-                                  </form>
+      <div class="col-8"> 
+        <div class="row">
+          <div class="col">
+            <!------------- NOTE ------------------>
+            <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
+            <br>
+            <form action="#" method="get" id="form1">
+              <input type="hidden" id="id" value="1">
+              <div id="divTxt"></div>
+            </form>
+          </div>
 
-                                <div hidden class='get_distance'>${id},${lati},${lng}</div>
+          <!-------------CHECKLIST -------------->
+          <div class="col">
+            <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
+            <br>
+            <form action="#" method="get" id="form2">
+              <input type="hidden" id="id2" value="1">
+              <div id="divCheckBox"></div>
+            </form>
+          </div>
+        </div>
+      </div>
 
-                                  <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-                                  <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-                                  <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-                                
-                                  <div class="distance" id=${id}></div>
-                                </div>
-
-                                <div class="col-4">
-                                  <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-                                </div>
-                                
-                              </div>
+    </div>
      `
      let parent = document.getElementsByClassName('place_info')[track]
      parent.appendChild(fill)
@@ -407,18 +414,22 @@ function callback(results, status) {
         <div id="recommended" >
                               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
-                                  <div class="carousel-item active" style='height:150px'>
-                                  <div class="card mb-3" style="max-width: 250px;">
+                                  <div class="carousel-item active" style='height: 150px;'>
+                                  <div class="card mb-3" style="max-width: 150px;">
                                     <div class="row g-0">
+
                                       <div class="col-md-6">
                                         <img src="${photo}"  alt="..." style="width:150px; max-height:150px">
                                       </div>
+
                                       <div class="col-md-6">
                                         <div class="card-body" >
+                                            
                                           <p class="card-title">${name}</p>
-                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style=" right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
                                         </div>
                                       </div>
+
                                     </div>
                                   </div>
                                 </div>
@@ -491,39 +502,53 @@ function add_rec(place_id,track){
 
      let fill = document.createElement('div')
      fill.innerHTML = `
-     <div class="row my-2">
-        <div class="col-4">
+      <div class="row my-2">
+        <div class="col">
           ${name}
-    
-          <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-    
-          <button class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-          <button class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-          <button class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-        
-          <div class="distance" id=${place_id}></div>
-        </div>
-    
-        <div class="col-4">
-          <!------------- NOTE ------------------>
-          <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
-          <form action="#" method="get" id="form1">
-            <input type="hidden" id="id" value="1">
-            <div id="divTxt"></div>
-          </form>
-        </div> 
+        <div>
+      </div>
 
-        <div class="col-4">
+     <div class="row"> 
+      <div class="col-4">
+        <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+  
+        <div hidden class='get_distance'>${id},${lati},${lng}</div>
+
+        <p>
+        <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+        <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+        <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+      
+        <div class="distance" id=${id}></div>
+        </p>
+      </div>
+
+      <div class="col-8"> 
+        <div class="row">
+          <div class="col">
+            <!------------- NOTE ------------------>
+            <button class="btn btn-light" href="#" onClick="addFormField(); return false;">+Note</button>
+            <br>
+            <form action="#" method="get" id="form1">
+              <input type="hidden" id="id" value="1">
+              <div id="divTxt"></div>
+            </form>
+          </div>
+
           <!-------------CHECKLIST -------------->
-          <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
-          <form action="#" method="get" id="form2">
-            <input type="hidden" id="id2" value="1">
-            <div id="divCheckBox"></div>
-          </form>
+          <div class="col">
+            <button class="btn btn-light" href="#" onClick="addCheckbox(); return false;">+Checklist</button>
+            <br>
+            <form action="#" method="get" id="form2">
+              <input type="hidden" id="id2" value="1">
+              <div id="divCheckBox"></div>
+            </form>
+          </div>
         </div>
-        
+      </div>
+
     </div>
-    `
+     `
      
      //let parent = document.getElementById('place_info')
      let parent = document.getElementsByClassName('place_info')[track]
