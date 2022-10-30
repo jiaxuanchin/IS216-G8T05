@@ -1,5 +1,5 @@
 //map with auto-fill to get long lang and place ID (Google API)
-   function fill_origin(){
+  function fill_origin(){
     let origin_list = document.getElementsByClassName('origin_fill')
     for(origin of origin_list){
       const origin_auto = new google.maps.places.Autocomplete(origin, {
@@ -84,9 +84,11 @@
             </div> <!--end DAY 1--></div>
       `
       document.getElementById('accordionFlushExample').appendChild(item)
-      fill_origin()
+      fill_origin();
      
     }
+
+    
   }
 
 
