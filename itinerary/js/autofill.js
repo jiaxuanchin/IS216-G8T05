@@ -41,14 +41,15 @@
   }
 
   function fill_template(){
-    for(let i=0;i<2;i++){
+    let num_date = document.getElementById('result-3')
+    for(let i=0; i<num_date.length; i++){
       item = document.createElement('div')
       item.innerHTML = `
       <div class="accordion-item">
               <!-- header -->
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  <h4 id="result-3"> </h4>
+                  <h4 id="${i}">${num_date[i]} </h4>
             
                 </button>
               </h2>

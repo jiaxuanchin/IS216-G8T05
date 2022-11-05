@@ -1,11 +1,33 @@
 
 var rangeText = function (start, end) {
         var str = '';
-        str += start ? start.format('Do MMMM YYYY') + ' - ' : '';
-        str += end ? end.format('Do MMMM YYYY') : '...';
+        str += start ? start.format('D/M/YYYY') + ' to ' : '';
+        str += end ? end.format('D/M/YYYY') : '...';
 
+        // str += start + '-' + end
+        
+        
         return str;
+
+
     }
+
+var getDatesInRange = function (startDate, endDate){
+    const dates = []
+    let currentDate = startDate
+    const addDays = function (days) {
+        const date = new Date(this.valueOf())
+        date.setDate(date.getDate() + days)
+        return date
+    }
+    while (currentDate <= endDate) {
+        dates.push(currentDate)
+        currentDate = addDays.call(currentDate, 1)
+    }
+    return dates
+    
+}
+
 
     css = function(url){
         var head  = document.getElementsByTagName('head')[0];
@@ -53,18 +75,10 @@ new Lightpick({
     field: document.getElementById('demo-2'),
     singleDate: false,
     onSelect: function(start, end){
-        document.getElementById('result-2').innerHTML = rangeText(start, end);
-        
-        var str = rangeText(start, end).split("-")
-        var start_date  = str[0]
-        var end_date = str[1]
+        document.getElementById('result-2').innerHTML = rangeText(start,end)
+        document.getElementById('result-3').innerHTML = getDatesInRange(start,end)
 
-      
-
-        document.getElementById('result-3').innerHTML =start_date;
-
-        // document.getElementById('result-4').innerHTML = diff_in_day;
-        
+   
     }
 
     
