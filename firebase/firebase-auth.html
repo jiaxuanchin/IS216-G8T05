@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase JS</title>
+
+</head>
+
+<body>
+    <button id='btnLogin'>Login</button>
+    <button id='btnLogout'>Logout</button>
+
+    <hr>
+
+    <h1 id='login'></h1>
+
+    <h1 id='target'></h1>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "REPLACE_WITH_YOURS",
+            authDomain: "REPLACE_WITH_YOURS.firebaseapp.com",
+            projectId: "REPLACE_WITH_YOURS",
+            storageBucket: "REPLACE_WITH_YOURS.appspot.com",
+            messagingSenderId: "REPLACE_WITH_YOURS",
+            appId: "REPLACE_WITH_YOURS",
+            databaseURL: "https://REPLACE_WITH_YOURS.asia-southeast1.firebasedatabase.app/"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        /* AUTHENTICATION CODE: START */
+        import { getAuth, onAuthStateChanged, signInWithPopup, signOut, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        var loginUser = false;
+
+        // when authentication status changed
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+
+                // ...
+                loginUser = user;
+                document.getElementById('login').innerText = `${user.displayName} (${user.email})`;
+                do_things();
+            } else {
+                // User is signed out
+                // ...
+                loginUser = false;
+                document.getElementById('login').innerText = 'Not authenticated';
+                document.getElementById('target').innerText = '';
+            }
+        });
+
+        // login
+        document.getElementById('btnLogin')
+            .addEventListener('click', function () {
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        // This gives you a Google Access Token. You can use it to access the Google API.
+                        const credential = GoogleAuthProvider.credentialFromResult(result);
+                        const token = credential.accessToken;
+                        // The signed-in user info.
+                        const user = result.user;
+                        // ...
+                        loginUser = user;
+
+                    }).catch((error) => {
+                        // Handle Errors here.
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        // The email of the user's account used.
+                        const email = error.email;
+                        // The AuthCredential type that was used.
+                        const credential = GoogleAuthProvider.credentialFromError(error);
+                        // ...
+                        console.log(error);
+                    });
+            });
+
+        // logout
+        document.getElementById('btnLogout')
+            .addEventListener('click', function () {
+                signOut(auth).then(() => {
+                    // Sign-out successful.
+                    loginUser = false;
+
+                }).catch((error) => {
+                    // An error happened.
+                    console.log(error);
+                });
+            });
+
+        /* AUTHENTICATION CODE: END */
+
+        /* DB CODE: START */
+        // Import the functions needed to read from realtime database
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+
+        function do_things() {
+            // connect to the realtime database
+            const db = getDatabase();
+
+            // get a reference to the data 'title'
+            const title = ref(db, 'title');
+
+            // when value of 'title' changes, update to our <h1 id='target'>
+            onValue(title, (snapshot) => {
+                const data = snapshot.val(); // get the new value
+                document.getElementById('target').innerText = data;
+            });
+        }
+
+        /* DB CODE: END  */
+
+    </script>
+
+</body>
+
+</html>

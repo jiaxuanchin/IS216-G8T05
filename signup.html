@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap4.min.css">
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Vue -->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <section class="pt-5 pb-5 mt-0 align-items-center d-flex" style="min-height: 100vh; background-size: cover; background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1920&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=c0d43804e2c7c93143fe8ff65398c8e9);">
+        <div class="container-fluid" id="main">
+            <div class="row justify-content-center align-items-center d-flex-row text-center h-100">
+                <div class="col-12 col-md-4 col-lg-4 h-50">
+                    <div class="card shadow">
+                        <div class="card-body pt-0 mx-auto">
+                            <img src="images/logo2.png" alt="" class="img-fluid">
+                            <h2 class="card-title mt-0 text-center">Create an Account</h2>
+                            <p class="text-center">Get started with your free account</p>
+                            <!-- username -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user" aria-hidden="true"></i> </span>
+                                </div>
+                                <input name="uname" class="form-control" placeholder="Username" type="text" id="uname">
+                            </div>
+
+                            <!-- email -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-envelope" aria-hidden="true"></i> </span>
+                                </div>
+                                <input name="email" class="form-control" placeholder="Email" type="email" id="email">
+                            </div>
+
+                            <!-- create password -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input class="form-control" name="pwd" placeholder="Create password" type="password" id="pwd1">
+                            </div>
+
+                            <!-- confirm password -->
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input class="form-control" name="cpwd" placeholder="Confirm password" type="password" id="pwd2">
+                            </div>
+
+                            <!-- submit button -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block text-white" style="background-color:#344648;" id="submit"> Create Account </button>
+                            </div>
+
+                            <p class="text-center">
+                                Have an account? <a href="login.html" class="text-primary">Login</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <script>
+        // sample test, to be connected to database        
+        const app = Vue.createApp({
+            data() {
+                return {
+                    users:  [
+                                { "user": "Jack", "pwd": "abc" }, { "user": "Mary", "pwd": "def" },
+                                { "user": "John", "pwd": "123" }, { "user": "Cherry", "pwd": "456" }
+                            ],
+                    uname: "",
+                    email: "",
+                    pwd1: "",
+                    pwd2: "",
+                    show: false,
+                    error: "",
+                }
+            },
+            methods: {
+                validate() {
+                    if (this.uname.length == 0 && this.email.length == 0 && this.pwd1.length == 0 && this.pwd2.length == 0) {
+                        this.error = 'Fields cannot be empty'
+                        this.show = true
+                        return
+                    }
+                    else if (this.email.length == 0) {
+                        this.error = 'Email cannot be empty'
+                        this.show = true
+                        return
+                    }
+                    else if (this.uname.length == 0) {
+                        this.error = 'Username cannot be empty'
+                        this.show = true
+                        return
+                    }
+                    else if (this.pwd1.length == 0) {
+                        this.error = 'Password cannot be empty'
+                        this.show = true
+                        return
+                    }
+                    else if (this.pwd2.length == 0) {
+                        this.error = 'Please confirm password'
+                        this.show = true
+                        return
+                    }
+                    else {
+                        let exists = false
+                        let obj = {}
+                        for (u of this.users) {
+                            if (u.user == this.uname || u.email == this.email) {
+                                exists = true
+                                obj = u
+                            }
+                        }
+                        if (exists) {
+                            this.error = 'Account exists! Please create a new account'
+                            this.show = true
+                            return
+                        }
+                        if (this.pwd1 != this.pwd2) {
+                            this.error = 'Passwords do not match!'
+                            this.show = true
+                            return
+                        }
+                    }
+                    this.show = false
+                    window.location.href = 'home2.html';
+                },
+            },
+        })
+        app.mount('#main')
+    </script> -->
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+        import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+    
+    
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+    
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            // Your configs
+                apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+                authDomain: "adventuretime-934a2.firebaseapp.com",
+                projectId: "adventuretime-934a2",
+                storageBucket: "adventuretime-934a2.appspot.com",
+                messagingSenderId: "168230082500",
+                appId: "1:168230082500:web:6fbd2239d875c99c467691",
+                measurementId: "G-MXMNLZZLM8",
+                databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const database = getDatabase(app);
+    
+        submit.addEventListener('click', (e) => {
+    
+            var email = document.getElementById('email').value;
+            var password1 = document.getElementById('pwd1').value;
+            var password2 = document.getElementById('pwd2').value;
+            if (password1 != password2) {
+                alert('Passwords do not match!')
+                document.getElementById('pwd1').value = ''
+                document.getElementById('pwd2').value = ''
+                return
+            }
+            else {
+                //sign up user
+            createUserWithEmailAndPassword(auth, email, password1)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ... user.uid
+                set(ref(database, 'users/' + user.uid), {
+                    email: email,
+                    password: password1
+                })
+                .then(() => {
+                    // Data saved successfully!
+                    alert('user created successfully');
+                    window.location.href = 'home2.html';
+                })
+                .catch((error) => {
+                    // The write failed...
+                    alert(error);
+                });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                alert(errorMessage);
+            });
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>adventuretime</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <!-- theme meta -->
+    <meta name="theme-name" content="revolve" />
+
+    <!-- Favicon
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
+    
+    <!-- THEME CSS
+	================================================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Themify -->
+    <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+    <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css">
+    <link rel="stylesheet" href="plugins/slick-carousel/slick.css">
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+</head>
+<body>
+
+    <!-- header -->
+    <header class="header-top bg-grey justify-content-center">
+      <nav class="navbar navbar-expand-md navigation-2 navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand text-uppercase" href="home1.html">
+            <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ti-menu" style="color: white;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href="login.html" class="nav-link text-white">Log in</a>
+              </li>
+              <li class="nav-item">
+                <a href="signup.html" class="nav-link text-white">Sign up</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Homepage nav -->
+
+    <!-- <div class="container-fluid text-white" style="background-size: cover;background-image: url(images/pano_img.png)">
+      <div class="row">
+        <div class="col-md-7">
+          <br>
+          <h1 class="text-white mx-5 pt-5">You will never travel without our trip planner again.</h1>
+          <p class="text-white mx-5 pb-5 pt-3">Build, organize, and map your itineraries in a free travel app designed for vacations & road trips</p>
+        </div>
+        <div class="col-md-5">
+          <h3 class="bg-white m-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam ut nam pariatur, veritatis voluptatibus sed consequuntur et illo. Vitae in ipsa maiores earum consectetur et, doloribus sunt. Ut, aspernatur.</h3>
+        </div>
+      </div>
+    </div> -->
+    <div class="container-fluid text-white p-5" style="background-size: cover;background-image: url(images/pano_img.png)">
+      <br>
+      <h1 class="text-white mx-5 pt-5 text-center">You will never travel without our trip planner again.</h1>
+      <p class="text-white mx-5 pb-5 pt-3 text-center">Build, organize, and map your itineraries in a free travel app designed for vacations & road trips</p>
+    </div>
+    <br><br>
+    <div class="container-sm">
+      <p class="text-center">With AdventureTime you will be able to plan...</p>
+      <br><br>
+      <div class="row justify-content-center">
+        <div class="col-md-2 col-sm-6 text-center">
+          <i class="fa fa-plane fa-5x" aria-hidden="true" style="color: #12A9DC;"></i><br>
+          <p>Flights</p>
+        </div>
+        <div class="col-md-2 col-sm-6 text-center">
+          <i class="fa fa-train fa-5x" aria-hidden="true" style="color: #ED6B24;"></i>
+          <p class="text-center">Trains</p>
+        </div>
+        <div class="col-md-2 col-sm-6 text-center">
+          <i class="fa fa-bus fa-5x" aria-hidden="true" style="color: #20BF55;"></i>
+          <p class="text-center">Shuttle</p>
+        </div>
+        <div class="col-md-2 col-sm-6 text-center">
+          <i class="fa fa-ship fa-5x" aria-hidden="true" style="color: #b035a0;"></i>
+          <p class="text-center">Cruise</p>
+        </div>
+      </div>
+      <br><br>
+    </div>
+
+    <p class="text-center">Hear what users have to say about us!</p>
+    <div class="container d-flex justify-content-center d-lg-block" style="max-width: 800px;">
+      <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active d-flex justify-content-center">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"It's so fast and efficient to plan my trip now!"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Jia Xuan</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"It's so fast and efficient to plan my trip now!"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Jia Xuan</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"blah blah blah"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Amanda</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"blah blah blah"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Amanda</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"blah blah blah"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Xiao Fang</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"blah blah blah"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Xiao Fang</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"blah blah blah"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Kelly</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"blah blah blah"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Kelly</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"blah blah blah"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Abhisit</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"blah blah blah"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- Abhisit</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/bg-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h1 class="text-white">"blah blah blah"</h1>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- William</p>
+            </div>
+            <div class="carousel-caption d-md-block d-lg-none">
+              <h3 class="text-white">"blah blah blah"</h3>
+              <p class="fst-italic text-white w-75 text-center mx-auto">- William</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- <div class="container d-md-block d-lg-none" style="background-size: cover;background-image: url(images/bg-1.png)">
+      <br><br><br><br><br>
+      <h3 class="text-white text-center pt-5">"It's so fast and efficient to plan my trip now!"</h3>
+      <p class="fst-italic text-white w-75 text-center mx-auto">- Jia Xuan</p>
+      <hr class="text-white">
+      <h3 class="text-white text-center">"blah blah blah"</h1>
+      <p class="fst-italic text-white w-75 text-center mx-auto">- Amanda</p>
+      <hr class="text-white">
+      <h3 class="text-white text-center">"blah blah blah"</h1>
+      <p class="fst-italic text-white w-75 text-center mx-auto">- Xiao Fang</p>
+      <hr class="text-white">
+      <h3 class="text-white text-center">"blah blah blah"</h1>
+      <p class="fst-italic text-white w-75 text-center mx-auto">- Kelly</p>
+      <hr class="text-white">
+      <h3 class="text-white text-center">"blah blah blah"</h1>
+      <p class="fst-italic text-white w-75 text-center mx-auto">- Abhisit</p>
+      <hr class="text-white">
+      <h3 class="text-white text-center">"blah blah blah"</h1>
+      <p class="fst-italic text-white w-75 text-center mx-auto pb-3">- William</p>   
+    </div>   -->
+    <br>
+    <br>
+    
+    <!--footer-->
+    <section class="footer-2 section-padding gray-bg pb-3">
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
+                <h4 class="mb-4 font-weight-bold">
+                    <i class="fa fa-map-marker fx-2" aria-hidden="true"></i> 
+                    <span style="color:#575769">81 Victoria St, Singapore 188065</span>
+                </h4>
+                <br>
+                <h4 class="mb-4 font-weight-bold">
+                    <i class="fa fa-phone fx-2" aria-hidden="true"></i> 
+                    <span style="color:#575769">+65 6782 9653</span>
+                </h4>
+                <br>
+                <h4 class="mb-4 font-weight-bold">
+                    <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
+                    <span style="color:#575769">support@adventuretime.com</span>
+                </h4>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none" />
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
+            <h2 class="mb-4 font-weight-bold">About the company</h2>
+            <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential travellers to travel with ease!</p>
+            <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
+            <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
+            <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
+            <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+            </div>
+            
+
+        </div>
+        
+    </section>	
+
+  <!-- THEME JAVASCRIPT FILES
+  ================================================== -->
+  <!-- initialize jQuery Library -->
+  <script src="plugins/jquery/jquery.js"></script>
+  <!-- Bootstrap jQuery -->
+  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="plugins/bootstrap/js/popper.min.js"></script>
+  <!-- Owl caeousel -->
+  <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+  <script src="plugins/slick-carousel/slick.min.js"></script>
+  <script src="plugins/magnific-popup/magnific-popup.js"></script>
+  <!-- Instagram Feed Js -->
+  <script src="plugins/instafeed-js/instafeed.min.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw" async defer></script>
+  <script src="plugins/google-map/gmap.js"></script>
+  <!-- main js -->
+  <script src="js/custom.js"></script>
+
+  </body>
+</html>
