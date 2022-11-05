@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <link href='fullcalendar/main.css' rel='stylesheet' />
+    <script src='fullcalendar/main.js'></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        timeZone: 'UTC',
+        initialView: 'timeGrid',
+        visibleRange: {
+            start: '2022-10-10', // affects the visible range! need to have start and end
+            end: '2022-10-15'
+        },
+        headerToolbar: {
+        left: '', // left: 'prev,next today'
+        center: 'title',
+        right: 'timeGridWeek,timeGridDay'
+        },
+        // events: 'https://fullcalendar.io/api/demo-feeds/events.json'
+        events: [
+            {
+                title: 'Singapore Zoo',
+                start: '2022-10-10T10:30:00',
+                end: '2022-10-11T11:30:00',
+            },
+            {
+                title: 'Sentosa',
+                start: '2022-11-10T10:30:00',
+                end: '2022-12-15T11:30:00',
+            }
+        ]
+    });
+
+    calendar.render();
+    });
+    </script>
+    
+    <style>
+        .outerBox{
+            width: 60%;
+            border: grey 3px solid;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 12px;
+            }
+
+        #calendar {
+            width:100%;
+            margin: 40px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="outerBox" class="mx-auto">
+        <div id='calendar'></div>
+    </div>
+</body>
+</html>
