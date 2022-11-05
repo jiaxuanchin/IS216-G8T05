@@ -289,6 +289,7 @@ if(document.getElementsByClassName('recommend_header')[track].innerHTML==''){
 }
 
 let id = document.getElementById('place_id').value
+console.log(id)
 let lati = document.getElementById('origin_lat').value 
 let lng = document.getElementById('origin_lng').value 
 const map = new google.maps.Map(document.getElementById("map"), {
@@ -307,6 +308,7 @@ service = new google.maps.places.PlacesService(map);
 service.getDetails(request, callback);
 
 function callback(place, status) {
+  console.log(id)
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     if(place.photos[0] != undefined){
       picture_url = place.photos[0].getUrl({
@@ -453,7 +455,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
                                     <div class="col-md-6">
                                       <div class="card-body">
                                         <p class="card-title">${name}</>
-                                        <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                        <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
                                       </div>
                                     </div>
                                   </div>
@@ -481,6 +483,7 @@ parent.innerHTML = fill
 
 function add_rec(place_id,track){
 let id = document.getElementById('place_id').value
+console.log(id)
 let lati = document.getElementById('origin_lat').value 
 let lng = document.getElementById('origin_lng').value 
 const map = new google.maps.Map(document.getElementById("map"), {
@@ -506,7 +509,6 @@ function callback(place, status) {
    }
 
    let name = place.name
-
    let fill = document.createElement('div')
    fill.innerHTML = `
     <div class="row my-2">
@@ -558,6 +560,7 @@ function callback(place, status) {
    
    //let parent = document.getElementById('place_info')
    let parent = document.getElementsByClassName('place_info')[track]
+   console.log(parent)
    parent.appendChild(fill)
   }
 }
