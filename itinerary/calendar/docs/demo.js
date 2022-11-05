@@ -20,10 +20,11 @@ var getDatesInRange = function (startDate, endDate){
         date.setDate(date.getDate() + days)
         return date
     }
-    while (currentDate <= endDate) {
+    while (currentDate <= endDate){
         dates.push(currentDate)
         currentDate = addDays.call(currentDate, 1)
     }
+    dates[0] = dates[0]['_d']
     return dates
     
 }
@@ -76,12 +77,12 @@ new Lightpick({
     singleDate: false,
     onSelect: function(start, end){
         document.getElementById('result-2').innerHTML = rangeText(start,end)
-        document.getElementById('result-3').innerHTML = getDatesInRange(start,end)
-
-   
+        document.getElementById('result-3').innerHTML = getDatesInRange(start,end)   
     }
 
     
 });
+
+
 
 
