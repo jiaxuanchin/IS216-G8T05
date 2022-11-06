@@ -314,6 +314,7 @@ function callback(place, status) {
    }
    let name = place.name
 
+
    let fill = document.createElement('div');
    fill.className = "container";
    fill.innerHTML = `
@@ -323,7 +324,7 @@ function callback(place, status) {
       <div>
     </div>
 
-   <div class="row"> 
+   <div class="row" > 
     <div class="col-4">
       <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
 
@@ -359,9 +360,15 @@ function callback(place, status) {
           <div class="divCheckBox" id=${id+'check2'}></div>
           </form>
         </div>
-      </div>
-    </div>
 
+        <!-----------TRASHBIN--------------------->
+        <div class="col">
+          <div style='float:right' class='fa fa-trash' onclick=removePlace(${fill})></div>
+        </div>
+      </div>
+      
+    </div>
+    
 
   </div>
    `
@@ -369,6 +376,10 @@ function callback(place, status) {
    parent.appendChild(fill)
   }
 }
+}
+
+function removePlace(fill){
+  document.getElementById(fill.id).remove()
 }
 
 function fill_rec(){
@@ -552,6 +563,12 @@ function callback(place, status) {
           <div class="divCheckBox" id=${id+'check2'}></div>
           </form>
         </div>
+
+        <!-----------TRASHBIN--------------------->
+        <div class="col">
+          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id + 'remove1'})></div>
+        </div>
+
       </div>
     </div>
   </div>
