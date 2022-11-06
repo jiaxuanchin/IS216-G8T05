@@ -316,6 +316,7 @@ function callback(place, status) {
 
 
    let fill = document.createElement('div');
+   fill.id = id + 'row'
    fill.className = "container";
    fill.innerHTML = `
     <div class="row my-2">
@@ -363,7 +364,7 @@ function callback(place, status) {
 
         <!-----------TRASHBIN--------------------->
         <div class="col">
-          <div style='float:right' class='fa fa-trash' onclick=removePlace(${fill})></div>
+          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
         </div>
       </div>
       
@@ -378,8 +379,8 @@ function callback(place, status) {
 }
 }
 
-function removePlace(fill){
-  document.getElementById(fill.id).remove()
+function removePlace(id){
+  document.getElementById(id).remove()
 }
 
 function fill_rec(){
@@ -583,58 +584,58 @@ function callback(place, status) {
 }
 
 function addFormField(id) {
-id_origin = id
-id = id.id
-id2 = id.slice(0,id.length-1) +'2'
-to_add = document.createElement('div')
-to_add.className = 'input_field' + id_origin.id
+  id_origin = id
+  id = id.id
+  id2 = id.slice(0,id.length-1) +'2'
+  to_add = document.createElement('div')
+  to_add.className = 'input_field' + id_origin.id
 
-current_input = document.getElementsByClassName('input_field' + id_origin.id)
-if(current_input.length == 0){
-  to_add.id = 'input_field'+ id_origin.id + 1
-}
-else{
-  cur_num_class = current_input[current_input.length-1].id
-  cur_num = cur_num_class[cur_num_class.length - 1]
-  console.log(cur_num)
-  to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
-}
-console.log(to_add.id)
-to_add.innerHTML = `<input type="text"><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
-div_element = document.getElementById(id2)
-div_element.appendChild(to_add)
+  current_input = document.getElementsByClassName('input_field' + id_origin.id)
+  if(current_input.length == 0){
+    to_add.id = 'input_field'+ id_origin.id + 1
+  }
+  else{
+    cur_num_class = current_input[current_input.length-1].id
+    cur_num = cur_num_class[cur_num_class.length - 1]
+    console.log(cur_num)
+    to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
+  }
+  console.log(to_add.id)
+  to_add.innerHTML = `<input type="text"><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
+  div_element = document.getElementById(id2)
+  div_element.appendChild(to_add)
 }
 
 function removeFormField(id) {
-document.getElementById(id.id).remove()
+  document.getElementById(id.id).remove()
 }
 
 function addCheckbox(id) {
 
-id_origin = id
-id = id.id
-id2 = id.slice(0,id.length-1) +'2'
-to_add = document.createElement('div')
-to_add.className = 'check_field' + id_origin.id
+  id_origin = id
+  id = id.id
+  id2 = id.slice(0,id.length-1) +'2'
+  to_add = document.createElement('div')
+  to_add.className = 'check_field' + id_origin.id
 
-current_input = document.getElementsByClassName('check_field'+id_origin.id)
-if(current_input.length == 0){
-  to_add.id = 'check_field'+ id_origin.id + 1
-}
-else{
-  cur_num_class = current_input[current_input.length-1].id
-  cur_num = cur_num_class[cur_num_class.length - 1]
-  console.log(cur_num)
-  to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
-}
-console.log(to_add.id)
-to_add.innerHTML = to_add.innerHTML = `<input type="checkbox"><input type='text'><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
-div_element = document.getElementById(id2)
-div_element.appendChild(to_add)
+  current_input = document.getElementsByClassName('check_field'+id_origin.id)
+  if(current_input.length == 0){
+    to_add.id = 'check_field'+ id_origin.id + 1
+  }
+  else{
+    cur_num_class = current_input[current_input.length-1].id
+    cur_num = cur_num_class[cur_num_class.length - 1]
+    console.log(cur_num)
+    to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
+  }
+  console.log(to_add.id)
+  to_add.innerHTML = to_add.innerHTML = `<input type="checkbox"><input type='text'><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
+  div_element = document.getElementById(id2)
+  div_element.appendChild(to_add)
 }
 
 function removeCheckBox(id2) {
-$(id2.id).remove();
+  $(id2.id).remove();
 }
 
 
