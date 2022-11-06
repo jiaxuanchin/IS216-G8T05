@@ -3,9 +3,6 @@ var rangeText = function (start, end) {
         var str = '';
         str += start ? start.format('D/M/YYYY') + ' to ' : '';
         str += end ? end.format('D/M/YYYY') : '...';
-
-        // str += start + '-' + end
-        
         
         return str;
 
@@ -24,7 +21,7 @@ var getDatesInRange = function (startDate, endDate){
         dates.push(currentDate)
         currentDate = addDays.call(currentDate, 1)
     }
-    dates[0] = dates[0]['_d']
+    dates[0] = dates[0]
     return dates
     
 }

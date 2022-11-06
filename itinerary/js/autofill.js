@@ -69,9 +69,7 @@
 
                             <!------------- SEARCH BOX ------------->
                             <!--PLACE INFO START-->
-                             <div class="place_info">
-                              
-                            </div>
+                             <div class="place_info"></div>
 
                             <!--PLACE INFO END-->
 
@@ -363,6 +361,7 @@ function callback(place, status) {
         </div>
       </div>
     </div>
+
 
   </div>
    `
