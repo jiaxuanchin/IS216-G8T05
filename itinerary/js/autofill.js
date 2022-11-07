@@ -321,7 +321,7 @@ function callback(place, status) {
    fill.innerHTML = `
     <div class="row my-2">
       <div class="col">
-        ${name}
+        <h3>${name}</h3>
       <div>
     </div>
 
@@ -366,11 +366,10 @@ function callback(place, status) {
         <div class="col">
           <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
         </div>
-      </div>
-      
-    </div>
-    
 
+      </div>
+    </div>
+    </div>
   </div>
    `
    let parent = document.getElementsByClassName('place_info')[track]
@@ -413,6 +412,8 @@ service = new google.maps.places.PlacesService(map);
 service.textSearch(request, callback);
 
 
+
+
 function callback(results, status) {
 if (status == google.maps.places.PlacesServiceStatus.OK) {
   let num = document.getElementById('recommended_track').value
@@ -434,19 +435,22 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
       <div id="recommended" >
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                               <div class="carousel-inner">
-                                <div class="carousel-item active" style='height: 150px;'>
-                                <div class="card mb-3" style="max-width: 150px;">
-                                  <div class="row g-0">
+                                <div class="carousel-item active" >
+                                <div class="card mb-3" >
+                                  <div class="row g-0" >
 
-                                    <div class="col-md-6">
-                                      <img src="${photo}"  alt="..." style="width:150px; max-height:150px">
+                                    <div class="col-md-3">
+                                    <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                       <div class="card-body" >
-                                          
-                                        <p class="card-title">${name}</p>
-                                        <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary" style=" right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                        <div class="row">
+                                          <p class="card-title">
+                                            ${name}
+                                          </p>
+                                        </div>
+                                        <div class="row"><button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button></div>
                                       </div>
                                     </div>
 
@@ -456,17 +460,23 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
       `
     }
     else{
-      fill += `<div class="carousel-item" style='height:150px'>
-                                <div class="card mb-3" style="max-width: 300px;">
+      fill += `<div class="carousel-item">
+                                <div class="card mb-3 " >
                                   <div class="row g-0">
-                                    <div class="col-md-6">
-                                      <img src="${photo}"  alt="..." style="width:150px;max-height:150px">
+
+                                    <div class="col-md-3">
+                                      <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
                                     </div>
                                     
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                       <div class="card-body">
-                                        <p class="card-title">${name}</>
-                                        <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary" style="position:absolute; right:20%; top:50%; type="submit" class="add_recommend">ADD!</button>
+                                        <div class="row">
+                                            <p class="card-title">${name}</p>
+                                        </div>
+
+                                        <div class="row">
+                                            <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
+                                          </div>
                                       </div>
                                     </div>
                                   </div>
@@ -475,16 +485,16 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     }
   }
   fill += `</div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>`
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>`
 parent.innerHTML = fill
 }
 }
@@ -520,15 +530,17 @@ function callback(place, status) {
    }
 
    let name = place.name
-   let fill = document.createElement('div')
+   let fill = document.createElement('div');
+   fill.id = id + 'row'
+   fill.className = "container";
    fill.innerHTML = `
     <div class="row my-2">
       <div class="col">
-        ${name}
+        <h3>${name}</h3>
       <div>
     </div>
 
-   <div class="row"> 
+   <div class="row" > 
     <div class="col-4">
       <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
 
@@ -536,10 +548,10 @@ function callback(place, status) {
 
       <p>
       <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-      <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+      <button value=${id} onclick='getDistance_transit(this)' class="btn" id ='Transit'><i class="fa fa-subway"></i>public transport</button>
       <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
     
-      <div class="distance" id=${id}></div>
+      <div class="distance" id=${id}>${id}</div>
       </p>
     </div>
 
@@ -567,10 +579,11 @@ function callback(place, status) {
 
         <!-----------TRASHBIN--------------------->
         <div class="col">
-          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id + 'remove1'})></div>
+          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
         </div>
 
       </div>
+    </div>
     </div>
   </div>
    `
