@@ -1,0 +1,59 @@
+.profile-image {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 5%;
+    border: 3px solid grey;
+}
+
+#profile {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}
+
+.profile-tab label {
+    font-weight: 600;
+}
+
+.profile-tab p {
+    font-weight: 600;
+    color: #0062cc;
+}
+
+#second {
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+#currenttrip {
+    margin-left: 5px;
+}
+
+.student-seat {
+    padding: 15px;
+    text-align: center;
+}
+
+.item {
+    width: 20rem;
+    height: 300px;
+}
+
+.img-card {
+    height: 150px;
+    width: 150px;
+}
+
+.button-chat {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    margin-right: 20px;
+}
