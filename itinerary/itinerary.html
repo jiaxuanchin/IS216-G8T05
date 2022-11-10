@@ -28,11 +28,15 @@
     <!-- icon -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://kit.fontawesome.com/660bb2d651.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <!-- other links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/vue@next"></script>
+
+    <!--Google charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- nav -->
       <!-- THEME CSS
@@ -61,6 +65,10 @@
           .trip-name{
             background-image: url("img/korea4.jpg");
             padding: 40px;
+          }
+
+          hr{
+            border-top: 2px solid rgb(77, 76, 76)
           }
           
     
@@ -200,6 +208,131 @@
   </div> <!--end container-->
   <p id="result-3" hidden></p>
 
+<!------------------------------------------Budget-------------------------------------------->
+<div id="app" style="width:90%;" class="mx-auto mb-4">
+    <h1>Budgeting</h1>
+
+  <div class="row p-3" style="background-color:lightgrey;border-radius:20px;">
+          <div class="col-lg-8 col-sm-12">
+              <h3>{{currency}}: ${{total_amt.toFixed(2)}}</h3>
+              <hr>
+              Total Amount
+          </div>
+
+          <div class="col-lg-4 col-sm-12">
+              
+              <!--Button to launch modal-->
+              <button type="button" class="btn" style="background-color: lightgray; color:black;" data-bs-toggle="modal" data-bs-target="#exampleModal"><h7 class="fw-bold"><i class="fa-solid fa-dollar-sign"></i> Category Breakdown</h7></button><br>
+              
+              <!--Modal content-->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog">
+                  
+                      <div class="modal-content">
+                  
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Spending Breakdown</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+
+                              <!--This is the buttons to togger the content within modal-->
+                              <div class="btn-group me-2" role="group" aria-label="First group">
+                                  <button v-on:click="catShowTableView()" type="button" class="btn btn-outline-secondary">Table View</button>
+                                  <button v-on:click="catShowBarView()" type="button" class="btn btn-outline-secondary">Bar View</button>
+                              </div>
+
+                              <br><br>
+
+                              <!--Chart View-->
+                              <div v-show="catBarView">
+                                  <h7 class="fw-bold">Bar View</h7>
+                                  <div id="bar_chart_div"></div>
+                              </div>
+
+                              <!--Table View-->
+                              <div v-show="catTableView">
+                                  <h7 class="fw-bold">Table View</h7>
+                                  <div id="table_div"></div>
+                              </div>
+
+                          </div><!--End of modal body-->
+                  
+                      </div>
+                  
+                  </div>
+              
+              </div> <!--End of modal content-->
+
+              <!--Button to launch modal for currency-->
+              <button type="button" class="btn" style="background-color: lightgray; color:black;" data-bs-toggle="modal" data-bs-target="#currencySettingModal"><h7 class="fw-bold"><i class="fa-solid fa-gear"></i> Currency Settings</h7></button>
+
+              <!--modal content for currency settings-->
+
+              <!--Start of currency setting modal content-->
+              <div class="modal fade" id="currencySettingModal" tabindex="-1" aria-labelledby="currencySettingModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog">
+                  
+                      <div class="modal-content m-2">
+                  
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="currencySettingModalLabel">Currency Setting</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+
+                              <h7 class="fw-bold">Ensuring ease budgeting</h7>
+                              <p>Input in your currency settings and let us do the quick conversion for you. </p>
+
+                              <div class="row text-center">
+
+                                  <div class="col-5">
+                                      Input Currency: <br> 
+                                      <div class="dropdown">
+                                          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Input Currency
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                              <li><a class="dropdown-item" href="#">Action</a></li>
+                                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-5">
+                                      Converted Currency: <br>
+                                      <div class="dropdown">
+                                          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Ouput Currency
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                              <li><a class="dropdown-item" href="#">Action</a></li>
+                                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                          </div><!--End of modal body-->
+                  
+                      </div>
+                  
+                  </div>
+              
+              </div> <!--End of modal content-->
+              <!--End of currency setting modal content-->
+          </div>
+      
+  </div>
+</div>
+
 <!------------------------------------------Footer-------------------------------------------->
 <section class="footer-2 section-padding gray-bg pb-3">
   <div class="row">
@@ -291,4 +424,88 @@
 
 
  
+</script>
+
+<!--Google bar charts to show-->
+<script>
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+
+      // The data here can be changed
+      var data = google.visualization.arrayToDataTable([
+          ['Activity', 'Price'],
+          ['Sentosa', 300],
+          ['Wild Wild Wet', 30],
+          ['Singapore Zoo', 300],
+          ['Adventure Colve', 2032],
+          ['Marina Bay Sands', 4503]
+      ]);
+
+      //The data here can be changed 
+      var options = {
+          title: 'Category Spending Breakdown',
+          chartArea: {width: '90%'},
+          hAxis: {
+          title: 'Price',
+          minValue: 0
+          },
+          vAxis: {
+          title: 'Activity'
+          }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+
+      chart.draw(data, options);
+  }
+</script>
+
+<!--Google table charts to show-->
+<script>
+  google.charts.load('current', {'packages':['table']});
+  google.charts.setOnLoadCallback(drawTable);
+
+  function drawTable() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Activity');
+  data.addColumn('number', 'Price');
+  data.addRows([
+      ['Sentosa', 300],
+      ['Wild Wild Wet', 30],
+      ['Singapore Zoo', 300],
+      ['Adventure Colve', 2032],
+      ['Marina Bay Sands', 4503]
+  ]);
+
+  var table = new google.visualization.Table(document.getElementById('table_div'));
+
+  table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+  }
+</script>
+
+<!--Vue instance for generation of budget total amount and currency-->
+<script>
+  const app = Vue.createApp({
+      data(){
+          return{
+              total_amt: 0,
+              currency: "SGD",
+              catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
+              catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
+
+          }
+      },
+      methods: {
+          catShowTableView(){
+              this.catTableView = true
+              this.catBarView = false
+          },
+          catShowBarView(){
+              this.catTableView = false
+              this.catBarView = true
+          }
+      }
+  }).mount("#app")
 </script>
