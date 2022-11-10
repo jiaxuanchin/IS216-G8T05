@@ -305,7 +305,6 @@ service = new google.maps.places.PlacesService(map);
 service.getDetails(request, callback);
 
 function callback(place, status) {
-  console.log(id)
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     if(place.photos[0] != undefined){
       picture_url = place.photos[0].getUrl({
@@ -362,7 +361,7 @@ function callback(place, status) {
 
         <!-----------TRASHBIN--------------------->
         <div class="col">
-          <div style='float:right' class='fa fa-trash' onClick=removePlace(${id+'row'})></div>
+          <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
         </div>
 
       </div>
@@ -598,73 +597,72 @@ service.getDetails(request, callback);
 function callback(place, status) {
   lati = place.geometry.location.lat()
   lng = place.geometry.location.lng()
-  let place_id = place.place_id
+  id = place.place_id
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     if(place.photos[0] != undefined){
       picture_url = place.photos[0].getUrl({
    })
    }
-   id_rep = place_id.replace('-','_')
+   id_rep = id.replace('-','_')
    console.log(id_rep)
    let name = place.name
    let fill = document.createElement('div');
    fill.id = id + 'row'
    fill.className = "container";
    fill.innerHTML = `
-    <div class="row my-2">
-      <div class="col">
-        <h3>${name}</h3>
-      <div>
-    </div>
+   <div class="row my-2">
+     <div class="col">
+       <h3>${name}</h3>
+     <div>
+   </div>
 
-   <div class="row" > 
-    <div class="col-4">
-      <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+  <div class="row" > 
+   <div class="col-4">
+     <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
 
-      <div hidden class='get_distance'>${place_id},${lati},${lng}</div>
+     <div hidden class='get_distance'>${id},${lati},${lng}</div>
 
-      <p>
-      <button value=${place_id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-      <button value=${place_id} onclick='getDistance_transit(this)' class="btn" id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-      <button value=${place_id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-    
-      <div class="distance" id=${place_id}></div>
-      </p>
-    </div>
+     <p>
+     <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+     <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+     <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+   
+     <div class="distance" id=${id}></div>
+     </p>
+   </div>
 
-    <div class="col-8"> 
-      <div class="row">
-        <div class="col">
-          <!------------- NOTE ------------------>
-          <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
-          <br>
-          <form action="#" method="get" id="form1">
-            <input type="hidden" id=${id_rep+'notes1'}>
-            <div class="divTxt" id=${id_rep+'notes2'}></div>
-          </form>
-        </div>
+   <div class="col-8"> 
+     <div class="row">
+       <div class="col">
+         <!------------- NOTE ------------------>
+         <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
+         <br>
+         <form action="#" method="get" id="form1">
+           <input type="hidden" id=${id_rep+'notes1'}>
+           <div class="divTxt" id=${id_rep+'notes2'}></div>
+         </form>
+       </div>
 
-        <!-------------CHECKLIST -------------->
-        <div class="col">
-          <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
-          <br>
-          <form action="#" method="get" id="form2">
-          <input type="hidden" id=${id_rep+'check1'}>
-          <div class="divCheckBox" id=${id_rep+'check2'}></div>
-          </form>
-        </div>
+       <!-------------CHECKLIST -------------->
+       <div class="col">
+         <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
+         <br>
+         <form action="#" method="get" id="form2">
+         <input type="hidden" id=${id_rep+'check1'}>
+         <div class="divCheckBox" id=${id_rep+'check2'}></div>
+         </form>
+       </div>
 
-        <!-----------TRASHBIN--------------------->
-        <div class="col">
-          <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
-        </div>
+       <!-----------TRASHBIN--------------------->
+       <div class="col">
+         <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
+       </div>
 
-      </div>
-    </div>
-    </div>
-  </div>
-   `
-   console.log(id_rep)
+     </div>
+   </div>
+   </div>
+ </div>
+  `
    //let parent = document.getElementById('place_info')
    let parent = document.getElementsByClassName('place_info')[track]
    console.log(parent)
@@ -727,6 +725,5 @@ function addCheckbox(id) {
 function removeCheckBox(id2) {
   $(id2.id).remove();
 }
-
 
 
