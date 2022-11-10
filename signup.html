@@ -72,78 +72,6 @@
         </div>
     </section>
 
-    <!-- <script>
-        // sample test, to be connected to database        
-        const app = Vue.createApp({
-            data() {
-                return {
-                    users:  [
-                                { "user": "Jack", "pwd": "abc" }, { "user": "Mary", "pwd": "def" },
-                                { "user": "John", "pwd": "123" }, { "user": "Cherry", "pwd": "456" }
-                            ],
-                    uname: "",
-                    email: "",
-                    pwd1: "",
-                    pwd2: "",
-                    show: false,
-                    error: "",
-                }
-            },
-            methods: {
-                validate() {
-                    if (this.uname.length == 0 && this.email.length == 0 && this.pwd1.length == 0 && this.pwd2.length == 0) {
-                        this.error = 'Fields cannot be empty'
-                        this.show = true
-                        return
-                    }
-                    else if (this.email.length == 0) {
-                        this.error = 'Email cannot be empty'
-                        this.show = true
-                        return
-                    }
-                    else if (this.uname.length == 0) {
-                        this.error = 'Username cannot be empty'
-                        this.show = true
-                        return
-                    }
-                    else if (this.pwd1.length == 0) {
-                        this.error = 'Password cannot be empty'
-                        this.show = true
-                        return
-                    }
-                    else if (this.pwd2.length == 0) {
-                        this.error = 'Please confirm password'
-                        this.show = true
-                        return
-                    }
-                    else {
-                        let exists = false
-                        let obj = {}
-                        for (u of this.users) {
-                            if (u.user == this.uname || u.email == this.email) {
-                                exists = true
-                                obj = u
-                            }
-                        }
-                        if (exists) {
-                            this.error = 'Account exists! Please create a new account'
-                            this.show = true
-                            return
-                        }
-                        if (this.pwd1 != this.pwd2) {
-                            this.error = 'Passwords do not match!'
-                            this.show = true
-                            return
-                        }
-                    }
-                    this.show = false
-                    window.location.href = 'home2.html';
-                },
-            },
-        })
-        app.mount('#main')
-    </script> -->
-
     <script type="module">
         // Import the functions you need from the SDKs you need
         import {initializeApp} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
@@ -182,6 +110,7 @@
             var email = document.getElementById('email').value;
             var password1 = document.getElementById('pwd1').value;
             var password2 = document.getElementById('pwd2').value;
+            var name = document.getElementById('uname').value
             if (password1 != password2) {
                 alert('Passwords do not match!')
                 document.getElementById('pwd1').value = ''
@@ -196,12 +125,14 @@
                 const user = userCredential.user;
                 // ... user.uid
                 set(ref(database, 'users/' + user.uid), {
+                    name: name,
                     email: email,
                     password: password1
                 })
                 .then(() => {
                     // Data saved successfully!
                     alert('user created successfully');
+                    localStorage.setItem('uid', user.uid)
                     window.location.href = 'home2.html';
                 })
                 .catch((error) => {
