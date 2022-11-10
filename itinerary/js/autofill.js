@@ -323,6 +323,8 @@ function callback(place, status) {
       <div class="col">
         <h3>${name}</h3>
       <div>
+      <!-----------TRASHBIN--------------------->
+        <span style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></span>
     </div>
 
    <div class="row" > 
@@ -342,7 +344,7 @@ function callback(place, status) {
 
     <div class="col-8"> 
       <div class="row">
-        <div class="col">
+        <div class="col-6">
           <!------------- NOTE ------------------>
           <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
           <br>
@@ -353,7 +355,7 @@ function callback(place, status) {
         </div>
 
         <!-------------CHECKLIST -------------->
-        <div class="col">
+        <div class="col-6">
           <button class="btn btn-light" href="#" onClick="addCheckbox(${id+'check1'}); return false;">+Checklist</button>
           <br>
           <form action="#" method="get" id="form2">
@@ -362,11 +364,7 @@ function callback(place, status) {
           </form>
         </div>
 
-        <!-----------TRASHBIN--------------------->
-        <div class="col">
-          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
-        </div>
-
+        
       </div>
     </div>
     </div>
@@ -413,7 +411,6 @@ service.textSearch(request, callback);
 
 
 
-
 function callback(results, status) {
 if (status == google.maps.places.PlacesServiceStatus.OK) {
   let num = document.getElementById('recommended_track').value
@@ -421,36 +418,35 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
   let photo = ''
   let fill = document.createElement('div')
   fill.innerHTML = ''
-  let track = 1
+  let track = 1;
+
   for(item of results){
     place_id = item.place_id
     name = item.name
     if(item.photos != undefined){
-      photo = item.photos[0].getUrl({
-   })
-  }
+      photo = item.photos[0].getUrl({})
+    }
+    
     if(track==1){
       track += 1
       fill = `
       <div id="recommended" >
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                              <div class="carousel-inner">
-                                <div class="carousel-item active" >
+                              <div class="carousel-inner" >
+                                <div class="carousel-item active " >
                                 <div class="card mb-3" >
                                   <div class="row g-0" >
 
-                                    <div class="col-md-3">
-                                    <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
+                                    <div class="col-6">
+                                    <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-6">
                                       <div class="card-body" >
-                                        <div class="row">
                                           <p class="card-title">
                                             ${name}
                                           </p>
-                                        </div>
-                                        <div class="row"><button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button></div>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
                                       </div>
                                     </div>
 
@@ -461,24 +457,20 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     }
     else{
       fill += `<div class="carousel-item">
-                                <div class="card mb-3 " >
-                                  <div class="row g-0">
+                                <div class="card mb-3" >
+                                  <div class="row g-0" >
 
-                                    <div class="col-md-3">
-                                      <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
+                                    <div class="col-6">
+                                      <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
                                     </div>
                                     
-                                    <div class="col-md-3">
-                                      <div class="card-body">
-                                        <div class="row">
+                                    <div class="col-6">
+                                    
                                             <p class="card-title">${name}</p>
-                                        </div>
-
-                                        <div class="row">
                                             <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
-                                          </div>
-                                      </div>
+                                
                                     </div>
+
                                   </div>
                                 </div>
     </div>`
@@ -555,9 +547,7 @@ function callback(place, status) {
       </p>
     </div>
 
-    <div class="col-8"> 
-      <div class="row">
-        <div class="col">
+    <div class="col-4"> 
           <!------------- NOTE ------------------>
           <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
           <br>
@@ -565,10 +555,10 @@ function callback(place, status) {
             <input type="hidden" id=${id+'notes1'}>
             <div class="divTxt" id=${id+'notes2'}></div>
           </form>
-        </div>
+    </div>
 
         <!-------------CHECKLIST -------------->
-        <div class="col">
+        <div class="col-4">
           <button class="btn btn-light" href="#" onClick="addCheckbox(${id+'check1'}); return false;">+Checklist</button>
           <br>
           <form action="#" method="get" id="form2">
@@ -578,14 +568,10 @@ function callback(place, status) {
         </div>
 
         <!-----------TRASHBIN--------------------->
-        <div class="col">
           <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
-        </div>
-
       </div>
     </div>
-    </div>
-  </div>
+
    `
    
    //let parent = document.getElementById('place_info')
