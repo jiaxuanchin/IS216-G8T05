@@ -42,10 +42,10 @@
 </head>
 <body onload="checkLogin()">
   <header class="header-top bg-grey">
-    <nav class="navbar navbar-expand-md navigation-2 navigation">
+    <nav class="navbar navbar-expand-md navigation-2 navigation py-1">
       <div class="container-fluid">
-        <a class="navbar-brand text-uppercase" href="home2.html">
-          <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+        <a class="navbar-brand text-uppercase py-0" href="home2.html">
+          <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="ti-menu" style="color: white;"></span>
@@ -54,9 +54,6 @@
           <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item mx-2">
               <a href="home2.html" class="nav-link text-white">Home</a>
-            </li>
-            <li class="nav-item mx-2">
-              <a href="fav.html" class="nav-link text-white">Favourites</a>
             </li>
             <li class="nav-item mx-2">
               <a href="createtrip.html" class="nav-link text-white">Add New Trip</a>
@@ -82,19 +79,19 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/french.png" class="d-block" alt="Hawaii, USA" style="width: 100%;height: 600px; object-fit: cover;">
+        <img src="images/french.png" class="d-block img-fluid" alt="Hawaii, USA">
       </div>
       <div class="carousel-item">
-        <img src="images/hawaiian.png" class="d-block w-100" alt="Paris, France" style="width: 100%;height: 600px; object-fit: cover;">
+        <img src="images/hawaiian.png" class="d-block w-100" alt="Paris, France">
       </div>
       <div class="carousel-item">
-        <img src="images/chinese.png" class="d-block w-100" alt="Kuala Lumpur, Malaysia" style="width: 100%;height: 600px; object-fit: cover;">
+        <img src="images/chinese.png" class="d-block w-100" alt="Kuala Lumpur, Malaysia">
       </div>
       <div class="carousel-item">
-        <img src="images/portugese.png" class="d-block w-100" alt="Rio De Janeiro, Brazil" style="width: 100%;height: 600px; object-fit: cover;">
+        <img src="images/portugese.png" class="d-block w-100" alt="Rio De Janeiro, Brazil">
       </div>
       <div class="carousel-item">
-        <img src="images/malay.png" class="d-block w-100" alt="Shanghai, China" style="width: 100%;height: 600px; object-fit: cover;">
+        <img src="images/malay.png" class="d-block w-100" alt="Shanghai, China">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -257,7 +254,7 @@
 <!-- main js -->
 <script src="js/custom.js"></script>
 
-<!-- <script>
+<script>
   $('.owl-carousel').owlCarousel({
     loop:false,
     margin:20,
@@ -277,16 +274,6 @@
         }
     }
   })
-  function checkLogin() {
-    if (localStorage.getItem('uid') == null) {
-      window.location.href = 'login.html';
-    }
-  }
-  console.log(localStorage.getItem('uid'))
-</script> -->
-<body onload="checkLogin()">
-</body>
-<script>
   function checkLogin() {
     if (localStorage.getItem('uid') == null) {
       window.location.href = 'login.html';
