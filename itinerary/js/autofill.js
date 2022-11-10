@@ -411,6 +411,85 @@ var request = {
 service = new google.maps.places.PlacesService(map);
 service.textSearch(request, callback);
 
+// function callback(results, status) {
+//   if (status == google.maps.places.PlacesServiceStatus.OK) {
+//     let num = document.getElementById('recommended_track').value
+//     let name = ''
+//     let photo = ''
+//     let fill = document.createElement('div')
+//     fill.innerHTML = ''
+//     let track = 1;
+//     fill += `
+//       <div id="recommended">
+//         <div class="container  my-3">
+//           <h2 class="font-weight-light">Recommended</h2>
+//             <div class="row mx-auto my-auto justify-content-center">
+//                 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+//                     <div class="carousel-inner" role="listbox">
+//                       <div class="carousel-item ">
+//       `
+  
+//     for(item of results){
+//       place_id = item.place_id
+//       name = item.name
+//       if(item.photos != undefined){
+//         photo = item.photos[0].getUrl({})
+//       }    
+//       if(track==1){
+//         track += 1
+//         fill += ` <div class="col-md-3">
+//                                 <div class="card" >
+//                                   <div class="row no-gutters">
+//                                       <div class="col-sm-5">
+//                                       <img src="${photo}" class="img-fluid">
+//                                       </div>
+//                                       <div class="col-sm-7">
+//                                           <div class="card-body">
+//                                               <h5 class="card-title">${name}</h5>
+//                                               <button value="${place_id}" onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
+//                                           </div>
+//                                       </div>
+//                                   </div>
+//                                 </div>
+//                   </div>              
+//         `
+
+//       }
+//       else{
+//         fill += `<div class="carousel-item ">
+//                   <div class="col-md-3">
+//                       <div class="card">
+//                           <div class="card-img">
+//                               <img src="${photo}" class="img-fluid">
+//                           </div>
+//                           <div class="card-img-overlay">${name}</div>
+//                           <button value="${place_id}" onclick='add_rec(this,${num}, ${id})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
+//                       </div>
+//                   </div>
+//                 </div>     
+//             `
+//       }
+//     }
+//     fill += `</div>
+//                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+//                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+//                   <span class="visually-hidden">Previous</span>
+//                 </button>
+//                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+//                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
+//                   <span class="visually-hidden">Next</span>
+//                 </button>
+
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>`
+//   parent.innerHTML = fill
+//   }
+//   }
+//   }
+  
+
 
 
 
@@ -421,36 +500,35 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
   let photo = ''
   let fill = document.createElement('div')
   fill.innerHTML = ''
-  let track = 1
+  let track = 1;
+
   for(item of results){
     place_id = item.place_id
     name = item.name
     if(item.photos != undefined){
-      photo = item.photos[0].getUrl({
-   })
-  }
+      photo = item.photos[0].getUrl({})
+    }
+    
     if(track==1){
       track += 1
       fill = `
       <div id="recommended" >
                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                              <div class="carousel-inner">
-                                <div class="carousel-item active" >
+                              <div class="carousel-inner" >
+                                <div class="carousel-item active " >
                                 <div class="card mb-3" >
                                   <div class="row g-0" >
 
-                                    <div class="col-md-3">
-                                    <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
+                                    <div class="col-6">
+                                    <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-6">
                                       <div class="card-body" >
-                                        <div class="row">
                                           <p class="card-title">
                                             ${name}
                                           </p>
-                                        </div>
-                                        <div class="row"><button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button></div>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
                                       </div>
                                     </div>
 
@@ -461,24 +539,20 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     }
     else{
       fill += `<div class="carousel-item">
-                                <div class="card mb-3 " >
-                                  <div class="row g-0">
+                                <div class="card mb-3" >
+                                  <div class="row g-0" >
 
-                                    <div class="col-md-3">
-                                      <img alt="Card image cap" class="card-img-top img-fluid" src="${photo}" />
+                                    <div class="col-6">
+                                      <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
                                     </div>
                                     
-                                    <div class="col-md-3">
-                                      <div class="card-body">
-                                        <div class="row">
+                                    <div class="col-6">
+                                    
                                             <p class="card-title">${name}</p>
-                                        </div>
-
-                                        <div class="row">
                                             <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
-                                          </div>
-                                      </div>
+                                
                                     </div>
+
                                   </div>
                                 </div>
     </div>`
