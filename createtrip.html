@@ -143,6 +143,8 @@
                 <div id="message" style="display: none; margin-top: 20px;" class="text-danger col-12">
 
                 </div>
+                <span id="flightstatus" style="display: none;">Not Added</span>
+                <span id="hotelstatus" style="display: none;">Not Added</span>
                 <div id="invites" class="col-12">
                     <ul>
                         <li><button class="button-add-flight" id="AddFlightBtn">Add your
@@ -225,7 +227,7 @@
                 </div>
                 <fieldset>
                     <input type="button" name="next-step" class="next-step" value="Next Step"
-                        onclick="location.href='restrictions.html';" />
+                        onclick="insertTripDetails()" />
                 </fieldset>
             </div>
         </div>
@@ -370,6 +372,7 @@
         close.onclick = function () {
             flightmodal.style.display = "none";
             flightbtn.style.display = "block";
+            document.getElementById("flightstatus").innerText = "Added";
         }
 
         closeflight.onclick = function () {
@@ -385,6 +388,7 @@
         addhotel.onclick = function () {
             hotelmodal.style.display = "none";
             hotelbtn.style.display = "block";
+            document.getElementById("hotelstatus").innerText = "Added";
         }
 
         function myFunction() {
