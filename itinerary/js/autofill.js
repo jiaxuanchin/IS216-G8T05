@@ -409,9 +409,17 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 let num = document.getElementById('recommended_track').value
 let name = ''
 let photo = ''
-let fill = document.createElement('div')
+let fill = ""
 fill.innerHTML = ''
-let track = 1;
+let first = true
+var indx = 0
+var active_status = "active"
+
+fill += `
+  <div id="recommended" >
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+  `
 
 for(item of results){
   place_id = item.place_id
@@ -420,60 +428,81 @@ for(item of results){
     photo = item.photos[0].getUrl({})
   }
   
-  if(track==1){
-    track += 1
-    fill = `
-    <div id="recommended" >
-                          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner" >
-                              <div class="carousel-item active " >
-                              <div class="card mb-3" >
-                                <div class="row g-0" >
-                                  <div class="col-6">
-                                    <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
-                                  </div>
-                                  <div class="col-6">
-                                    <div class="card-body" >
-                                        <p class="card-title">
-                                          ${name}
-                                        </p>
-                                        <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-    `
+  if(indx !== 0){
+    active_status = ""
+  }
+
+  if(first){
+    indx ++
+    first = false
+    fill += `
+    <div class="carousel-item ${active_status}" >
+      <div class ="d-flex">
+        <div class="col-6">
+
+          <!--This is the start of the card-->
+          <div class="card mb-3" >
+            <div class="row g-0" >
+
+              <div class="col-6">
+              <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
+              </div>
+
+              <div class="col-6">
+                <div class="card-body" >
+                    <p class="card-title">
+                      ${name}
+                    </p>
+                    <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--This is the end of the card-->
+        </div>
+`
   }
   else{
-    fill += `<div class="carousel-item">
-                              <div class="card mb-3" >
-                                <div class="row g-0" >
-                                  <div class="col-6">
-                                    <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
-                                  </div>
-                                  
-                                  <div class="col-6">
-                                  
-                                          <p class="card-title">${name}</p>
-                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm hello" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
-                              
-                                  </div>
-                                </div>
-                              </div>
+    fill += `
+      <div class= "col-6">
+        <!--Start of second card-->
+        <div class="card mb-3" >
+          <div class="row g-0" >
+
+            <div class="col-6">
+              <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
+            </div>
+            
+            <div class="col-6">
+              <div class="card-body" >
+                    <p class="card-title">${name}</p>
+                    <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <!--End of card-->
+      
+      </div>
+      <!--closing the col-6-->
+    </div>
   </div>`
+  first = true
   }
 
 }
-fill += `</div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+fill +=  `
+        </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
           </div>
         </div>`
 parent.innerHTML = fill
