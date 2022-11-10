@@ -336,20 +336,20 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     <div class="row">
       <div class="col">
         <!------------- NOTE ------------------>
-        <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
+        <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
         <br>
         <form action="#" method="get" id="form1">
-          <input type="hidden" id=${id+'notes1'}>
-          <div class="divTxt" id=${id+'notes2'}></div>
+          <input type="hidden" id=${id_rep+'notes1'}>
+          <div class="divTxt" id=${id_rep+'notes2'}></div>
         </form>
       </div>
       <!-------------CHECKLIST -------------->
       <div class="col">
-        <button class="btn btn-light" href="#" onClick="addCheckbox(${id+'check1'}); return false;">+Checklist</button>
+        <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
         <br>
         <form action="#" method="get" id="form2">
-        <input type="hidden" id=${id+'check1'}>
-        <div class="divCheckBox" id=${id+'check2'}></div>
+        <input type="hidden" id=${id_rep+'check1'}>
+        <div class="divCheckBox" id=${id_rep+'check2'}></div>
         </form>
       </div>
       <!-----------TRASHBIN--------------------->
@@ -590,12 +590,17 @@ function callback(place, status) {
 lati = place.geometry.location.lat()
 lng = place.geometry.location.lng()
 id = place.place_id
+console.log(id)
 if (status == google.maps.places.PlacesServiceStatus.OK) {
   if(place.photos[0] != undefined){
     picture_url = place.photos[0].getUrl({
  })
  }
  id_rep = id.replace('-','_')
+ for(let i=0;i<10;i++){
+  id_rep = id_rep.replace('-','_')
+ }
+ console.log(id_rep)
  let name = place.name
  let fill = document.createElement('div');
  fill.id = id + 'row'
@@ -622,7 +627,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
    <div class="row">
      <div class="col">
        <!------------- NOTE ------------------>
-       <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
+       <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
        <br>
        <form action="#" method="get" id="form1">
          <input type="hidden" id=${id_rep+'notes1'}>
@@ -709,4 +714,3 @@ div_element.appendChild(to_add)
 function removeCheckBox(id2) {
 $(id2.id).remove();
 }
-
