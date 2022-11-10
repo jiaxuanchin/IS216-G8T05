@@ -536,13 +536,14 @@ for(item of results){
                                   <div class="col-6">
                                   
                                           <p class="card-title">${name}</p>
-                                          <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
+                                          <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm hello" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
                               
                                   </div>
                                 </div>
                               </div>
   </div>`
   }
+
 }
 fill += `</div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -563,6 +564,10 @@ parent.innerHTML = fill
 
 
 function add_rec(place_id,track){
+  if(place_id.value == undefined){
+    console.log('fail to retrieve API')
+    return 
+  }
 let id = document.getElementById('place_id').value
 let lati = document.getElementById('origin_lat').value 
 let lng = document.getElementById('origin_lng').value 
@@ -704,5 +709,4 @@ div_element.appendChild(to_add)
 function removeCheckBox(id2) {
 $(id2.id).remove();
 }
-
 
