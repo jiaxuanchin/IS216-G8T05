@@ -59,9 +59,6 @@
               <a href="fav.html" class="nav-link text-white">Favourites</a>
             </li>
             <li class="nav-item mx-2">
-              <a href="myTrips.html" class="nav-link text-white">My Trips</a>
-            </li>
-            <li class="nav-item mx-2">
               <a href="createtrip.html" class="nav-link text-white">Add New Trip</a>
             </li>
             <li class="nav-item mx-2">
@@ -260,7 +257,7 @@
 <!-- main js -->
 <script src="js/custom.js"></script>
 
-<script>
+<!-- <script>
   $('.owl-carousel').owlCarousel({
     loop:false,
     margin:20,
@@ -280,6 +277,16 @@
         }
     }
   })
+  function checkLogin() {
+    if (localStorage.getItem('uid') == null) {
+      window.location.href = 'login.html';
+    }
+  }
+  console.log(localStorage.getItem('uid'))
+</script> -->
+<body onload="checkLogin()">
+</body>
+<script>
   function checkLogin() {
     if (localStorage.getItem('uid') == null) {
       window.location.href = 'login.html';
