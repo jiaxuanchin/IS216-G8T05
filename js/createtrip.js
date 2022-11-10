@@ -25,21 +25,21 @@ document.getElementById("todt").setAttribute("min", today);
 document.getElementById("fromstay").setAttribute("min", today);
 document.getElementById("tostay").setAttribute("min", today);
 
-function checkCalendar(original,target) {
+function checkCalendar(original, target) {
     let date = document.getElementById(original);
     document.getElementById(target).setAttribute("min", date.value);
 }
 
 tripfromdate.onchange = function () {
-    checkCalendar("fromdate","todate");
+    checkCalendar("fromdate", "todate");
 }
 
 flightfromdate.onchange = function () {
-    checkCalendar("fromdt","todt");
+    checkCalendar("fromdt", "todt");
 }
 
 hotelfromdate.onchange = function () {
-    checkCalendar("fromstay","tostay");
+    checkCalendar("fromstay", "tostay");
 }
 
 
@@ -391,46 +391,55 @@ function insertTripDetails() {
     let startdate = document.getElementById("fromdate").value;
     let enddate = document.getElementById("todate").value;
 
-    let airlinesfrom = document.getElementById("airlineF").value;
-    let flightfrom = document.getElementById("dd_flight").innerText;
-    let fromdate = document.getElementById("fromdt").value;
-    let rd_airport = document.getElementById("rd_airport").innerText;
-    let ra_airport = document.getElementById("ra_airport").innerText;
-    let rd_time = document.getElementById("rd_time").innerText;
-    let ra_time = document.getElementById("ra_time").innerText;
+    let depature_details = "";
+    let arrival_details = "";
+    let hotellist = "";
 
-    let airlinesto = document.getElementById("airlineT").value;
-    let flightto = document.getElementById("rd_flight").innerText;
-    let todate = document.getElementById("todt").value;
-    let dd_airport = document.getElementById("dd_airport").innerText;
-    let da_airport = document.getElementById("da_airport").innerText;
-    let dd_time = document.getElementById("dd_time").innerText;
-    let da_time = document.getElementById("da_time").innerText;
+    if (document.getElementById("flightstatus").innerText == "Added") {
+        let airlinesfrom = document.getElementById("airlineF").value;
+        let flightfrom = document.getElementById("dd_flight").innerText;
+        let fromdate = document.getElementById("fromdt").value;
+        let rd_airport = document.getElementById("rd_airport").innerText;
+        let ra_airport = document.getElementById("ra_airport").innerText;
+        let rd_time = document.getElementById("rd_time").innerText;
+        let ra_time = document.getElementById("ra_time").innerText;
 
-    let depature_details = {
-        'departure-airlines': airlinesfrom, 'departure-flight-number': flightfrom, 'departure-date': fromdate,
-        'depart-airport': rd_airport, 'depart-time': rd_time, 'arrival-airport': ra_airport, 'arrival-time': ra_time
-    };
+        let airlinesto = document.getElementById("airlineT").value;
+        let flightto = document.getElementById("rd_flight").innerText;
+        let todate = document.getElementById("todt").value;
+        let dd_airport = document.getElementById("dd_airport").innerText;
+        let da_airport = document.getElementById("da_airport").innerText;
+        let dd_time = document.getElementById("dd_time").innerText;
+        let da_time = document.getElementById("da_time").innerText;
 
-    let arrival_details = {
-        'arrival-airlines': airlinesto, 'arrival-flight-number': flightto, 'arrival-date': todate,
-        'depart-airport': dd_airport, 'depart-time': dd_time, 'arrival-airport': da_airport, 'arrival-time': da_time
-    };
+        depature_details = {
+            'departure-airlines': airlinesfrom, 'departure-flight-number': flightfrom, 'departure-date': fromdate,
+            'depart-airport': rd_airport, 'depart-time': rd_time, 'arrival-airport': ra_airport, 'arrival-time': ra_time
+        };
 
-    let hotel = document.getElementById("myHotelInput").value;
-    let fromhoteldate = document.getElementById("fromstay").value;
-    let tohoteldate = document.getElementById("tostay").value;
+        arrival_details = {
+            'arrival-airlines': airlinesto, 'arrival-flight-number': flightto, 'arrival-date': todate,
+            'depart-airport': dd_airport, 'depart-time': dd_time, 'arrival-airport': da_airport, 'arrival-time': da_time
+        };
+    }
 
-    let hotellist = { 'hotel': hotel, 'start-date': fromhoteldate, 'end-date': tohoteldate };
+    if (document.getElementById("hotelstatus").innerText == "Added") {
+        let hotel = document.getElementById("myHotelInput").value;
+        let fromhoteldate = document.getElementById("fromstay").value;
+        let tohoteldate = document.getElementById("tostay").value;
+
+        hotellist = { 'hotel': hotel, 'start-date': fromhoteldate, 'end-date': tohoteldate };
+    }
 
     let id = startdate + country.slice(0, 3) + city.slice(0, 3);
 
     writeUserDataWithCompletion(id, country, city, startdate, enddate, depature_details, arrival_details, hotellist);
+    sessionStorage.setItem("country", country);
 }
 
 //The following writes the data
 function writeUserDataWithCompletion(id, selected_country, selected_city, start_date, end_date, departure_flight, arrival_flight, hotel) {
-    firebase.database().ref('users/'+ localStorage.getItem('uid') + '/trip/' + id).set({
+    firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + id).set({
         country: selected_country,
         city: selected_city,
         startdate: start_date,
@@ -443,6 +452,7 @@ function writeUserDataWithCompletion(id, selected_country, selected_city, start_
             console.log("Add Data Failed!");
         } else {
             console.log("Add Data Done!");
+            window.location.href = 'restrictions.html'
         }
     });
 }
