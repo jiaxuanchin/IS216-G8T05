@@ -18,10 +18,11 @@
     <!-- theme meta -->
     <meta name="theme-name" content="revolve" />
 
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-   
-    <!-- THEME CSS-->
+    <!-- Favicon
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
+    
+    <!-- THEME CSS
+	================================================== -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
     <!-- Themify -->
@@ -39,150 +40,166 @@
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
 </head>
-<body>
-  <!--header-->
-  <!-- <header class="header-top bg-grey justify-content-center">
+<body onload="checkLogin()">
+  <header class="header-top bg-grey">
     <nav class="navbar navbar-expand-md navigation-2 navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand text-uppercase" href="home2.html">
-                <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="ti-menu" style="color: white;"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul id="menu" class="menu navbar-nav mx-auto">
-                    <li class="nav-item"><a href="home2.html" class="nav-link text-white">Home</a></li>
-                    
-                    <li class="nav-item"><a href="fav.html" class="nav-link text-white">Favourites</a></li>
-
-                    <li class="nav-item"><a href="current_trips.html" class="nav-link text-white">Current Trips</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Add New Trip</a></li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Profile</a>
-                    </li>
-                    </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
-                </form>
-            </div>
+      <div class="container-fluid">
+        <a class="navbar-brand text-uppercase" href="home2.html">
+          <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="ti-menu" style="color: white;"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-2">
+              <a href="home2.html" class="nav-link text-white">Home</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="fav.html" class="nav-link text-white">Favourites</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="myTrips.html" class="nav-link text-white">My Trips</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="#" class="nav-link text-white">Add New Trip</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="#" class="nav-link text-white">Profile</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link text-white" id="logout" style="cursor: pointer;">Log out</a>
+            </li>
+          </ul>
+          <!-- <form class="d-flex" role="search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
+          </form> -->
         </div>
-    </nav>    
-</header> -->
-<header class="header-top bg-grey justify-content-center">
-  <nav class="navbar navbar-expand-md navigation-2 navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand text-uppercase" href="home2.html">
-        <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+      </div>
+    </nav>
+  </header>
+
+  <!-- Content -->
+  <!-- greetings -->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/french.png" class="d-block" alt="Hawaii, USA" style="width: 100%;height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="images/hawaiian.png" class="d-block w-100" alt="Paris, France" style="width: 100%;height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="images/chinese.png" class="d-block w-100" alt="Kuala Lumpur, Malaysia" style="width: 100%;height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="images/portugese.png" class="d-block w-100" alt="Rio De Janeiro, Brazil" style="width: 100%;height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="images/malay.png" class="d-block w-100" alt="Shanghai, China" style="width: 100%;height: 600px; object-fit: cover;">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Start planning, plane -->
+  <div class="container-fluid my-3 text-center py-3" style="background-color: #344648;">
+    <img src="https://assets.website-files.com/5e77aebfc78e1c7a72b9201b/5ecfce32a80336a92e83b544_icon_subscribe_plane_animation_starts-with-quartplane.gif" width="400" alt="An animated paper plane flying through the air." class="image-10">
+    <h1 class="text-white py-1">Plan your next trip.</h1>
+    <h2 class="text-white py-1">Don't hesitate. Just travel.</h2>
+    <p class="fs-5 py-1">
+      <a href="#" style="color:#ce8460;font-weight: bold;" >
+        Start planning <i class="fa fa-arrow-right" aria-hidden="true"></i>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="ti-menu" style="color: white;"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul id="menu" class="menu navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a href="home2.html" class="nav-link text-white">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="fav.html" class="nav-link text-white">Favourites</a>
-          </li>
-          <li class="nav-item">
-            <a href="current_trips.html" class="nav-link text-white">Current Trips</a>
-          </li>
-          <li class="nav-item">
-            <a href="createtrip.html" class="nav-link text-white">Add New Trip</a>
-          </li>
-          <li class="nav-item">
-            <a href="profile.html" class="nav-link text-white">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">Log out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+    </p>
+  </div>
 
-<!-- Content -->
-<div class="container my-5">
-  <h3>Popular itineraries by other users!</h3>
-  <div class="owl-carousel owl-theme">
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to California</h4>
-          <p class="card-text">1 week in San Francisco during winter!</p>
+  <!-- popular destinations -->
+  <div class="container my-5">
+    <h3>Popular itineraries by other users!</h3>
+    <div class="owl-carousel owl-theme">
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to California</h4>
+            <p class="card-text">1 week in San Francisco during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to Singapore</h4>
-          <p class="card-text">1 week in Singapore during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to Singapore</h4>
+            <p class="card-text">1 week in Singapore during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to Japan</h4>
-          <p class="card-text">1 week in Tokyo during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to Japan</h4>
+            <p class="card-text">1 week in Tokyo during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to South Korea</h4>
-          <p class="card-text">1 week in Seoul during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to South Korea</h4>
+            <p class="card-text">1 week in Seoul during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to China</h4>
-          <p class="card-text">1 week in Shanghai during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to China</h4>
+            <p class="card-text">1 week in Shanghai during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to Italy</h4>
-          <p class="card-text">1 week in Milan during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to Italy</h4>
+            <p class="card-text">1 week in Milan during winter!</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="item d-flex justify-content-center">
-      <div class="card" style="width: 16rem;">
-        <img src="images/bg-5.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h4 class="card-title">Trip to Spain</h4>
-          <p class="card-text">1 week in Barcelona during winter!</p>
+      <div class="item d-flex justify-content-center">
+        <div class="card" style="width: 16rem;">
+          <img src="images/bg-5.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Trip to Spain</h4>
+            <p class="card-text">1 week in Barcelona during winter!</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 <!--footer-->
-<section class="footer-2 section-padding gray-bg pb-3">
+<section class="footer-2 section-padding gray-bg pb-5 px-3">
     <div class="row">
         <!-- Grid column -->
         <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
@@ -243,6 +260,9 @@
 <!-- main js -->
 <script src="js/custom.js"></script>
 
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore-compat.js"></script>
 <script>
   $('.owl-carousel').owlCarousel({
     loop:false,
@@ -263,7 +283,58 @@
         }
     }
   })
-  
+  function checkLogin() {
+    if (localStorage.getItem('uid') == null) {
+      window.location.href = 'login.html';
+    }
+  }
+  console.log(localStorage.getItem('uid'))
+</script>
+<script type="module"> 
+  // logout
+    // Import the functions you need from the SDKs you need
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+    import {
+        getAuth,
+        browserLocalPersistence,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        setPersistence
+    } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+    import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        // Your configs
+            apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+            authDomain: "adventuretime-934a2.firebaseapp.com",
+            projectId: "adventuretime-934a2",
+            storageBucket: "adventuretime-934a2.appspot.com",
+            messagingSenderId: "168230082500",
+            appId: "1:168230082500:web:6fbd2239d875c99c467691",
+            measurementId: "G-MXMNLZZLM8",
+            databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    document.getElementById('logout')
+      .addEventListener('click', function () {
+          signOut(auth).then(() => {
+            alert("Sign out successful")
+            localStorage.removeItem('uid')
+            window.location.href = 'home1.html';
+          }).catch((error) => {
+              // An error happened.
+              console.log(error);
+          });
+      });
 </script>
 </body>
 </html>
