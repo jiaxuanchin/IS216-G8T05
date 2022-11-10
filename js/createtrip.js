@@ -423,14 +423,14 @@ function insertTripDetails() {
 
     let hotellist = { 'hotel': hotel, 'start-date': fromhoteldate, 'end-date': tohoteldate };
 
-    let id = country.slice(0, 3) + city.slice(0, 3) + startdate.slice(0, 3) + enddate.slice(0, 3);
+    let id = startdate + country.slice(0, 3) + city.slice(0, 3);
 
     writeUserDataWithCompletion(id, country, city, startdate, enddate, depature_details, arrival_details, hotellist);
 }
 
 //The following writes the data
 function writeUserDataWithCompletion(id, selected_country, selected_city, start_date, end_date, departure_flight, arrival_flight, hotel) {
-    firebase.database().ref('users/SbVsgXb5pmUBW29z1b3HeMCfDDw2/trip/' + id).set({
+    firebase.database().ref('users/'+ localStorage.getItem('uid') + '/trip/' + id).set({
         country: selected_country,
         city: selected_city,
         startdate: start_date,
