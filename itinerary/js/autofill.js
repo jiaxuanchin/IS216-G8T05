@@ -323,6 +323,8 @@ function callback(place, status) {
       <div class="col">
         <h3>${name}</h3>
       <div>
+      <!-----------TRASHBIN--------------------->
+        <span style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></span>
     </div>
 
    <div class="row" > 
@@ -342,7 +344,7 @@ function callback(place, status) {
 
     <div class="col-8"> 
       <div class="row">
-        <div class="col">
+        <div class="col-6">
           <!------------- NOTE ------------------>
           <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
           <br>
@@ -353,7 +355,7 @@ function callback(place, status) {
         </div>
 
         <!-------------CHECKLIST -------------->
-        <div class="col">
+        <div class="col-6">
           <button class="btn btn-light" href="#" onClick="addCheckbox(${id+'check1'}); return false;">+Checklist</button>
           <br>
           <form action="#" method="get" id="form2">
@@ -362,11 +364,7 @@ function callback(place, status) {
           </form>
         </div>
 
-        <!-----------TRASHBIN--------------------->
-        <div class="col">
-          <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
-        </div>
-
+        
       </div>
     </div>
     </div>
@@ -410,86 +408,6 @@ var request = {
 
 service = new google.maps.places.PlacesService(map);
 service.textSearch(request, callback);
-
-// function callback(results, status) {
-//   if (status == google.maps.places.PlacesServiceStatus.OK) {
-//     let num = document.getElementById('recommended_track').value
-//     let name = ''
-//     let photo = ''
-//     let fill = document.createElement('div')
-//     fill.innerHTML = ''
-//     let track = 1;
-//     fill += `
-//       <div id="recommended">
-//         <div class="container  my-3">
-//           <h2 class="font-weight-light">Recommended</h2>
-//             <div class="row mx-auto my-auto justify-content-center">
-//                 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
-//                     <div class="carousel-inner" role="listbox">
-//                       <div class="carousel-item ">
-//       `
-  
-//     for(item of results){
-//       place_id = item.place_id
-//       name = item.name
-//       if(item.photos != undefined){
-//         photo = item.photos[0].getUrl({})
-//       }    
-//       if(track==1){
-//         track += 1
-//         fill += ` <div class="col-md-3">
-//                                 <div class="card" >
-//                                   <div class="row no-gutters">
-//                                       <div class="col-sm-5">
-//                                       <img src="${photo}" class="img-fluid">
-//                                       </div>
-//                                       <div class="col-sm-7">
-//                                           <div class="card-body">
-//                                               <h5 class="card-title">${name}</h5>
-//                                               <button value="${place_id}" onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
-//                                           </div>
-//                                       </div>
-//                                   </div>
-//                                 </div>
-//                   </div>              
-//         `
-
-//       }
-//       else{
-//         fill += `<div class="carousel-item ">
-//                   <div class="col-md-3">
-//                       <div class="card">
-//                           <div class="card-img">
-//                               <img src="${photo}" class="img-fluid">
-//                           </div>
-//                           <div class="card-img-overlay">${name}</div>
-//                           <button value="${place_id}" onclick='add_rec(this,${num}, ${id})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
-//                       </div>
-//                   </div>
-//                 </div>     
-//             `
-//       }
-//     }
-//     fill += `</div>
-//                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-//                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-//                   <span class="visually-hidden">Previous</span>
-//                 </button>
-//                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-//                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
-//                   <span class="visually-hidden">Next</span>
-//                 </button>
-
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>`
-//   parent.innerHTML = fill
-//   }
-//   }
-//   }
-  
-
 
 
 
@@ -629,9 +547,7 @@ function callback(place, status) {
       </p>
     </div>
 
-    <div class="col-8"> 
-      <div class="row">
-        <div class="col">
+    <div class="col-4"> 
           <!------------- NOTE ------------------>
           <button class="btn btn-light" href="#" onClick="addFormField(${id+'notes1'}); return false;">+Note</button>
           <br>
@@ -639,10 +555,10 @@ function callback(place, status) {
             <input type="hidden" id=${id+'notes1'}>
             <div class="divTxt" id=${id+'notes2'}></div>
           </form>
-        </div>
+    </div>
 
         <!-------------CHECKLIST -------------->
-        <div class="col">
+        <div class="col-4">
           <button class="btn btn-light" href="#" onClick="addCheckbox(${id+'check1'}); return false;">+Checklist</button>
           <br>
           <form action="#" method="get" id="form2">
@@ -652,14 +568,10 @@ function callback(place, status) {
         </div>
 
         <!-----------TRASHBIN--------------------->
-        <div class="col">
           <div style='float:right' class='fa fa-trash' onclick=removePlace(${id+ 'row'})></div>
-        </div>
-
       </div>
     </div>
-    </div>
-  </div>
+
    `
    
    //let parent = document.getElementById('place_info')
