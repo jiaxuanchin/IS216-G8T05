@@ -362,7 +362,7 @@ function callback(place, status) {
           <div class="divCheckBox" id=${id_rep+'check2'}></div>
           </form>
         </div>
-        
+        <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
       </div>
     </div>
     </div>
@@ -705,3 +705,47 @@ let textarea = document.querySelector(".resize-ta");
 textarea.addEventListener("keyup", () => {
   textarea.style.height = calcHeight(textarea.value) + "px";
 });
+
+//add
+function saveData(){
+  let places_list = document.getElementsByClassName('place_info')
+  for(item of places_list){
+    places = item.getElementsByClassName('container')
+    for(place of places){
+      console.log(place.getElementsByClassName('getAllVal')[0])
+      let val = place.getElementsByClassName('getAllVal')[0].innerHTML
+      let val_list = val.split(',')
+      let id = val_list[0]
+      let id_rep = val_list[1]
+      let name = val_list[2]
+      let lati = val_list[3]
+      let lng = val_list[4]
+      let picture_url = val_list[5]
+      let track = val_list[6]
+      console.log(picture_url)
+    }
+  }
+}
+
+//get name,id,id_rep,track_num(track the accordion position)
+// <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
+
+//The following writes the data
+function writeUserDataWithCompletion(id, selected_country, selected_city, start_date, end_date, departure_flight, arrival_flight, hotel) {
+  firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + id).set({
+      country: selected_country,
+      city: selected_city,
+      startdate: start_date,
+      enddate: end_date,
+      departureflight: arrival_flight,
+      arrivalflight: departure_flight,
+      hotel: hotel,
+  }, function (error) {
+      if (error) {
+          console.log("Add Data Failed!");
+      } else {
+          console.log("Add Data Done!");
+          window.location.href = 'restrictions.html'
+      }
+  });
+}
