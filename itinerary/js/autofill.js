@@ -61,14 +61,17 @@ function fill_template(){
           
               </button>
             </h2>
+
+            <!-- body -->
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body"> 
+                <div class="accordion-body "> 
                     <div class="row d-flex">
                         <div class="col-12">
                           <!------------- SEARCH BOX ------------->
+
                           <!--PLACE INFO START-->
                            <div class="place_info"></div>
-                          <!--PLACE INFO END-->
+
                           <!--ADD PLACE INPUT BOX-->
                           <div class="search-box mb-2 ">
                             <input type="text" id="${i}" class="form-control origin_fill" placeholder="Add a place">
@@ -316,7 +319,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  fill.className = "container";
  fill.innerHTML = `
   <div class="row my-2">
-    <div class="col">
+    <div class="col mb-2 rounded p-3 bg-light" >
       <h3>${name}</h3>
       <!-----------TRASHBIN--------------------->
       <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
@@ -341,7 +344,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
       <!------------- NOTE ------------------>
       <div class="col-6">
-        <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+        <button class="btn btn-primary mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
         <br>
         <form action="#" method="get" id="form1">
           <input type="hidden" id=${id_rep+'notes1'}>
@@ -351,7 +354,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
       <!-------------CHECKLIST -------------->
       <div class="col-6">
-        <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+        <button class="btn btn-primary mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
         <br>
         <form action="#" method="get" id="form2">
         <input type="hidden" id=${id_rep+'check1'}>
@@ -584,7 +587,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
      <div class="col-6">
        <!------------- NOTE ------------------>
-       <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
+       <button class="btn btn-light mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
        <br>
        <form action="#" method="get" id="form1">
          <input type="hidden" id=${id_rep+'notes1'}>
@@ -594,7 +597,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
      <!-------------CHECKLIST -------------->
      <div class="col-6">
-       <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
+       <button class="btn btn-light mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
        <br>
        <form action="#" method="get" id="form2">
         <input type="hidden" id=${id_rep+'check1'}>
@@ -633,7 +636,7 @@ else{
   console.log(cur_num)
   to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
 }
-to_add.innerHTML = `<span class="textarea" contenteditable></span><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
+to_add.innerHTML = `<span class="textarea" contenteditable></span><div class='fa fa-trash' onclick=removeFormField(${to_add.id})></div><br><br>`
 div_element = document.getElementById(id2)
 div_element.appendChild(to_add)
 }
