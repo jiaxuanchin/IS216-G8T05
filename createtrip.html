@@ -534,7 +534,25 @@
         } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            // Your configs
+            apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+            authDomain: "adventuretime-934a2.firebaseapp.com",
+            projectId: "adventuretime-934a2",
+            storageBucket: "adventuretime-934a2.appspot.com",
+            messagingSenderId: "168230082500",
+            appId: "1:168230082500:web:6fbd2239d875c99c467691",
+            measurementId: "G-MXMNLZZLM8",
+            databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        };
+
         // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
         const auth = getAuth();
         document.getElementById('logout')
             .addEventListener('click', function () {
