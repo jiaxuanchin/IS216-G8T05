@@ -82,44 +82,38 @@
 
   <body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
-  <header class="header-top bg-grey justify-content-center">
-    <nav class="navbar navbar-expand-md navigation-2 navigation">
-        <div class="container-fluid">
-            <a class="navbar-brand text-uppercase" href="home2.html">
-            <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="ti-menu" style="color: white;"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul id="menu" class="menu navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a href="home2.html" class="nav-link text-white">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="fav.html" class="nav-link text-white">Favourites</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="current_trips.html" class="nav-link text-white">Current Trips</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="#" class="nav-link text-white">Add New Trip</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="#" class="nav-link text-white">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                    <a href="#" class="nav-link text-white">Log out</a>
-                    </li>
-                </ul >
-                <form class="d-flex" role="search">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
+  <header class="header-top bg-grey"> 
+    <nav class="navbar navbar-expand-md navigation-2 navigation py-1"> 
+      <div class="container-fluid"> 
+        <a class="navbar-brand text-uppercase py-0" href="home2.html"> 
+          <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4"> 
+        </a> 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
+          <span class="ti-menu" style="color: white;"></span> 
+        </button> 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+          <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0"> 
+            <li class="nav-item mx-2"> 
+              <a href="home2.html" class="nav-link text-white">Home</a> 
+            </li> 
+            <li class="nav-item mx-2"> 
+              <a href="createtrip.html" class="nav-link text-white">Add New Trip</a> 
+            </li> 
+            <li class="nav-item mx-2"> 
+              <a href="profile.html" class="nav-link text-white">Profile</a> 
+            </li> 
+            <li class="nav-item mx-2"> 
+              <a class="nav-link text-white" id="logout" style="cursor: pointer;">Log out</a> 
+            </li> 
+          </ul> 
+          <!-- <form class="d-flex" role="search"> 
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search"> 
+            <button type="button" class="btn btn-primary"><i class="ti-search"></i></button> 
+          </form> --> 
+        </div> 
+      </div> 
+    </nav> 
+  </header>
 
 <!-- content -->
 
