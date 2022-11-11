@@ -37,6 +37,11 @@
     <!--Google charts-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <!-- This is the API from Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
     <!-- nav -->
       <!-- THEME CSS
         ================================================== -->
@@ -75,7 +80,7 @@
   </head>
 
 
-  <body>
+  <body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
   <header class="header-top bg-grey justify-content-center">
     <nav class="navbar navbar-expand-md navigation-2 navigation">
@@ -109,7 +114,7 @@
                 </ul >
                 <form class="d-flex" role="search">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button type="button" class="btn btn-primary" style="border-radius: 0px;"><i class="ti-search"></i></button>
+                    <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
                 </form>
             </div>
         </div>
@@ -183,7 +188,7 @@
                       <i style="font-size:24px" class="fa">&#xf073; 
                       <p id="result-2" style="display:inline">&nbsp;</p></i> 
                     </button>
-                    <button class="btn btn-primary" onclick="fill_template()">Confirm Date</button>
+                    <button onclick="fill_template()">Confirm Date</button>
                   </div>
                   <!-- end calendar -->
 
@@ -208,19 +213,19 @@
   </div> <!--end container-->
   <p id="result-3" hidden></p>
   <div id="carousel_num">1</div>
+
 <!------------------------------------------Budget-------------------------------------------->
 <div id="budget" style="width:90%;" class="mx-auto mb-4">
     <h1>Budgeting</h1>
 
   <div class="row p-3" style="background-color:lightgrey; border-radius:20px;">
           <div class="col-lg-8 col-sm-12">
-              <h3>{{to}}: <span id="convertedamt"> {{callCovertorAPI}} </span></h3>
+              <h3>{{currency}}: ${{total_amt.toFixed(2)}}</h3>
               <hr>
               Total Amount
           </div>
 
           <div class="col-lg-4 col-sm-12">
-              
               <!--Button to launch modal-->
               <button type="button" class="btn" style="background-color: lightgray; color:black;" data-bs-toggle="modal" data-bs-target="#exampleModal"><h7 class="fw-bold"><i style="font-size:15px" class="fa">&#xf155;</i> Category Breakdown</h7></button><br>
               
@@ -294,7 +299,7 @@
                                 <div class="input-group mb-3">
                                   <label class="input-group-text" for="fromCurr">From Currency</label>
                                   <select class="form-select" id="fromCurr" v-model="from">
-                                      <option v-for="curr of Object.values(currency_code_array)" v-bind:value="curr">{{curr}}</option>
+                                      <option v-for="curr of currency_code_array" v-bind:value="curr">{{curr}}</option>
                                   </select>
                                 </div>
                                 <!--End of the drop down of currency-->
@@ -303,7 +308,7 @@
                                 <div class="input-group mb-3">
                                   <label class="input-group-text" for="toCurr">To Currency</label>
                                   <select class="form-select" id="toCurr" v-model="to">
-                                      <option v-for="curr of Object.values(currency_code_array)">{{curr}}</option>
+                                      <option v-for="curr of currency_code_array">{{curr}}</option>
                                   </select>
                                 </div>
                                 <!--End of Output currency-->
@@ -480,317 +485,199 @@
 
 <!--Vue instance for generation of budget total amount and currency-->
 <script>
-function convert(from,to,amt) {
-        const options = {
-            method: 'GET',
-            url: 'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency',
-            params: { have: from, want: to, amount: amt },
-            headers: {
-                'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
-                'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
-            }
-        };
-
-        axios.request(options)
-            .then(function (response) {
-                console.log(response.data)
-                onchangecurrency(response.data)
-            })
-            .catch(function (error) {
-                // In case of any error, see what it's about
-                console.log(error)
-            })
-    }
-    function onchangecurrency(data) {
-        let result = data.new_amount;
-        document.getElementById("convertedamt").innerText = result;
-        return result;
-    }
 
 // Currency Exchange Drop down list ==> Vanilla JS
-var currency_code_str =`Afghanistan	AF	AFG	Afghan Afghani	AFN
-ÅLand Islands	AX	ALA	Euro	EUR
-Albania	AL	ALB	Albanian Lek	ALL
-Algeria	DZ	DZA	Algerian Dinar	DZD
-American Samoa	AS	ASM	US Dollar	USD
-Andorra	AD	AND	Euro	EUR
-Angola	AO	AGO	Angolan Kwanza	AOA
-Anguilla	AI	AIA	East Caribbean Dollar	XCD
-Antarctica	AQ	ATA	US Dollar	USD
-Antigua and Barbuda	AG	ATG	East Caribbean Dollar	XCD
-Argentina	AR	ARG	Argentine Peso	ARS
-Armenia	AM	ARM	Armenian Dram	AMD
-Aruba	AW	ABW	Aruban Florin	AWG
-Ascension Island	AC	ASC	Saint Helena Pound	SHP
-Australia	AU	AUS	Australian Dollar	AUD
-Austria	AT	AUT	Euro	EUR
-Azerbaijan	AZ	AZE	Azerbaijani Manat	AZN
-Bahamas	BS	BHS	Bahamian Dollar	BSD
-Bahrain	BH	BHR	Bahraini Dinar	BHD
-Bangladesh	BD	BGD	Bangladeshi Taka	BDT
-Barbados	BB	BRB	Barbadian Dollar	BBD
-Belarus	BY	BLR	Belarusian Ruble	BYN
-Belgium	BE	BEL	Euro	EUR
-Belize	BZ	BLZ	Belize Dollar	BZD
-Benin	BJ	BEN	CFA Franc BCEAO	XOF
-Bermuda	BM	BMU	Bermudan Dollar	BMD
-Bhutan	BT	BTN	Indian Rupee	INR
-Bolivia	BO	BOL	Bolivian Boliviano	BOB
-Bosnia and Herzegovina	BA	BIH	Bosnia-Herzegovina Convertible Mark	BAM
-Botswana	BW	BWA	Botswanan Pula	BWP
-Bouvet Island	BV	BVT	Norwegian Krone	NOK
-Brazil	BR	BRA	Brazilian Real	BRL
-British Indian Ocean Territory	IO	IOT	US Dollar	USD
-British Virgin Islands	VG	VGB	US Dollar	USD
-Brunei	BN	BRN	Brunei Dollar	BND
-Bulgaria	BG	BGR	Bulgarian Lev	BGN
-Burkina Faso	BF	BFA	CFA Franc BCEAO	XOF
-Burundi	BI	BDI	Burundian Franc	BIF
-Cambodia	KH	KHM	Cambodian Riel	KHR
-Cameroon	CM	CMR	CFA Franc BEAC	XAF
-Canada	CA	CAN	Canadian Dollar	CAD
-Canary Islands	IC		Euro	EUR
-Cape Verde	CV	CPV	Cape Verdean Escudo	CVE
-Cayman Islands	KY	CYM	Cayman Islands Dollar	KYD
-Central African Republic	CF	CAF	CFA Franc BEAC	XAF
-Chad	TD	TCD	CFA Franc BEAC	XAF
-Chile	CL	CHL	Chilean Peso	CLP
-China	CN	CHN	Chinese Yuan	CNY
-Christmas Island	CX	CXR	Australian Dollar	AUD
-Clipperton Island	CC	CCK	Australian Dollar	AUD
-Colombia	CO	COL	Colombian Peso	COP
-Comoros	KM	COM	Comorian Franc	KMF
-Congo - Brazzaville	CG	COG	CFA Franc BEAC	XAF
-Congo - Kinshasa	CD	COD	Congolese Franc	CDF
-Cook Islands	CK	COK	New Zealand Dollar	NZD
-Costa Rica	CR	CRI	Costa Rican Colón	CRC
-Côte d’Ivoire	CI	CIV	CFA Franc BCEAO	XOF
-Croatia	HR	HRV	Croatian Kuna	HRK
-Cuba	CU	CUB	Cuban Peso	CUP
-Curacao	CW	CW	Netherlands Antillean Guilder	ANG
-Cyprus	CY	CYP	Euro	EUR
-Czech Republic	CZ	CZE	Czech Republic Koruna	CZK
-Denmark	DK	DNK	Danish Krone	DKK
-Djibouti	DJ	DJI	Djiboutian Franc	DJF
-Dominica	DM	DMA	East Caribbean Dollar	XCD
-Dominican Republic	DO	DOM	Dominican Peso	DOP
-East Timor	TL	TLS	Indonesian Rupiah	IDR
-Ecuador	EC	ECU	US Dollar	USD
-Egypt	EG	EGY	Egyptian Pound	EGP
-El Salvador	SV	SLV	Salvadoran Colón	SVC
-Equatorial Guinea	GQ	GNQ	CFA Franc BEAC	XAF
-Eritrea	ER	ERI	Eritrean Nakfa	ERN
-Estonia	EE	EST	Euro	EUR
-Ethiopia	ET	ETH	Ethiopian Birr	ETB
-Falkland Islands	FK	FLK	Falkland Islands Pound	FKP
-Faroe Islands	FO	FRO	Danish Krone	DKK
-Fiji	FJ	FJI	Fijian Dollar	FJD
-Finland	FI	FIN	Euro	EUR
-France	FR	FRA	Euro	EUR
-French Guiana	GF	GUF	Euro	EUR
-French Polynesia	PF	PYF	CFP Franc	XPF
-French Southern Territories	TF	ATF	Euro	EUR
-Gabon	GA	GAB	CFA Franc BEAC	XAF
-Gambia	GM	GMB	Gambian Dalasi	GMD
-Georgia	GE	GEO	Georgian Lari	GEL
-Germany	DE	DEU	Euro	EUR
-Ghana	GH	GHA	Ghanaian Cedi	GHS
-Gibraltar	GI	GIB	Gibraltar Pound	GIP
-Greece	GR	GRC	Euro	EUR
-Greenland	GL	GRL	Danish Krone	DKK
-Grenada	GD	GRD	East Caribbean Dollar	XCD
-Guadeloupe	GP	GLP	Euro	EUR
-Guam	GU	GUM	US Dollar	USD
-Guatemala	GT	GTM	Guatemalan Quetzal	GTQ
-Guernsey	GG	GGY	Pound Sterling	GBP
-Guinea	GN	GIN	Guinean Franc	GNF
-Guinea-Bissau	GW	GNB	CFA Franc BCEAO	XOF
-Guyana	GY	GUY	Guyanaese Dollar	GYD
-Haiti	HT	HTI	Haitian Gourde	HTG
-Heard Island and McDonald Islands	HM	HMD	Australian Dollar	AUD
-Honduras	HN	HND	Honduran Lempira	HNL
-Hong Kong	HK	HKG	Hong Kong Dollar	HKD
-Hungary	HU	HUN	Hungarian Forint	HUF
-Iceland	IS	ISL	Icelandic Króna	ISK
-India	IN	IND	Indian Rupee	INR
-Indonesia	ID	IDN	Indonesian Rupiah	IDR
-Iran	IR	IRN	Iranian Rial	IRR
-Iraq	IQ	IRQ	Iraqi Dinar	IQD
-Ireland	IE	IRL	Euro	EUR
-Isle Of Man	IM	IMN	Pound Sterling	GBP
-Israel	IL	ISR	Israeli New Sheqel	ILS
-Italy	IT	ITA	Euro	EUR
-Jamaica	JM	JAM	Jamaican Dollar	JMD
-Japan	JP	JPN	Japanese Yen	JPY
-Jersey	JE	JEY	Pound Sterling	GBP
-Jordan	JO	JOR	Jordanian Dinar	JOD
-Kazakhstan	KZ	KAZ	Kazakhstani Tenge	KZT
-Kenya	KE	KEN	Kenyan Shilling	KES
-Kiribati	KI	KIR	Australian Dollar	AUD
-Kosovo	XK	XKX	Euro	EUR
-Kuwait	KW	KWT	Kuwaiti Dinar	KWD
-Kyrgyzstan	KG	KGZ	Kyrgystani Som	KGS
-Laos	LA	LAO	Laotian Kip	LAK
-Latvia	LV	LVA	Euro	EUR
-Lebanon	LB	LBN	Lebanese Pound	LBP
-Lesotho	LS	LSO	Lesotho Loti	LSL
-Liberia	LR	LBR	Liberian Dollar	LRD
-Libya	LY	LBY	Libyan Dinar	LYD
-Liechtenstein	LI	LIE	Swiss Franc	CHF
-Lithuania	LT	LTU	Euro	EUR
-Luxembourg	LU	LUX	Euro	EUR
-Macau	MO	MAC	Macanese Pataca	MOP
-Macedonia	MK	MKD	Macedonian Denar	MKD
-Madagascar	MG	MDG	Malagasy Ariary	MGA
-Malawi	MW	MWI	Malawian Kwacha	MWK
-Malaysia	MY	MYS	Malaysian Ringgit	MYR
-Maldives	MV	MDV	Maldivian Rufiyaa	MVR
-Mali	ML	MLI	CFA Franc BCEAO	XOF
-Malta	MT	MLT	Euro	EUR
-Marshall Islands	MH	MHL	US Dollar	USD
-Martinique	MQ	MTQ	Euro	EUR
-Mauritania	MR	MRT	Ouguiya	MRU
-Mauritius	MU	MUS	Mauritian Rupee	MUR
-Mayotte	YT	MYT	Euro	EUR
-Mexico	MX	MEX	Mexican Peso	MXN
-Micronesia	FM	FSM	US Dollar	USD
-Moldova	MD	MDA	Moldovan Leu	MDL
-Monaco	MC	MCO	Euro	EUR
-Mongolia	MN	MNG	Mongolian Tugrik	MNT
-Montenegro	ME	MNE	Euro	EUR
-Montserrat	MS	MSR	East Caribbean Dollar	XCD
-Morocco	MA	MAR	Moroccan Dirham	MAD
-Mozambique	MZ	MOZ	Mozambican Metical	MZN
-Myanmar	MM	MMR	Myanma Kyat	MMK
-Namibia	NA	NAM	Namibian Dollar	NAD
-Nauru	NR	NRU	Australian Dollar	AUD
-Nepal	NP	NPL	Nepalese Rupee	NPR
-Netherlands	NL	NLD	Euro	EUR
-Netherlands Antilles	AN	ANT	Netherlands Antillean Guilder	ANG
-New Caledonia	NC	NCL	CFP Franc	XPF
-New Zealand	NZ	NZL	New Zealand Dollar	NZD
-Nicaragua	NI	NIC	Nicaraguan Córdoba	NIO
-Niger	NE	NER	CFA Franc BCEAO	XOF
-Nigeria	NG	NGA	Nigerian Naira	NGN
-Niue	NU	NIU	New Zealand Dollar	NZD
-Norfolk Island	NF	NFK	Australian Dollar	AUD
-North Korea	KP	PRK	North Korean Won	KPW
-Northern Mariana Islands	MP	MNP	US Dollar	USD
-Norway	NO	NOR	Norwegian Krone	NOK
-Oman	OM	OMN	Omani Rial	OMR
-Pakistan	PK	PAK	Pakistani Rupee	PKR
-Palau	PW	PLW	US Dollar	USD
-Palestine	PS	PSE	Jordanian Dinar	JOD
-Panama	PA	PAN	Panamanian Balboa	PAB
-Papua New Guinea	PG	PNG	Papua New Guinean Kina	PGK
-Paraguay	PY	PRY	Paraguayan Guarani	PYG
-Peru	PE	PER	Peruvian Nuevo Sol	PEN
-Philippines	PH	PHL	Philippine Peso	PHP
-Pitcairn	PN	PCN	New Zealand Dollar	NZD
-Poland	PL	POL	Polish Zloty	PLN
-Portugal	PT	PRT	Euro	EUR
-Puerto Rico	PR	PRI	US Dollar	USD
-Qatar	QA	QAT	Qatari Rial	QAR
-Reunion	RE	REU	Euro	EUR
-Romania	RO	ROU	Romanian Leu	RON
-Russia	RU	RUS	Russian Ruble	RUB
-Rwanda	RW	RWA	Rwandan Franc	RWF
-Saint BarthÉLemy	BL	BLM	Euro	EUR
-Saint Helena	SH	SHN	Pound Sterling	GBP
-Saint Kitts and Nevis	KN	KNA	East Caribbean Dollar	XCD
-Saint Lucia	LC	LCA	East Caribbean Dollar	XCD
-Saint Martin (French Part)	MF	MAF	Euro	EUR
-Saint Pierre and Miquelon	PM	SPM	Euro	EUR
-Saint Vincent and the Grenadines	VC	VCT	East Caribbean Dollar	XCD
-Samoa	WS	WSM	Samoan Tala	WST
-San Marino	SM	SMR	Euro	EUR
-Sao Tome and Principe	ST	STP	Dobra	STN
-Saudi Arabia	SA	SAU	Saudi Riyal	SAR
-Senegal	SN	SEN	CFA Franc BCEAO	XOF
-Serbia	RS	SRB	Serbian Dinar	RSD
-Serbia and Montenegro	CS	SCG	Serbian Dinar	RSD
-Seychelles	SC	SYC	Seychellois Rupee	SCR
-Sierra Leone	SL	SLE	Sierra Leonean Leone	SLL
-Singapore	SG	SGP	Singapore Dollar	SGD
-Sint Maarten (Dutch Part)	SX	SXM	Netherlands Antillean Guilder	ANG
-Slovakia	SK	SVK	Euro	EUR
-Slovenia	SI	SVN	Euro	EUR
-Solomon Islands	SB	SLB	Solomon Islands Dollar	SBD
-Somalia	SO	SOM	Somali Shilling	SOS
-South Africa	ZA	ZAF	South African Rand	ZAR
-South Georgia and the South Sandwich Islands	GS	SGS	Pound Sterling	GBP
-South Korea	KR	KOR	South Korean Won	KRW
-South Sudan	SS	SSD	South Sudanese Pound	SSP
-Spain	ES	ESP	Euro	EUR
-Sri Lanka	LK	LKA	Sri Lankan Rupee	LKR
-Sudan	SD	SDN	Sudanese Pound	SDG
-Suriname	SR	SUR	Surinamese Dollar	SRD
-Svalbard and Jan Mayen	SJ	SJM	Norwegian Krone	NOK
-Swaziland	SZ	SWZ	Swazi Lilangeni	SZL
-Sweden	SE	SWE	Swedish Krona	SEK
-Switzerland	CH	CHE	Swiss Franc	CHF
-Syria	SY	SYR	Syrian Pound	SYP
-Taiwan	TW	TWN	New Taiwan Dollar	TWD
-Tajikistan	TJ	TJK	Tajikistani Somoni	TJS
-Tanzania	TZ	TZA	Tanzanian Shilling	TZS
-Thailand	TH	THA	Thai Baht	THB
-Togo	TG	TGO	CFA Franc BCEAO	XOF
-Tokelau	TK	TKL	New Zealand Dollar	NZD
-Tonga	TO	TON	Tongan Paʻanga	TOP
-Trinidad and Tobago	TT	TTO	Trinidad and Tobago Dollar	TTD
-Tristan da Cunha	TA		Saint Helena Pound	SHP
-Tunisia	TN	TUN	Tunisian Dinar	TND
-Turkey	TR	TUR	Turkish Lira	TRY
-Turkmenistan	TM	TKM	Turkmenistani Manat	TMT
-Turks and Caicos Islands	TC	TCA	US Dollar	USD
-Tuvalu	TV	TUV	Australian Dollar	AUD
-U.S. Outlying Islands	UM	UMI	US Dollar	USD
-U.S. Virgin Islands	VI	VIR	US Dollar	USD
-Uganda	UG	UGA	Ugandan Shilling	UGX
-Ukraine	UA	UKR	Ukrainian Hryvnia	UAH
-United Arab Emirates	AE	ARE	United Arab Emirates Dirham	AED
-United Kingdom	GB	GBR	Pound Sterling	GBP
-United States	US	USA	US Dollar	USD
-Uruguay	UY	URY	Uruguayan Peso	UYU
-Uzbekistan	UZ	UZB	Uzbekistan Som	UZS
-Vanuatu	VU	VUT	Vanuatu Vatu	VUV
-Vatican	VA	VAT	Euro	EUR
-Venezuela	VE	VEN	Bolívar Soberano	VES
-Vietnam	VN	VNM	Vietnamese Dong	VND
-Wallis and Futuna	WF	WLF	CFP Franc	XPF
-Western Sahara	EH	ESH	Moroccan Dirham	MAD
-Yemen	YE	YEM	Yemeni Rial	YER
-Zambia	ZM	ZMB	Zambian Kwacha	ZMW
-Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
-`
+var currency_code_str =`Albania	ALL	lek
+Algeria	DZD	dinar
+Angola	AOA	kwanza
+Argentina	ARS	peso
+Armenia	AMD	dram
+Australia	AUD	dollar
+Austria	EUR	euro
+Azerbaijan	AZN	manat
+Bahrain	BHD	dinar
+Barbados	BBD	dollar
+Belarus	BYN	rouble
+Belgium	EUR	euro
+Bermuda	BMD	dollar
+Bolivia	BOB	boliviano
+Bosnia and Herzegovina	BAM	konvertibilna marka
+Botswana	BWP	pula
+Brazil	BRL	real
+Bulgaria	BGN	lev
+Cabo Verde	CVE	escudo
+Cambodia	KHR	riel
+Cameroon, Republic of	XAF	CFA franc BEAC
+Canada	CAD	dollar
+Cayman Islands	KYD	dollar
+Chad	XAF	CFA franc BEAC
+Chile	CLP	peso
+China, People's Republic of	CNY	yuan
+Colombia	COP	peso
+Congo, Democratic Republic of the	CDF	franc
+Congo, Republic of	XAF	CFA franc BEAC
+Costa Rica	CRC	colon
+Croatia	HRK	kuna
+Cyprus	EUR	euro
+Czech Republic	CZK	koruna
+Denmark	DKK	kroner
+Dominican Republic	DOP	peso
+Ecuador	USD	dollar
+Egypt	EGP	pound
+El Salvador	USD	dollar
+Equatorial Guinea	XAF	CFA franc BEAC
+Estonia	EUR	euro
+Fiji	FJD	dollar
+Finland	EUR	euro
+France	EUR	euro
+Gabon	XAF	CFA franc BEAC
+Georgia	GEL	lari
+Germany	EUR	euro
+Ghana	GHS	cedi
+Gibraltar	GIP	pound
+Greece	EUR	euro
+Greenland	DKK	Danish krone
+Guatemala	GTQ	quetzal
+Guernsey, Channel Islands	GBP	British pound sterling
+Guyana	GYD	dollar
+Honduras	HNL	lempira
+Hong Kong SAR	HKD	dollar
+Hungary	HUF	forint
+Iceland	ISK	krona
+India	INR	rupee
+Indonesia	IDR	rupiah
+Iraq	IQD	dinar
+Ireland	EUR	euro
+Isle of Man	IMP	pound
+Israel	ILS	shekel
+Italy	EUR	euro
+Ivory Coast (Cote d'Ivoire)	XOF	CFA franc BCEAO
+Jamaica	JMD	dollar
+Japan	JPY	yen
+Jersey, Channel Islands	GBP	British pound sterling
+Jordan	JOD	dinar
+Kazakhstan	KZT	tenge
+Kenya	KES	shilling
+Korea, Republic of	KRW	won
+Kosovo	EUR	euro
+Kuwait	KWD	dinar
+Kyrgyzstan	KGS	som
+Lao PDR	LAK	kip
+Latvia	EUR	euro
+Lebanon	LBP	pound
+Libya	LYD	dinar
+Liechtenstein	CHF	franc
+Lithuania	EUR	euro
+Luxembourg	EUR	euro
+Macau SAR	MOP	pataca
+Madagascar	MGA	ariary
+Malawi	MWK	kwacha
+Malaysia	MYR	ringgit
+Maldives	MVR	rufiyaa
+Malta	EUR	euro
+Mauritania	MRU	ouguiya
+Mauritius	MUR	rupee
+Mexico	MXN	peso
+Moldova	MDL	leu
+Mongolia	MNT	tugrik
+Montenegro	EUR	euro
+Morocco	MAD	dirham
+Mozambique	MZN	metical
+Myanmar	MMK	kyat
+Namibia, Republic of	NAD	dollar
+Netherlands	EUR	euro
+New Zealand	NZD	dollar
+Nicaragua	NIO	cordoba oro
+Nigeria	NGN	naira
+North Macedonia	MKD	denar
+Norway	NOK	kroner
+Oman	OMR	rial
+Pakistan	PKR	rupee
+Palestinian territories	ILS	shekel, dollar, and dinar
+Panama	PAB	balboa  and dollar
+Papua New Guinea	PGK	kina
+Paraguay	PYG	guarani
+Peru	PEN	nuevo sol
+Philippines	PHP	peso
+Poland	PLN	zloty
+Portugal	EUR	euro
+Puerto Rico	USD	dollar
+Qatar	QAR	riyal
+Romania	RON	leu
+Russian Federation	RUB	ruble
+Rwanda	RWF	franc
+Saint Lucia	XCD	dollar
+Saudi Arabia	SAR	riyal
+Senegal	XOF	CFA franc BCEAO
+Serbia	RSD	dinar
+Singapore	SGD	dollar
+Slovak Republic	EUR	euro
+Slovenia	EUR	euro
+South Africa	ZAR	rand
+Spain	EUR	euro
+Sri Lanka	LKR	rupee
+Swaziland	SZL	lilangeni
+Sweden	SEK	krona
+Switzerland	CHF	franc
+Taiwan	TWD	dollar
+Tajikistan	TJS	somoni
+Tanzania	TZS	shilling
+Thailand	THB	baht
+Timor-Leste	USD	US dollar
+Trinidad And Tobago	TTD	dollar
+Tunisia	TND	dinar
+Turkey	TRY	lira
+Turkmenistan	TMT	manat
+Uganda	UGX	shilling
+Ukraine	UAH	hryvnia
+United Arab Emirates	AED	dirham
+United Kingdom	GBP	sterling
+United States	USD	dollar
+Uruguay	UYU	peso
+Uzbekistan, Republic of	UZS	soum
+Venezuela	VEF	bolivar
+Vietnam	VND	dong
+Zambia	ZMW	kwacha
+Zimbabwe	ZWD	dollar`
 
   //Cleaning the data 
-  countries_info = currency_code_str.split(/[\r\n]/gm)
-    console.log(countries_info)
+  currency_str1 = currency_code_str.replace("   ","")
+  currency_str2 = currency_str1.replace(/[\r\n]/gm,"")
+  currency_all_array = currency_str2.split("\t")
 
-    country_array_of_obj = [] // Clean data is added here
+  //creating the clean currency code array
+  currency_array = []
+  no_dup_currency_array = []
 
-    for(country of countries_info){
-        country = country.split("\t")
-        country_code = country[1]
-        country_array_of_obj[country_code] = country[4]
+  //collecting only the country currency codes
+  for(i=0;i<currency_all_array.length;i++){
+      if(i%2 != 0){
+          currency_array.push(currency_all_array[i])
+      }
+  }
+  currency_array = currency_array.sort()
+
+  // remove duplicates in country currency codes
+  for(ele of currency_array){
+      if(!no_dup_currency_array.includes(ele)){
+          no_dup_currency_array.push(ele)
+      }
     }
-
-    no_dup_currency_array = country_array_of_obj.sort() // [country:currency, country:currency, etc..]
 
   const budget = Vue.createApp({
       data(){
           return{
             //data from the grey budget table
+              total_amt: 0,
               currency: "SGD",
               catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
               catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
 
               //data from the currency settings
               currency_code_array: no_dup_currency_array,
-              to: "SGD",
-              from: "USD",
-              amount: 1 //needs to REACTIVELY from the activites
+              to: "",
+              from: "",
+              amount: 1
           }
       },
       methods: {
@@ -802,11 +689,168 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
               this.catTableView = false
               this.catBarView = true
           }
-      },
-      computed: {
-          callCovertorAPI() {
-              arr = convert(this.from,this.to,this.amount);
-          }
       }
   }).mount("#budget")
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function getDatesFireBase(startDate, endDate){
+    const dates = []
+    let currentDate = startDate
+    const addDays = function (days) {
+        const date = new Date(this.valueOf())
+        date.setDate(date.getDate() + days)
+        return date
+    }
+    while (currentDate <= endDate){
+        dates.push(currentDate)
+        currentDate = addDays.call(currentDate, 1)
+    }
+    dates[0] = dates[0]
+    return dates   
+}
+  function checkLogin() {
+      if (localStorage.getItem('uid') == null) {
+          window.location.href = 'login.html';
+      }
+  }
+  console.log(localStorage.getItem('uid'))
+  let userid = localStorage.getItem('uid');
+</script>
+
+<script type="module">
+  // logout
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+  import {
+      getAuth,
+      browserLocalPersistence,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      setPersistence
+  } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      // Your configs
+      apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+      authDomain: "adventuretime-934a2.firebaseapp.com",
+      projectId: "adventuretime-934a2",
+      storageBucket: "adventuretime-934a2.appspot.com",
+      messagingSenderId: "168230082500",
+      appId: "1:168230082500:web:6fbd2239d875c99c467691",
+      measurementId: "G-MXMNLZZLM8",
+      databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  let user_id = localStorage.getItem('uid')
+  var database = firebase.database()
+  let cur_trip = 'none'
+  var leadsRef = database.ref('users');
+  leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.key == user_id){
+        let trip_list = childSnapshot.val()['trip']
+        for(let index in trip_list){
+          cur_trip = trip_list[index]
+        }
+      }
+    });
+    let start = cur_trip['startdate']
+    let end = cur_trip['enddate']
+    console.log(start)
+    console.log(end)
+    start = new Date(start)
+    end = new Date(end)
+    console.log(start)
+    console.log(end)
+    const dates = []
+    let currentDate = start
+    const addDays = function (days) {
+        const date = new Date(this.valueOf())
+        date.setDate(date.getDate() + days)
+        return date
+    }
+    while(currentDate <= end){
+        dates.push(currentDate)
+        currentDate = addDays.call(currentDate, 1)
+    }
+    dates[0] = dates[0]
+    document.getElementById('result-3').innerHTML = dates
+
+    
+//Fill calendar on page load
+  document.getElementById('accordionFlushExample').innerHTML = ''
+  let text = document.getElementById('result-3').innerHTML
+  let date_list = text.split(',')
+  for(let i=0; i<date_list.length; i++){
+    let skip_index = 0
+    for(let u=0;u<3;u++){
+      skip_index = date_list[i].indexOf(' ',skip_index)
+      skip_index += 1
+    }
+    let date_text = date_list[i].slice(0,skip_index)
+    let item = document.createElement('div')
+    item.innerHTML = `
+    <div class="accordion-item">
+            <!-- header -->
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <h4 id="${i}">${date_text} </h4>
+          
+              </button>
+            </h2>
+
+            <!-- body -->
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body "> 
+                    <div class="row d-flex">
+                        <div class="col-12">
+                          <!------------- SEARCH BOX ------------->
+
+                          <!--PLACE INFO START-->
+                           <div class="place_info"></div>
+
+                          <!--ADD PLACE INPUT BOX-->
+                          <div class="search-box mb-2 ">
+                            <input type="text" id="${i}" class="form-control origin_fill" placeholder="Add a place">
+                            <br>
+                            
+                            <div class="row recommend_header"></div>
+                            <div class="recommended" ></div>
+
+                          </div>
+                          <br>                       
+                        </div> <!--end col-->
+                    </div> <!--end row-->
+                </div> <!--end accordion body-->
+            </div> <!--end accordion collaspe-->
+          </div> <!--end DAY 1--></div>
+    `
+    document.getElementById('accordionFlushExample').appendChild(item)
+    fill_origin();
+   
+  }
+});
 </script>
