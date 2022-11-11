@@ -320,9 +320,9 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  fill.innerHTML = `
   <div class="row my-2">
     <div class="col mb-2 rounded p-3 bg-light" >
-      <h3>${name}</h3>
-      <!-----------TRASHBIN--------------------->
-      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
+      <h3>${name}
+      <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+      </h3>
     <div>
   </div>
  <div class="row">
@@ -344,7 +344,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
       <!------------- NOTE ------------------>
       <div class="col-6">
-        <button class="btn btn-primary mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+        <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
         <br>
         <form action="#" method="get" id="form1">
           <input type="hidden" id=${id_rep+'notes1'}>
@@ -354,7 +354,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
       <!-------------CHECKLIST -------------->
       <div class="col-6">
-        <button class="btn btn-primary mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+        <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
         <br>
         <form action="#" method="get" id="form2">
         <input type="hidden" id=${id_rep+'check1'}>
@@ -561,15 +561,17 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  console.log(id_rep)
  let name = place.name
  let fill = document.createElement('div');
- fill.id = id + 'row'
+ fill.id = id_rep + 'row'
  fill.className = "container";
  fill.innerHTML = `
  <div class="row my-2" id=''>
-   <div class="col">
-     <h3>${name}</h3>
-     <!-----------TRASHBIN--------------------->
-      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
+   <div class="col mb-2 rounded p-3 bg-light" >
+     <h3>
+        ${name}
+        <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+     </h3>
    <div>
+   
  </div>
 
 <div class="row" > 
@@ -590,7 +592,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
      <div class="col-6">
        <!------------- NOTE ------------------>
-       <button class="btn btn-light mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
+       <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
        <br>
        <form action="#" method="get" id="form1">
          <input type="hidden" id=${id_rep+'notes1'}>
@@ -600,7 +602,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
 
      <!-------------CHECKLIST -------------->
      <div class="col-6">
-       <button class="btn btn-light mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
+       <button class="btn btn-new-grey mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
        <br>
        <form action="#" method="get" id="form2">
         <input type="hidden" id=${id_rep+'check1'}>
