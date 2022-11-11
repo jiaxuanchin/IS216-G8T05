@@ -318,9 +318,12 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
   <div class="row my-2">
     <div class="col">
       <h3>${name}</h3>
+      <!-----------TRASHBIN--------------------->
+      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
     <div>
   </div>
- <div class="row" > 
+ <div class="row">
+
   <div class="col-4">
     <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
     <div hidden class='get_distance'>${id},${lati},${lng}</div>
@@ -332,30 +335,30 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     <div class="distance" id=${id}></div>
     </p>
   </div>
+  
   <div class="col-8"> 
     <div class="row">
-      <div class="col">
-        <!------------- NOTE ------------------>
-        <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
+
+      <!------------- NOTE ------------------>
+      <div class="col-6">
+        <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
         <br>
         <form action="#" method="get" id="form1">
           <input type="hidden" id=${id_rep+'notes1'}>
           <div class="divTxt" id=${id_rep+'notes2'}></div>
         </form>
       </div>
+
       <!-------------CHECKLIST -------------->
-      <div class="col">
-        <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
+      <div class="col-6">
+        <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
         <br>
         <form action="#" method="get" id="form2">
         <input type="hidden" id=${id_rep+'check1'}>
         <div class="divCheckBox" id=${id_rep+'check2'}></div>
         </form>
       </div>
-      <!-----------TRASHBIN--------------------->
-      <div class="col">
-        <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
-      </div>
+      
     </div>
   </div>
   </div>
@@ -558,8 +561,11 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  <div class="row my-2" id=''>
    <div class="col">
      <h3>${name}</h3>
+     <!-----------TRASHBIN--------------------->
+      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
    <div>
  </div>
+
 <div class="row" > 
  <div class="col-4">
    <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
@@ -572,9 +578,11 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
    <div class="distance" id=${id}></div>
    </p>
  </div>
+
  <div class="col-8"> 
    <div class="row">
-     <div class="col">
+
+     <div class="col-6">
        <!------------- NOTE ------------------>
        <button class="btn btn-light" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note</button>
        <br>
@@ -583,19 +591,17 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
          <div class="divTxt" id=${id_rep+'notes2'}></div>
        </form>
      </div>
+
      <!-------------CHECKLIST -------------->
-     <div class="col">
+     <div class="col-6">
        <button class="btn btn-light" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist</button>
        <br>
        <form action="#" method="get" id="form2">
-       <input type="hidden" id=${id_rep+'check1'}>
-       <div class="divCheckBox" id=${id_rep+'check2'}></div>
+        <input type="hidden" id=${id_rep+'check1'}>
+        <div class="divCheckBox" id=${id_rep+'check2'}></div>
        </form>
      </div>
-     <!-----------TRASHBIN--------------------->
-     <div class="col">
-       <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
-     </div>
+     
    </div>
  </div>
  </div>
@@ -627,7 +633,7 @@ else{
   console.log(cur_num)
   to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
 }
-to_add.innerHTML = `<input type="text"><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
+to_add.innerHTML = `<span class="textarea" contenteditable></span><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
 div_element = document.getElementById(id2)
 div_element.appendChild(to_add)
 }
@@ -655,7 +661,7 @@ to_add.className = 'check_field' + id_origin.id
     to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
   }
   console.log(to_add.id)
-  to_add.innerHTML = to_add.innerHTML = `<input type="checkbox"><input type='text'><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
+  to_add.innerHTML = to_add.innerHTML = `<input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><span class="textarea" contenteditable></span><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
   div_element = document.getElementById(id2)
   div_element.appendChild(to_add)
 }
@@ -664,4 +670,23 @@ function removeCheckBox(id2) {
 $(id2.id).remove();
 }
 
-$(document).keypress(function(e) { if(e.keyCode === 13) { e.preventDefault(); return false; } });
+// $(document).keypress(function(e) { if(e.keyCode === 13) { e.preventDefault(); return false; } });
+// Dealing with Input width
+let el = document.querySelector(".input-wrap .input");
+let widthMachine = document.querySelector(".input-wrap .width-machine");
+el.addEventListener("keyup", () => {
+  widthMachine.innerHTML = el.value;
+});
+
+// Dealing with Textarea Height
+function calcHeight(value) {
+  let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+  // min-height + lines x line-height + padding + border
+  let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+  return newHeight;
+}
+
+let textarea = document.querySelector(".resize-ta");
+textarea.addEventListener("keyup", () => {
+  textarea.style.height = calcHeight(textarea.value) + "px";
+});

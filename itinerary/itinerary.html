@@ -76,7 +76,7 @@
 
 
   <body>
-  <!--header-->
+  <!----------------------------------------header-------------------------------------------------->
   <header class="header-top bg-grey justify-content-center">
     <nav class="navbar navbar-expand-md navigation-2 navigation">
         <div class="container-fluid">
@@ -118,9 +118,9 @@
 
 <!-- content -->
 
-    <!-- Itinerary heading 2 -->
+    <!-- Itinerary heading -->
     <!-- Banner --> 
-    <section class="trip-name" > 
+    <section class="trip-name shadow" > 
       <div class="card w-50 h-200 mx-auto shadow">
         <div class="card-body ">
           <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
@@ -166,7 +166,7 @@
     <!-------------------------------------Itinerary----------------------------->
     
     <div class="itinerary-heading d-flex justify-content-center">
-      <div class="container">
+      <div class="container ">
         <div class="row ">
 
           <div class="col">
@@ -185,11 +185,12 @@
                     </button>
                     <button onclick="fill_template()">Confirm Date</button>
                   </div>
-
                   <!-- end calendar -->
+
                 </div>
               </div>
-          </div>    
+          </div>  
+
         </div>
       </div>  
     </div>
@@ -415,9 +416,6 @@
 
   let long = document.getElementById('origin_lng')
   long.addEventListener('change',sayHi)
-
-
-
  
 </script>
 
