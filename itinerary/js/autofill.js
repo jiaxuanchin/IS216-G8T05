@@ -303,75 +303,76 @@ service = new google.maps.places.PlacesService(map);
 service.getDetails(request, callback);
 
 function callback(place, status) {
-if (status == google.maps.places.PlacesServiceStatus.OK) {
-  if(place.photos[0] != undefined){
-    picture_url = place.photos[0].getUrl({
- })
- }
- let name = place.name
- console.log(id)
- let fill = document.createElement('div');
- id_rep = id.replace('-','_')
- for(let i=0;i<10;i++){
-  id_rep = id_rep.replace('-','_')
- }
- fill.id = id_rep + 'row'
- fill.className = "container";
- fill.innerHTML = `
-  <div class="row my-2">
-    <div class="col mb-2 rounded p-3 bg-light" >
-      <h3>${name}
-      <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
-      </h3>
-    <div>
-  </div>
- <div class="row">
-
-  <div class="col-4">
-    <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-    <div hidden class='get_distance'>${id},${lati},${lng}</div>
-    <p>
-    <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-    <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-    <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    if(place.photos[0] != undefined){
+      picture_url = place.photos[0].getUrl({
+   })
+   }
+   let name = place.name
+   console.log(id)
+   let fill = document.createElement('div');
+   id_rep = id.replace('-','_')
+   for(let i=0;i<10;i++){
+    id_rep = id_rep.replace('-','_')
+   }
+   fill.id = id_rep + 'row'
+   fill.className = "container";
+   fill.innerHTML = `
+    <div class="row my-2">
+      <div class="col mb-2 rounded p-3 bg-light" >
+        <h3>${name}
+         <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+        </h3>
+      <div>
+    </div>
+   <div class="row">
   
-    <div class="distance" id=${id}></div>
-    </p>
-  </div>
+    <div class="col-4">
+      <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+      <br>
+      <div hidden class='get_distance'>${id},${lati},${lng}</div>
+      <p>
+      <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+      <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+      <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+    
+      <div class="distance" id=${id}></div>
+      </p>
+    </div>
+    
+    <div class="col-8"> 
+      <div class="row">
   
-  <div class="col-8"> 
-    <div class="row">
-
-      <!------------- NOTE ------------------>
-      <div class="col-6">
-        <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
-        <br>
-        <form action="#" method="get" id="form1">
-          <input type="hidden" id=${id_rep+'notes1'}>
-          <div class="divTxt" id=${id_rep+'notes2'}></div>
-        </form>
+        <!------------- NOTE ------------------>
+        <div class="col-6">
+          <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+          <br>
+          <form action="#" method="get" id="form1">
+            <input type="hidden" id=${id_rep+'notes1'}>
+            <div class="divTxt" id=${id_rep+'notes2'}></div>
+          </form>
+        </div>
+  
+        <!-------------CHECKLIST -------------->
+        <div class="col-6">
+          <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+          <br>
+          <form action="#" method="get" id="form2">
+          <input type="hidden" id=${id_rep+'check1'}>
+          <div class="divCheckBox" id=${id_rep+'check2'}></div>
+          </form>
+        </div>
+        
       </div>
-
-      <!-------------CHECKLIST -------------->
-      <div class="col-6">
-        <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-        <br>
-        <form action="#" method="get" id="form2">
-        <input type="hidden" id=${id_rep+'check1'}>
-        <div class="divCheckBox" id=${id_rep+'check2'}></div>
-        </form>
-      </div>
-      
+    </div>
     </div>
   </div>
-  </div>
-</div>
- `
- let parent = document.getElementsByClassName('place_info')[track]
- parent.appendChild(fill)
-}
-}
-}
+   `
+   let parent = document.getElementsByClassName('place_info')[track]
+   parent.appendChild(fill)
+  }
+  }
+  }
 
 function removePlace(id){
 console.log('hello')
@@ -545,134 +546,140 @@ service = new google.maps.places.PlacesService(map);
 service.getDetails(request, callback);
 
 function callback(place, status) {
-lati = place.geometry.location.lat()
-lng = place.geometry.location.lng()
-id = place.place_id
-console.log(id)
-if (status == google.maps.places.PlacesServiceStatus.OK) {
-  if(place.photos[0] != undefined){
-    picture_url = place.photos[0].getUrl({
- })
- }
- id_rep = id.replace('-','_')
- for(let i=0;i<10;i++){
-  id_rep = id_rep.replace('-','_')
- }
- console.log(id_rep)
- let name = place.name
- let fill = document.createElement('div');
- fill.id = id_rep + 'row'
- fill.className = "container";
- fill.innerHTML = `
- <div class="row my-2" id=''>
-   <div class="col mb-2 rounded p-3 bg-light" >
-     <h3>
-        ${name}
-        <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
-     </h3>
-   <div>
-   
- </div>
-
-<div class="row" > 
- <div class="col-4">
-   <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-   <div hidden class='get_distance'>${id},${lati},${lng}</div>
-   <p>
-   <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-   <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-   <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
- 
-   <div class="distance" id=${id}></div>
-   </p>
- </div>
-
- <div class="col-8"> 
-   <div class="row">
-
-     <div class="col-6">
-       <!------------- NOTE ------------------>
-       <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
-       <br>
-       <form action="#" method="get" id="form1">
-         <input type="hidden" id=${id_rep+'notes1'}>
-         <div class="divTxt" id=${id_rep+'notes2'}></div>
-       </form>
-     </div>
-
-     <!-------------CHECKLIST -------------->
-     <div class="col-6">
-       <button class="btn btn-new-grey mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-       <br>
-       <form action="#" method="get" id="form2">
-        <input type="hidden" id=${id_rep+'check1'}>
-        <div class="divCheckBox" id=${id_rep+'check2'}></div>
-       </form>
-     </div>
+  lati = place.geometry.location.lat()
+  lng = place.geometry.location.lng()
+  id = place.place_id
+  console.log(id)
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    if(place.photos[0] != undefined){
+      picture_url = place.photos[0].getUrl({
+   })
+   }
+   id_rep = id.replace('-','_')
+   for(let i=0;i<10;i++){
+    id_rep = id_rep.replace('-','_')
+   }
+   console.log(id_rep)
+   let name = place.name
+   let fill = document.createElement('div');
+   fill.id = id_rep + 'row'
+   fill.className = "container";
+   fill.innerHTML = `
+   <div class="row my-2" id=''>
+     <div class="col mb-2 rounded p-3 bg-light" >
+       <h3>
+          ${name}
+           <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+       </h3>
+     <div>
      
    </div>
- </div>
- </div>
-</div>
-`
- //let parent = document.getElementById('place_info')
- let parent = document.getElementsByClassName('place_info')[track]
- console.log(parent)
- parent.appendChild(fill)
-}
-}
-}
+  
+  <div class="row" > 
+   <div class="col-4">
+     <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+     <br>
+     <div hidden class='get_distance'>${id},${lati},${lng}</div>
+     <p>
+     <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+     <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+     <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+   
+     <div class="distance" id=${id}></div>
+     </p>
+   </div>
+  
+   <div class="col-8"> 
+     <div class="row">
+  
+       <div class="col-6">
+         <!------------- NOTE ------------------>
+         <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+         <br>
+         <form action="#" method="get" id="form1">
+           <input type="hidden" id=${id_rep+'notes1'}>
+           <div class="divTxt" id=${id_rep+'notes2'}></div>
+         </form>
+       </div>
+  
+       <!-------------CHECKLIST -------------->
+       <div class="col-6">
+         <button class="btn btn-new-grey mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+         <br>
+         <form action="#" method="get" id="form2">
+          <input type="hidden" id=${id_rep+'check1'}>
+          <div class="divCheckBox" id=${id_rep+'check2'}></div>
+         </form>
+       </div>
+       
+     </div>
+   </div>
+   </div>
+  </div>
+  `
+   //let parent = document.getElementById('place_info')
+   let parent = document.getElementsByClassName('place_info')[track]
+   console.log(parent)
+   parent.appendChild(fill)
+  }
+  }
+  }
 
 function addFormField(id) {
-console.log(id)
-id_origin = id
-id = id.id
-id2 = id.slice(0,id.length-1) +'2'
-to_add = document.createElement('div')
-to_add.className = 'input_field' + id_origin.id
-
-current_input = document.getElementsByClassName('input_field' + id_origin.id)
-if(current_input.length == 0){
-  to_add.id = 'input_field'+ id_origin.id + 1
-}
-else{
-  cur_num_class = current_input[current_input.length-1].id
-  cur_num = cur_num_class[cur_num_class.length - 1]
-  console.log(cur_num)
-  to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
-}
-to_add.innerHTML = `<span class="textarea" contenteditable></span><div class='fa fa-trash' onclick=removeFormField(${to_add.id})></div><br><br>`
-div_element = document.getElementById(id2)
-div_element.appendChild(to_add)
-}
+    console.log(id)
+    id_origin = id
+    id = id.id
+    id2 = id.slice(0,id.length-1) +'2'
+    to_add = document.createElement('div')
+    to_add.className = 'input_field' + id_origin.id
+    
+    current_input = document.getElementsByClassName('input_field' + id_origin.id)
+    if(current_input.length == 0){
+      to_add.id = 'input_field'+ id_origin.id + 1
+    }
+    else{
+      cur_num_class = current_input[current_input.length-1].id
+      cur_num = cur_num_class[cur_num_class.length - 1]
+      console.log(cur_num)
+      to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
+    }
+    to_add.innerHTML = `<div class="d-flex ">
+            <span class="textarea" contenteditable "></span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
+            </div><br>`
+    div_element = document.getElementById(id2)
+    div_element.appendChild(to_add)
+  }
 
 function removeFormField(id) {
-document.getElementById(id.id).remove()
+  document.getElementById(id.id).remove()
 }
 
 function addCheckbox(id) {
 
-id_origin = id
-id = id.id
-id2 = id.slice(0,id.length-1) +'2'
-to_add = document.createElement('div')
-to_add.className = 'check_field' + id_origin.id
-
-  current_input = document.getElementsByClassName('check_field'+id_origin.id)
-  if(current_input.length == 0){
-    to_add.id = 'check_field'+ id_origin.id + 1
+  id_origin = id
+  id = id.id
+  id2 = id.slice(0,id.length-1) +'2'
+  to_add = document.createElement('div')
+  to_add.className = 'check_field' + id_origin.id
+  
+    current_input = document.getElementsByClassName('check_field'+id_origin.id)
+    if(current_input.length == 0){
+      to_add.id = 'check_field'+ id_origin.id + 1
+    }
+    else{
+      cur_num_class = current_input[current_input.length-1].id
+      cur_num = cur_num_class[cur_num_class.length - 1]
+      console.log(cur_num)
+      to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
+    }
+    console.log(to_add.id)
+    to_add.innerHTML = to_add.innerHTML = `<div class="d-flex "> 
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" style="display:inline-block";><span class="textarea"  contenteditable ></span>
+                  <span style="margin:5px;" class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
+                  </div><br>`
+    div_element = document.getElementById(id2)
+    div_element.appendChild(to_add)
   }
-  else{
-    cur_num_class = current_input[current_input.length-1].id
-    cur_num = cur_num_class[cur_num_class.length - 1]
-    console.log(cur_num)
-    to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
-  }
-  console.log(to_add.id)
-  to_add.innerHTML = to_add.innerHTML = `<input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><span class="textarea" contenteditable></span><span class='fa fa-trash' onclick=removeFormField(${to_add.id})></span><br><br>`
-  div_element = document.getElementById(id2)
-  div_element.appendChild(to_add)
-}
 
 function removeCheckBox(id2) {
 $(id2.id).remove();
