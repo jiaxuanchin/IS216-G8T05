@@ -561,7 +561,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  console.log(id_rep)
  let name = place.name
  let fill = document.createElement('div');
- fill.id = id + 'row'
+ fill.id = id_rep + 'row'
  fill.className = "container";
  fill.innerHTML = `
  <div class="row my-2" id=''>
