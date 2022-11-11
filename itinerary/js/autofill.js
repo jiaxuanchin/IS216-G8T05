@@ -420,10 +420,12 @@ fill.innerHTML = ''
 let first = true
 var indx = 0
 var active_status = "active"
-
+let carouselnum = document.getElementById('carousel_num').innerHTML
+let id = 'carouselExampleControls'+ carouselnum
+let id2 = '#carouselExampleControls'+carouselnum
 fill += `
-  <div id="recommended" >
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div>
+    <div id=${id} class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
   `
 
@@ -501,17 +503,18 @@ for(item of results){
 }
 fill +=  `
         </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target=${id2} data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target=${id2} data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
           </div>
         </div>`
 parent.innerHTML = fill
+document.getElementById('carousel_num').innerHTML = Number(document.getElementById('carousel_num').innerHTML) + 1
 }
 }
 }
