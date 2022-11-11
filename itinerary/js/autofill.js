@@ -309,7 +309,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
  })
  }
  let name = place.name
-
+ console.log(id)
  let fill = document.createElement('div');
  id_rep = id.replace('-','_')
  for(let i=0;i<10;i++){
@@ -322,7 +322,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
     <div class="col mb-2 rounded p-3 bg-light" >
       <h3>${name}</h3>
       <!-----------TRASHBIN--------------------->
-      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
+      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
     <div>
   </div>
  <div class="row">
@@ -568,7 +568,7 @@ if (status == google.maps.places.PlacesServiceStatus.OK) {
    <div class="col">
      <h3>${name}</h3>
      <!-----------TRASHBIN--------------------->
-      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id+'row'})"></div>
+      <div style='float:right' class='fa fa-trash' onClick="removePlace(${id_rep+'row'})"></div>
    <div>
  </div>
 
