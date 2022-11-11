@@ -79,19 +79,19 @@
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/french.png" class="d-block img-fluid" alt="Hawaii, USA">
+        <img src="images/french.png" class="d-block w-100" alt="Hawaii, USA" >
       </div>
       <div class="carousel-item">
-        <img src="images/hawaiian.png" class="d-block w-100" alt="Paris, France">
+        <img src="images/hawaiian.png" class="d-block w-100" alt="Paris, France" name="carousel">
       </div>
       <div class="carousel-item">
-        <img src="images/chinese.png" class="d-block w-100" alt="Kuala Lumpur, Malaysia">
+        <img src="images/chinese.png" class="d-block w-100" alt="Kuala Lumpur, Malaysia" name="carousel">
       </div>
       <div class="carousel-item">
-        <img src="images/portugese.png" class="d-block w-100" alt="Rio De Janeiro, Brazil">
+        <img src="images/portugese.png" class="d-block w-100" alt="Rio De Janeiro, Brazil" name="carousel">
       </div>
       <div class="carousel-item">
-        <img src="images/malay.png" class="d-block w-100" alt="Shanghai, China">
+        <img src="images/malay.png" class="d-block w-100" alt="Shanghai, China" name="carousel">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -105,15 +105,18 @@
   </div>
 
   <!-- Start planning, plane -->
-  <div class="container-fluid my-3 text-center py-3" style="background-color: #344648;">
-    <img src="https://assets.website-files.com/5e77aebfc78e1c7a72b9201b/5ecfce32a80336a92e83b544_icon_subscribe_plane_animation_starts-with-quartplane.gif" width="400" alt="An animated paper plane flying through the air." class="image-10">
-    <h1 class="text-white py-1">Plan your next trip.</h1>
-    <h2 class="text-white py-1">Don't hesitate. Just travel.</h2>
-    <p class="fs-5 py-1">
-      <a href="createtrip.html" style="color:#ce8460;font-weight: bold;" >
-        Start planning <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    </p>
+  <div class="container-fluid text-center py-3 d-flex align-items-center align-middle" id="plane" style="background-color: #344648;">
+    <div class="mx-auto">
+      <img src="https://assets.website-files.com/5e77aebfc78e1c7a72b9201b/5ecfce32a80336a92e83b544_icon_subscribe_plane_animation_starts-with-quartplane.gif" width="350" alt="An animated paper plane flying through the air." class="image-10">
+      <h1 class="text-white py-1">Plan your next trip.</h1>
+      <h2 class="text-white py-1">Don't hesitate. Just travel.</h2>
+      <p class="fs-5 py-1">
+        <a href="createtrip.html" style="color:#ce8460;font-weight: bold;" >
+          Start planning <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </p>
+    </div>
+
   </div>
 
   <!-- popular destinations -->
@@ -280,6 +283,23 @@
     }
   }
   console.log(localStorage.getItem('uid'))
+  // console.log(window.innerHeight)
+  let inner_h = window.innerHeight
+  let h = window.innerHeight - 88
+  let w = window.innerWidth
+  console.log(w)
+  if (w > 1000) {
+    let images = document.getElementsByName('carousel')
+    for (img of images) {
+      img.setAttribute('style', 'height: ' + h + 'px;')
+    }
+    let plane = document.getElementById('plane')
+    plane.setAttribute('style', 'background-color: #344648; height: ' + inner_h + 'px;')
+    console.log(images)
+  }
+
+
+
 </script>
 
 <!-- firebase -->
