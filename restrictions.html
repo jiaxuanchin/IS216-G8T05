@@ -92,9 +92,9 @@
             <!--token-->
             <div id="token" hidden>
             </div>
-            <div onclick="getInfo()" class="btn btn-grey mt-3">
+            <!--<div onclick="getInfo()" class="btn btn-grey mt-3">
                get started</button>
-            </div>
+            </div>-->
 
 					</div>
 				</div>
@@ -468,22 +468,22 @@
   import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
   // connect to the realtime database
-  const db = getDatabase(app);
-  const auth = getAuth();
+  //const db = getDatabase(app);
+  //const auth = getAuth();
 
   // get a reference to the data 'title'
   
-  const country = ref(db, 'country'); 
+  //const country = ref(db, 'country'); 
   //try
   //const number = ref(db, 'number'); 
 
   // const g = ref(db, 'gender');
 
   // when value of 'title' changes, update to our <h1 id='target'>
-  onValue(country, (snapshot) => {
-      const data = snapshot.val(); // get the new value
-      document.getElementById('target').innerText = data;
-  });
+  //onValue(country, (snapshot) => {
+  //    const data = snapshot.val(); // get the new value
+      //document.getElementById('target').innerText = data;
+  //});
 
     //firebase.auth().onAuthStateChanged
 
