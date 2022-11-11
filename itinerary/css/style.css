@@ -247,6 +247,10 @@ blockquote {
   text-align: center;
 }
 
+.fa-trash:hover{
+  color: #ce8460;
+}
+
 /* Button */
 .btn {
   border-radius: 0px;
@@ -260,8 +264,26 @@ blockquote {
   border: 1px solid transparent;
 }
 
+.btn-pink{
+  background: #FFBB98;
+}
+
+.btn-new-grey{
+  background: #e0e0e0;
+}
+
+.btn-new-grey:hover{
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+
+
 .btn-primary {
   background: #ce8460;
+  color: white;
+
 }
 .btn-primary:hover {
   background: #000;
