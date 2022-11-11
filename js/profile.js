@@ -15,22 +15,24 @@ retrieveProfile();
 retrieveTrip();
 
 function retrieveProfile() {
-    let username = document.getElementById("username");
-    let usernameedit = document.getElementById("usernameedit");
-    let name = document.getElementById("name");
+    //let username = document.getElementById("username");
+    //let usernameedit = document.getElementById("usernameedit");
+    //let name = document.getElementById("name");
     let email = document.getElementById("email");
 
-    var user = firebase.database().ref('users/SbVsgXb5pmUBW29z1b3HeMCfDDw2');
+    var user = firebase.database().ref('users/' + localStorage.getItem('uid'));
+    console.log(localStorage.getItem('uid'));
+    console.log(user);
     user.once('value').then((snapshot) => {
         if (snapshot.exists()) {
             let response = snapshot.val();
-            username.innerText = "@" + response.username;
-            name.innerText = response.Name;
+            //username.innerText = "@" + response.username;
+            //name.innerText = response.name;
             email.innerText = response.email;
-            usernameedit.innerText = "Username : @" + response.username;
-            document.getElementById("newname").value = response.Name;
+            //usernameedit.innerText = "Username : @" + response.username;
+            //document.getElementById("newname").value = response.Name;
             document.getElementById("newemail").value = response.email;
-            if (response.photo != "") {
+            if (response.photo != undefined) {
                 document.getElementById("profile").src = response.photo;
             }
             else {
@@ -46,20 +48,20 @@ function retrieveProfile() {
 
 function updateProfile() {
     //var userId = document.getElementById("id").value;
-    let userId = "SbVsgXb5pmUBW29z1b3HeMCfDDw2"
-    var name = document.getElementById("newname").value;
+    let userId = localStorage.getItem('uid');
+    //var name = document.getElementById("newname").value;
     var email = document.getElementById("newemail").value;
-    var file = document.getElementById("files").files[0];
+    //var file = document.getElementById("files").files[0];
     //console.log(document.getElementById("files").files.length);
     var updates = {};
     if (document.getElementById("files").files.length != 0) {
-        updates['/users/' + userId + "/" + 'Name'] = name;
+        //updates['/users/' + userId + "/" + 'Name'] = name;
         updates['/users/' + userId + "/" + 'email'] = email;
         firebase.database().ref().update(updates);
         uploadFile();
     }
     else {
-        updates['/users/' + userId + "/" + 'Name'] = name;
+        //updates['/users/' + userId + "/" + 'Name'] = name;
         updates['/users/' + userId + "/" + 'email'] = email;
         firebase.database().ref().update(updates);
         retrieveProfile();
@@ -76,7 +78,7 @@ function uploadFile() {
     //console.log(file);
 
     //dynamically set reference to the file name
-    var thisRef = storageRef.child("profileimg").child("SbVsgXb5pmUBW29z1b3HeMCfDDw2");
+    var thisRef = storageRef.child("profileimg").child(localStorage.getItem('uid'));
 
     //put request upload file to firebase storage
     thisRef.put(file).then(function (snapshot) {
@@ -88,7 +90,7 @@ function uploadFile() {
             .then((url) => {
                 // Insert url into an <img> tag to "download"
                 //document.getElementById("profile").src = url;
-                let userId = "SbVsgXb5pmUBW29z1b3HeMCfDDw2";
+                let userId = localStorage.getItem('uid');
                 var updates = {};
                 updates['/users/' + userId + "/" + 'photo'] = url;
                 //console.log(url);
@@ -107,7 +109,7 @@ function editProfile() {
 }
 
 function retrieveTrip() {
-    var user = firebase.database().ref('users/SbVsgXb5pmUBW29z1b3HeMCfDDw2/trip');
+    var user = firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/');
     user.once('value').then((snapshot) => {
         if (snapshot.exists()) {
             document.getElementById("currenttrip").innerHTML = "";
@@ -125,7 +127,7 @@ function retrieveTrip() {
 }
 
 function retrieveTripDetails(item) {
-    var user = firebase.database().ref('users/SbVsgXb5pmUBW29z1b3HeMCfDDw2/trip/' + item);
+    var user = firebase.database().ref('users/'+ localStorage.getItem('uid') + '/trip/' + item);
     user.once('value').then((snapshot) => {
         if (snapshot.exists()) {
             let response = snapshot.val();

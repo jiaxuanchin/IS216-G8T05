@@ -1,56 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    
-    <style>
-      img{
-        width:100%;
-        
-      }
-
-      .card img {
-          object-fit: contain;
-        }
-
-      .card{
-        font-size: 10;
-      }
-
-
-
-.carousel-inner .carousel-item.active,
-.carousel-inner .carousel-item-next,
-.carousel-inner .carousel-item-prev {
-    display: flex;
-}
-
-/* medium and up screens */
-@media (min-width: 768px) {
-    
-    .carousel-inner .carousel-item-end.active,
-    .carousel-inner .carousel-item-next {
-      transform: translateX(25%);
-    }
-    
-    .carousel-inner .carousel-item-start.active, 
-    .carousel-inner .carousel-item-prev {
-      transform: translateX(-25%);
-    }
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start { 
-  transform: translateX(0);
-}
-
-
-
-      
-
-
-    </style>
-
-
+  
     <div id="map"></div>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
@@ -60,12 +11,13 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/autofill.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWAdiErZx7DlZYzpcxulO8_OLY2rYUm4&libraries=places&v=weekly" defer></script>
-    
-    
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
      <!-- theme meta -->
      <meta name="theme-name" content="revolve" />
+
+    <!-- progress bar -->
+    <link rel="stylesheet" href="../css/step.css">
    
     <!-- calendar -->
     <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
@@ -82,6 +34,9 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/vue@next"></script>
 
+    <!--Google charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- nav -->
       <!-- THEME CSS
         ================================================== -->
@@ -95,11 +50,33 @@
         <link rel="stylesheet" href="css/style.css">
         <!--calendar icon-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+          img{
+            width:100%;
+            
+          }
+    
+          .card img {
+              object-fit: contain;
+            }
+
+          .trip-name{
+            background-image: url("img/korea4.jpg");
+            padding: 40px;
+          }
+
+          hr{
+            border-top: 2px solid rgb(77, 76, 76)
+          }
+          
+    
+        </style>
   </head>
 
 
   <body>
-  <!--header-->
+  <!----------------------------------------header-------------------------------------------------->
   <header class="header-top bg-grey justify-content-center">
     <nav class="navbar navbar-expand-md navigation-2 navigation">
         <div class="container-fluid">
@@ -129,7 +106,7 @@
                     <li class="nav-item">
                     <a href="#" class="nav-link text-white">Log out</a>
                     </li>
-                </ul>
+                </ul >
                 <form class="d-flex" role="search">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
@@ -141,45 +118,55 @@
 
 <!-- content -->
 
-
-<script>
-  let items = document.querySelectorAll('.carousel .carousel-item')
-
-items.forEach((el) => {
-    const minPerSlide = 4
-    let next = el.nextElementSibling
-    for (var i=1; i<minPerSlide; i++) {
-        if (!next) {
-            // wrap carousel by using first child
-        	next = items[0]
-      	}
-        let cloneChild = next.cloneNode(true)
-        el.appendChild(cloneChild.children[0])
-        next = next.nextElementSibling
-    }
-})
-
-</script>
-
-
-    <!-- --------------------------------------------------------------------------- -->
-    <div class="trip-name">
-        <div class="card w-50 h-200 mx-auto shadow">
-          <div class="card-body ">
-            <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1>
-            <h5 class="card-content" style="text-align:left"> 
-              <i style="font-size:24px" class="fa">&#xf073;</i> 
-              <p id="result-2" style="display:inline">&nbsp;</p></i> 
-            </h5> 
-            <br>
-          </div>
+    <!-- Itinerary heading -->
+    <!-- Banner --> 
+    <section class="trip-name shadow" > 
+      <div class="card w-50 h-200 mx-auto shadow">
+        <div class="card-body ">
+          <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
+          <h5 class="card-content" style="text-align:left"> 
+            <i style="font-size:24px" class="fa">&#xf073;</i> 
+            <p id="result-2" style="display:inline">&nbsp;</p></i> 
+          </h5> 
+          <br>
         </div>
-    </div>
+      </div>
+      </div> 
+      
+    </section>
+
 
     <br><br>
+
+    <!--------------------------- progress bar ------------------------------>
+    <div class="container"> 
+      <div class="row justify-content-center"> 
+          <div class="col-11 col-sm-9 col-md-7  
+          col-lg-6 col-xl-5 text-center p-0 mt-2 mb-2"> 
+              <div class="px-0 pt-3 pb-0 mt-2 mb-2"> 
+                  <form id="form"> 
+                      <ul id="progressbar" class="d-flex justify-content-center"> 
+                          <li class="active" id="step1"> 
+                              <strong>Step 1</strong> 
+                          </li> 
+                          <li class="active" id="step2"><strong>Step 2</strong></li> 
+                          <li  class="active" id="step3"><strong>Step 3</strong></li> 
+                          
+                      </ul> 
+                      <fieldset> 
+                          <div class="finish"> 
+                          </div> 
+                      </fieldset> 
+                  </form> 
+              </div> 
+          </div> 
+      </div> 
+    </div>
+
+    <!-------------------------------------Itinerary----------------------------->
     
     <div class="itinerary-heading d-flex justify-content-center">
-      <div class="container">
+      <div class="container ">
         <div class="row ">
 
           <div class="col">
@@ -198,11 +185,12 @@ items.forEach((el) => {
                     </button>
                     <button onclick="fill_template()">Confirm Date</button>
                   </div>
-
                   <!-- end calendar -->
+
                 </div>
               </div>
-          </div>    
+          </div>  
+
         </div>
       </div>  
     </div>
@@ -215,14 +203,133 @@ items.forEach((el) => {
     <div class="container">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 
-          <!-------------- item1 ------------>
-          
 
       </div> <!--end accordion-->
   </div> <!--end container-->
   <p id="result-3" hidden></p>
 
-<!--footer-->
+<!------------------------------------------Budget-------------------------------------------->
+<div id="budget" style="width:90%;" class="mx-auto mb-4">
+    <h1>Budgeting</h1>
+
+  <div class="row p-3" style="background-color:lightgrey; border-radius:20px;">
+          <div class="col-lg-8 col-sm-12">
+              <h3>{{currency}}: ${{total_amt.toFixed(2)}}</h3>
+              <hr>
+              Total Amount
+          </div>
+
+          <div class="col-lg-4 col-sm-12">
+              
+              <!--Button to launch modal-->
+              <button type="button" class="btn" style="background-color: lightgray; color:black;" data-bs-toggle="modal" data-bs-target="#exampleModal"><h7 class="fw-bold"><i style="font-size:15px" class="fa">&#xf155;</i> Category Breakdown</h7></button><br>
+              
+              <!--Modal content-->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog">
+                  
+                      <div class="modal-content">
+                  
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Spending Breakdown</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+
+                              <!--This is the buttons to togger the content within modal-->
+                              <div class="btn-group me-2" role="group" aria-label="First group">
+                                  <button v-on:click="catShowTableView()" type="button" class="btn btn-outline-secondary">Table View</button>
+                                  <button v-on:click="catShowBarView()" type="button" class="btn btn-outline-secondary">Bar View</button>
+                              </div>
+
+                              <br><br>
+
+                              <!--Chart View-->
+                              <div v-show="catBarView">
+                                  <h7 class="fw-bold">Bar View</h7>
+                                  <div id="bar_chart_div"></div>
+                              </div>
+
+                              <!--Table View-->
+                              <div v-show="catTableView">
+                                  <h7 class="fw-bold">Table View</h7>
+                                  <div id="table_div"></div>
+                              </div>
+
+                          </div><!--End of modal body-->
+                  
+                      </div>
+                  
+                  </div>
+              
+              </div> <!--End of modal content-->
+
+              <!--Button to launch modal for currency-->
+              <button type="button" class="btn" style="background-color: lightgray; color:black;" data-bs-toggle="modal" data-bs-target="#currencySettingModal"><h7 class="fw-bold"><span>&#9881;</span> Currency Settings</h7></button>
+
+              <!--modal content for currency settings-->
+
+              <!--Start of currency setting modal content-->
+              <div class="modal fade" id="currencySettingModal" tabindex="-1" aria-labelledby="currencySettingModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog">
+                  
+                      <div class="modal-content m-2">
+                  
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="currencySettingModalLabel">Currency Setting</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+
+                              <h7 class="fw-bold">Ensuring ease budgeting</h7>
+                              <p>Input in your currency settings and let us do the quick conversion for you. </p>
+
+                              <div class="row text-center">
+
+                                <!--Drop down of currency-->
+                                <div class="input-group mb-3">
+                                  <label class="input-group-text" for="fromCurr">From Currency</label>
+                                  <select class="form-select" id="fromCurr" v-model="from">
+                                      <option v-for="curr of currency_code_array" v-bind:value="curr">{{curr}}</option>
+                                  </select>
+                                </div>
+                                <!--End of the drop down of currency-->
+
+                                <!--Start of Output currency-->
+                                <div class="input-group mb-3">
+                                  <label class="input-group-text" for="toCurr">To Currency</label>
+                                  <select class="form-select" id="toCurr" v-model="to">
+                                      <option v-for="curr of currency_code_array">{{curr}}</option>
+                                  </select>
+                                </div>
+                                <!--End of Output currency-->
+
+                              </div>
+
+                          </div><!--End of modal body-->
+
+                          <!--Start of modal footer-->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Changes</button>
+                          </div>
+                          <!--End of modal footer-->
+                  
+                      </div>
+                  
+                  </div>
+              
+              </div> <!--End of modal content-->
+              <!--End of currency setting modal content-->
+          </div>
+      
+  </div>
+</div>
+
+<!------------------------------------------Footer-------------------------------------------->
 <section class="footer-2 section-padding gray-bg pb-3">
   <div class="row">
       <!-- Grid column -->
@@ -267,30 +374,27 @@ items.forEach((el) => {
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
     <!-- calendar script -->
-    <!-- <script></script> -->
     <script async src="https://buttons.github.io/buttons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
     <script type="text/javascript" src="calendar/docs/demo.js"></script>
     <!-- THEME JAVASCRIPT FILES
-================================================== -->
-<!-- initialize jQuery Library -->
-<script src="plugins/jquery/jquery.js"></script>
-<!-- Bootstrap jQuery -->
-<!-- <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="plugins/bootstrap/js/popper.min.js"></script> -->
-<!-- Owl caeousel -->
-<!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
-<script src="plugins/slick-carousel/slick.min.js"></script> -->
-<script src="plugins/magnific-popup/magnific-popup.js"></script>
-<!-- Instagram Feed Js -->
-<script src="plugins/instafeed-js/instafeed.min.js"></script>
-<!-- Google Map -->
-<!-- <script src="plugins/google-map/gmap.js"></script> -->
-<!-- main js -->
-<script src="js/custom.js"></script>
-
-    
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <!-- Bootstrap jQuery -->
+    <!-- <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/bootstrap/js/popper.min.js"></script> -->
+    <!-- Owl caeousel -->
+    <!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="plugins/slick-carousel/slick.min.js"></script> -->
+    <script src="plugins/magnific-popup/magnific-popup.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="plugins/instafeed-js/instafeed.min.js"></script>
+    <!-- Google Map -->
+    <!-- <script src="plugins/google-map/gmap.js"></script> -->
+    <!-- main js -->
+    <script src="js/custom.js"></script>
     <!-- CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   </body>
@@ -312,5 +416,274 @@ items.forEach((el) => {
 
   let long = document.getElementById('origin_lng')
   long.addEventListener('change',sayHi)
+ 
+</script>
 
+<!--Google bar charts to show-->
+<script>
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBasic);
+
+  function drawBasic() {
+
+      // The data here can be changed
+      var data = google.visualization.arrayToDataTable([
+          ['Activity', 'Price'],
+          ['Sentosa', 300],
+          ['Wild Wild Wet', 30],
+          ['Singapore Zoo', 300],
+          ['Adventure Colve', 2032],
+          ['Marina Bay Sands', 4503]
+      ]);
+
+      //The data here can be changed 
+      var options = {
+          title: 'Category Spending Breakdown',
+          chartArea: {width: '90%'},
+          hAxis: {
+          title: 'Price',
+          minValue: 0
+          },
+          vAxis: {
+          title: 'Activity'
+          }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+
+      chart.draw(data, options);
+  }
+</script>
+
+<!--Google table charts to show-->
+<script>
+  google.charts.load('current', {'packages':['table']});
+  google.charts.setOnLoadCallback(drawTable);
+
+  function drawTable() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Activity');
+  data.addColumn('number', 'Price');
+  data.addRows([
+      ['Sentosa', 300],
+      ['Wild Wild Wet', 30],
+      ['Singapore Zoo', 300],
+      ['Adventure Colve', 2032],
+      ['Marina Bay Sands', 4503]
+  ]);
+
+  var table = new google.visualization.Table(document.getElementById('table_div'));
+
+  table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+  }
+</script>
+
+<!--Vue instance for generation of budget total amount and currency-->
+<script>
+
+// Currency Exchange Drop down list ==> Vanilla JS
+var currency_code_str =`Albania	ALL	lek
+Algeria	DZD	dinar
+Angola	AOA	kwanza
+Argentina	ARS	peso
+Armenia	AMD	dram
+Australia	AUD	dollar
+Austria	EUR	euro
+Azerbaijan	AZN	manat
+Bahrain	BHD	dinar
+Barbados	BBD	dollar
+Belarus	BYN	rouble
+Belgium	EUR	euro
+Bermuda	BMD	dollar
+Bolivia	BOB	boliviano
+Bosnia and Herzegovina	BAM	konvertibilna marka
+Botswana	BWP	pula
+Brazil	BRL	real
+Bulgaria	BGN	lev
+Cabo Verde	CVE	escudo
+Cambodia	KHR	riel
+Cameroon, Republic of	XAF	CFA franc BEAC
+Canada	CAD	dollar
+Cayman Islands	KYD	dollar
+Chad	XAF	CFA franc BEAC
+Chile	CLP	peso
+China, People's Republic of	CNY	yuan
+Colombia	COP	peso
+Congo, Democratic Republic of the	CDF	franc
+Congo, Republic of	XAF	CFA franc BEAC
+Costa Rica	CRC	colon
+Croatia	HRK	kuna
+Cyprus	EUR	euro
+Czech Republic	CZK	koruna
+Denmark	DKK	kroner
+Dominican Republic	DOP	peso
+Ecuador	USD	dollar
+Egypt	EGP	pound
+El Salvador	USD	dollar
+Equatorial Guinea	XAF	CFA franc BEAC
+Estonia	EUR	euro
+Fiji	FJD	dollar
+Finland	EUR	euro
+France	EUR	euro
+Gabon	XAF	CFA franc BEAC
+Georgia	GEL	lari
+Germany	EUR	euro
+Ghana	GHS	cedi
+Gibraltar	GIP	pound
+Greece	EUR	euro
+Greenland	DKK	Danish krone
+Guatemala	GTQ	quetzal
+Guernsey, Channel Islands	GBP	British pound sterling
+Guyana	GYD	dollar
+Honduras	HNL	lempira
+Hong Kong SAR	HKD	dollar
+Hungary	HUF	forint
+Iceland	ISK	krona
+India	INR	rupee
+Indonesia	IDR	rupiah
+Iraq	IQD	dinar
+Ireland	EUR	euro
+Isle of Man	IMP	pound
+Israel	ILS	shekel
+Italy	EUR	euro
+Ivory Coast (Cote d'Ivoire)	XOF	CFA franc BCEAO
+Jamaica	JMD	dollar
+Japan	JPY	yen
+Jersey, Channel Islands	GBP	British pound sterling
+Jordan	JOD	dinar
+Kazakhstan	KZT	tenge
+Kenya	KES	shilling
+Korea, Republic of	KRW	won
+Kosovo	EUR	euro
+Kuwait	KWD	dinar
+Kyrgyzstan	KGS	som
+Lao PDR	LAK	kip
+Latvia	EUR	euro
+Lebanon	LBP	pound
+Libya	LYD	dinar
+Liechtenstein	CHF	franc
+Lithuania	EUR	euro
+Luxembourg	EUR	euro
+Macau SAR	MOP	pataca
+Madagascar	MGA	ariary
+Malawi	MWK	kwacha
+Malaysia	MYR	ringgit
+Maldives	MVR	rufiyaa
+Malta	EUR	euro
+Mauritania	MRU	ouguiya
+Mauritius	MUR	rupee
+Mexico	MXN	peso
+Moldova	MDL	leu
+Mongolia	MNT	tugrik
+Montenegro	EUR	euro
+Morocco	MAD	dirham
+Mozambique	MZN	metical
+Myanmar	MMK	kyat
+Namibia, Republic of	NAD	dollar
+Netherlands	EUR	euro
+New Zealand	NZD	dollar
+Nicaragua	NIO	cordoba oro
+Nigeria	NGN	naira
+North Macedonia	MKD	denar
+Norway	NOK	kroner
+Oman	OMR	rial
+Pakistan	PKR	rupee
+Palestinian territories	ILS	shekel, dollar, and dinar
+Panama	PAB	balboa  and dollar
+Papua New Guinea	PGK	kina
+Paraguay	PYG	guarani
+Peru	PEN	nuevo sol
+Philippines	PHP	peso
+Poland	PLN	zloty
+Portugal	EUR	euro
+Puerto Rico	USD	dollar
+Qatar	QAR	riyal
+Romania	RON	leu
+Russian Federation	RUB	ruble
+Rwanda	RWF	franc
+Saint Lucia	XCD	dollar
+Saudi Arabia	SAR	riyal
+Senegal	XOF	CFA franc BCEAO
+Serbia	RSD	dinar
+Singapore	SGD	dollar
+Slovak Republic	EUR	euro
+Slovenia	EUR	euro
+South Africa	ZAR	rand
+Spain	EUR	euro
+Sri Lanka	LKR	rupee
+Swaziland	SZL	lilangeni
+Sweden	SEK	krona
+Switzerland	CHF	franc
+Taiwan	TWD	dollar
+Tajikistan	TJS	somoni
+Tanzania	TZS	shilling
+Thailand	THB	baht
+Timor-Leste	USD	US dollar
+Trinidad And Tobago	TTD	dollar
+Tunisia	TND	dinar
+Turkey	TRY	lira
+Turkmenistan	TMT	manat
+Uganda	UGX	shilling
+Ukraine	UAH	hryvnia
+United Arab Emirates	AED	dirham
+United Kingdom	GBP	sterling
+United States	USD	dollar
+Uruguay	UYU	peso
+Uzbekistan, Republic of	UZS	soum
+Venezuela	VEF	bolivar
+Vietnam	VND	dong
+Zambia	ZMW	kwacha
+Zimbabwe	ZWD	dollar`
+
+  //Cleaning the data 
+  currency_str1 = currency_code_str.replace("   ","")
+  currency_str2 = currency_str1.replace(/[\r\n]/gm,"")
+  currency_all_array = currency_str2.split("\t")
+
+  //creating the clean currency code array
+  currency_array = []
+  no_dup_currency_array = []
+
+  //collecting only the country currency codes
+  for(i=0;i<currency_all_array.length;i++){
+      if(i%2 != 0){
+          currency_array.push(currency_all_array[i])
+      }
+  }
+  currency_array = currency_array.sort()
+
+  // remove duplicates in country currency codes
+  for(ele of currency_array){
+      if(!no_dup_currency_array.includes(ele)){
+          no_dup_currency_array.push(ele)
+      }
+    }
+
+  const budget = Vue.createApp({
+      data(){
+          return{
+            //data from the grey budget table
+              total_amt: 0,
+              currency: "SGD",
+              catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
+              catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
+
+              //data from the currency settings
+              currency_code_array: no_dup_currency_array,
+              to: "",
+              from: "",
+              amount: 1
+          }
+      },
+      methods: {
+          catShowTableView(){
+              this.catTableView = true
+              this.catBarView = false
+          },
+          catShowBarView(){
+              this.catTableView = false
+              this.catBarView = true
+          }
+      }
+  }).mount("#budget")
 </script>
