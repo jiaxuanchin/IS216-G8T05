@@ -213,7 +213,7 @@
 
   <div class="row p-3" style="background-color:lightgrey;border-radius:20px;">
           <div class="col-lg-8 col-sm-12">
-              <h3>{{currency}}: ${{total_amt.toFixed(2)}}</h3>
+              <h3>{{to}}: <span id="convertedamt"> {{callCovertorAPI}} </span></h3>
               <hr>
               Total Amount
           </div>
@@ -482,6 +482,32 @@
 
 <!--Vue instance for generation of budget total amount and currency-->
 <script>
+function convert(from,to,amt) {
+        const options = {
+            method: 'GET',
+            url: 'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency',
+            params: { have: from, want: to, amount: amt },
+            headers: {
+                'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+                'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+            }
+        };
+
+        axios.request(options)
+            .then(function (response) {
+                console.log(response.data)
+                onchangecurrency(response.data)
+            })
+            .catch(function (error) {
+                // In case of any error, see what it's about
+                console.log(error)
+            })
+    }
+    function onchangecurrency(data) {
+        let result = data.new_amount;
+        document.getElementById("convertedamt").innerText = result;
+        return result;
+    }
 
 // Currency Exchange Drop down list ==> Vanilla JS
 var currency_code_str =`Albania	ALL	lek
@@ -665,16 +691,15 @@ Zimbabwe	ZWD	dollar`
       data(){
           return{
             //data from the grey budget table
-              total_amt: 0,
               currency: "SGD",
               catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
               catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
 
               //data from the currency settings
               currency_code_array: no_dup_currency_array,
-              to: "",
-              from: "",
-              amount: 1
+              to: "SGD",
+              from: "UDS",
+              amount: 1 //needs to REACTIVELY from the activites
           }
       },
       methods: {
@@ -685,6 +710,11 @@ Zimbabwe	ZWD	dollar`
           catShowBarView(){
               this.catTableView = false
               this.catBarView = true
+          }
+      },
+      computed: {
+          callCovertorAPI() {
+              arr = convert(this.from,this.to,this.amount);
           }
       }
   }).mount("#budget")
