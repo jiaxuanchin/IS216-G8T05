@@ -66,11 +66,10 @@ function fill_template(){
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body "> 
                     <div class="row d-flex">
-                        <div class="col-12">
                           <!------------- SEARCH BOX ------------->
 
                           <!--PLACE INFO START-->
-                           <div class="place_info"></div>
+                          <div class="place_info"></div>
 
                           <!--ADD PLACE INPUT BOX-->
                           <div class="search-box mb-2 ">
@@ -78,11 +77,10 @@ function fill_template(){
                             <br>
                             
                             <div class="row recommend_header"></div>
-                            <div class="recommended" ></div>
+                            <div class="recommended"></div>
 
                           </div>
-                          <br>                       
-                        </div> <!--end col-->
+                          <br>
                     </div> <!--end row-->
                 </div> <!--end accordion body-->
             </div> <!--end accordion collaspe-->
@@ -417,101 +415,118 @@ let name = ''
 let photo = ''
 let fill = ""
 fill.innerHTML = ''
-let first = true
 var indx = 0
 var active_status = "active"
 let carouselnum = document.getElementById('carousel_num').innerHTML
 let id = 'carouselExampleControls'+ carouselnum
-let id2 = '#carouselExampleControls'+carouselnum
+let id2 = '#carouselExampleControls'+ carouselnum
 fill += `
-  <div>
-    <div id=${id} class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
+  <div id=${id} class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
   `
+var count_of_card = 1
 
 for(item of results){
+  
+  // Labelling the items
   place_id = item.place_id
   name = item.name
   if(item.photos != undefined){
     photo = item.photos[0].getUrl({})
   }
   
+  // Checking the active status
   if(indx !== 0){
     active_status = ""
   }
 
-  if(first){
-    indx ++
-    first = false
+  if(count_of_card === 1){
+    
+    //carousel-item "active"
+    //card 1
+    //count_of_card ++
+
     fill += `
     <div class="carousel-item ${active_status}" >
-      <div class ="d-flex">
-        <div class="col-6">
+      <div class ="card-group">
 
-          <!--This is the start of the card-->
-          <div class="card mb-3" >
-            <div class="row g-0" >
-
-              <div class="col-6">
-              <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
-              </div>
-
-              <div class="col-6">
-                <div class="card-body" >
-                    <p class="card-title">
-                      ${name}
-                    </p>
-                    <button value=${place_id} onclick='add_rec(this,${num})' class="btn btn-primary  btn-sm" type="submit" class="add_recommend">ADD!</button>
-                </div>
-              </div>
-
-            </div>
+      <div class="card border rounded mb-0 h-100 rounded">
+      <div class="card-row d-flex g-0 h-100 w-100">
+          <div class="col-md-4 p-0">
+              <img src="${photo}" class="rounded" alt="...">
           </div>
-          <!--This is the end of the card-->
-        </div>
-`
-  }
-  else{
-    fill += `
-      <div class= "col-6">
-        <!--Start of second card-->
-        <div class="card mb-3" >
-          <div class="row g-0" >
-
-            <div class="col-6">
-              <img alt="Card image cap" class="card" style='width:150px; height: 150px' src="${photo}" />
-            </div>
-            
-            <div class="col-6">
-              <div class="card-body" >
-                    <p class="card-title">${name}</p>
-                    <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm" style="position:absolute; type="submit" class="add_recommend">ADD!</button>
+          <div class="col-md-7 p-0">
+              <div class="card-body p-1">
+                  <h5 class="card-title text-truncate mb-0">${name}</h5>
+                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm p-1" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
               </div>
-            </div>
-
           </div>
-        </div>
-      <!--End of card-->
-      
       </div>
-      <!--closing the col-6-->
-    </div>
-  </div>`
-  first = true
-  }
+    </div>`
+  
+    count_of_card++
+  } else if (count_of_card===2){
 
+    //card 2
+    //count_of_card ++
+    fill += `
+    <div class="card border rounded mb-0 h-100 rounded">
+      <div class="card-row d-flex g-0 h-100 w-100">
+          <div class="col-md-4 p-0">
+              <img src="${photo}" class="rounded" alt="...">
+          </div>
+          <div class="col-md-7 p-0">
+              <div class="card-body p-1">
+                  <h5 class="card-title text-truncate mb-0">${name}</h5>
+                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    `
+    count_of_card++
+  } else {
+    //card 3
+    //End of carousel-item
+    //count_of_card =1
+    fill += `
+        <div class="card border rounded mb-0 h-100 rounded">
+          <div class="card-row d-flex g-0 h-100 w-100">
+              <div class="col-md-4 p-0">
+                  <img src="${photo}" class="rounded" alt="...">
+              </div>
+              <div class="col-md-7 p-0">
+                  <div class="card-body p-1">
+                      <h5 class="card-title text-truncate mb-0">${name}</h5>
+                      <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Individual card End-->
+
+      </div>
+      <!--Card group per slider End-->
+    </div>
+    `
+    count_of_card =1
+  }
+  indx++
 }
 fill +=  `
         </div>
+        </div>
+
           <button class="carousel-control-prev" type="button" data-bs-target=${id2} data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
+
           <button class="carousel-control-next" type="button" data-bs-target=${id2} data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-          </div>
+
         </div>`
 parent.innerHTML = fill
 document.getElementById('carousel_num').innerHTML = Number(document.getElementById('carousel_num').innerHTML) + 1
