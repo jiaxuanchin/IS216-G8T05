@@ -7,6 +7,9 @@
     <title>Sign Up</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
     <!--icon-->
@@ -65,6 +68,8 @@
                             <p class="text-center">
                                 Have an account? <a href="login.html" class="text-primary">Login</a>
                             </p>
+
+                            <p id="errormsg" class="text-danger"></p>
                         </div>
                     </div>
                 </div>
@@ -72,6 +77,7 @@
         </div>
     </section>
 
+    <!-- Javascript -->
     <script type="module">
         // Import the functions you need from the SDKs you need
         import {initializeApp} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
@@ -106,47 +112,66 @@
         const database = getDatabase(app);
     
         submit.addEventListener('click', (e) => {
-    
+            let error1 = ''
             var email = document.getElementById('email').value;
             var password1 = document.getElementById('pwd1').value;
             var password2 = document.getElementById('pwd2').value;
             var name = document.getElementById('uname').value
             if (password1 != password2) {
-                alert('Passwords do not match!')
                 document.getElementById('pwd1').value = ''
                 document.getElementById('pwd2').value = ''
-                return
+                error1 = 'Passwords do not match!'
+            }
+            else if (name == '' || email == '' || password1 == '' || password2 == '') {
+                error1 = 'Please do not leave any fields blank.'
             }
             else {
                 //sign up user
-            createUserWithEmailAndPassword(auth, email, password1)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // ... user.uid
-                set(ref(database, 'users/' + user.uid), {
-                    name: name,
-                    email: email,
-                    password: password1
-                })
-                .then(() => {
-                    // Data saved successfully!
-                    alert('user created successfully');
-                    localStorage.setItem('uid', user.uid)
-                    window.location.href = 'home2.html';
+                createUserWithEmailAndPassword(auth, email, password1)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // ... user.uid
+                    set(ref(database, 'users/' + user.uid), {
+                        name: name,
+                        email: email,
+                        password: password1
+                    })
+                    .then(() => {
+                        // Data saved successfully!
+                        localStorage.setItem('uid', user.uid)
+
+                        window.location.href = 'home2.html'
+                    })
+                    .catch((error) => {
+                        // The write failed...
+                        error1 = 'Please reload the page and try again.'
+                    });
                 })
                 .catch((error) => {
-                    // The write failed...
-                    alert(error);
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                    //console.log(typeof errorCode);
+                    if (errorMessage.includes("email-already-in-use")) {
+                        error1 = 'Email exists. Please enter a new one.'
+                    }
+                    else if (errorMessage.includes('invalid-email')) {
+                        error1 = 'Please enter a valid email.'
+                    }
+                    else if (errorMessage.includes('Password should be at least 6 characters (auth/weak-password)')) {
+                        error1 = 'Password must be at least 6 characters.'
+                    }
+                    else {
+                        error1 = 'Error! Please try again later.'
+                    }
+                    // error1 = errorCode.replace('-', ' ')
+                    // error1 = error1.slice(5)
+                    // error1 = error1.toUpperCase()
+                    document.getElementById('errormsg').innerHTML = error1
                 });
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-                alert(errorMessage);
-            });
             }
+            document.getElementById('errormsg').innerHTML = error1
         })
     </script>
 
