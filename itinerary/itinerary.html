@@ -1129,14 +1129,15 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 </script>
 
 <!--save trip info START-->
-<script>
-  let trip_id = '2022-11-21JAP' // get trip_id from user
-  document.getElementById(trip_id).innerHTML = trip_id
-</script>
 <html>
 <div hidden id="trip_id"></div>
-
 </html>
+<script>
+  let trip_id = '2022-11-13KOR'
+  // let trip_id = localStorage.getItem('trip_id') 
+  document.getElementById('trip_id').innerHTML = trip_id
+  console.log(trip_id)
+</script>
 <!--save trip info END-->
 
 
