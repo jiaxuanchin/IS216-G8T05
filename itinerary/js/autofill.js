@@ -339,6 +339,29 @@ function callback(place, status) {
     </div>
     
     <div class="col-8"> 
+
+      <div class="row">
+          <!------------- Budget ------------------>
+
+        <div class="col-10">
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
+              <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!------------- Time ------------------>
+        <div class="col-10">
+          <div class="input-group mb-3 w-80">
+            <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
+            <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'">
+          </div>
+        </div>
+      </div>
+
       <div class="row">
   
         <!------------- NOTE ------------------>
@@ -448,7 +471,7 @@ for(item of results){
     //count_of_card ++
 
     fill += `
-    <div class="carousel-item ${active_status}" >
+    <div class="carousel-item ${active_status} mt-2" >
       <div class ="card-group">
 
       <div class="card border rounded mb-0 h-100 rounded">
