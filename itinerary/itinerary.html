@@ -321,7 +321,7 @@
             </table>
             <span class="form-floating">
               <button type="button" id="addflight" class="btn btn-primary"
-                style="float:right;margin-bottom: 10px; margin-right: 20px;" onclick="updateFlight()">Add
+                style="float:right;margin-bottom: 10px; margin-right: 20px;">Add
                 flight</button>
             </span>
           </div>
@@ -1425,10 +1425,10 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
     let newairportreturn = returnhomeairport.slice(0, returnhomeairport.search(","));
 
     if (newairport == city && newairportreturn == "Singapore") {
+      updateFlight();
       document.getElementById("flighterrormsg").style.display = "none";
       document.getElementById("noflightexists").style.display = "none";
       document.getElementById("flightexists").style.display = "block";
-      checkHotelFlight();
     }
     else {
       document.getElementById("flighterrormsg").style.display = "block";
