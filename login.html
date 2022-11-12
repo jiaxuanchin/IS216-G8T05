@@ -15,14 +15,14 @@
   <script src="https://unpkg.com/vue@next"></script>
 </head>
 
-<body>
+<body style="height: 500px;">
   <section class="pt-5 pb-5 mt-0 align-items-center d-flex" style="min-height: 100vh; background-size: cover; background-image: url(https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1920&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=c0d43804e2c7c93143fe8ff65398c8e9);">
     <div class="container-fluid" id="main">
       <div class="row justify-content-center align-items-center d-flex-row text-center h-100">
         <div class="col-12 col-md-4 col-lg-4 h-50 ">
           <div class="card shadow">
-            <div class="card-body pt-0 mx-auto">
-              <img src="images/logo2.png" alt="" class="img-fluid">
+            <div class="card-body p-0 mx-auto">
+              <img src="images/logo2.png" alt="" width="200px" class="my-5">
               <h2 class="card-title text-center">Welcome back!</h2>
               <p class="text-center">Login to get started</p>
               <!-- username -->
@@ -59,7 +59,10 @@
 
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore-compat.js"></script>
-  
+  <script>
+    let inner_h = window.innerHeight
+    
+  </script>
   <script type="module">
     // Import the functions you need from the SDKs you need
     import {initializeApp} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";

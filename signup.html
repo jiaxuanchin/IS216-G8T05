@@ -24,8 +24,8 @@
             <div class="row justify-content-center align-items-center d-flex-row text-center h-100">
                 <div class="col-12 col-md-4 col-lg-4 h-50">
                     <div class="card shadow">
-                        <div class="card-body pt-0 mx-auto">
-                            <img src="images/logo2.png" alt="" class="img-fluid">
+                        <div class="card-body p-0 mx-auto">
+                            <img src="images/logo2.png" alt="" width="200px" class="my-3">
                             <h2 class="card-title mt-0 text-center">Create an Account</h2>
                             <p class="text-center">Get started with your free account</p>
                             <!-- username -->
@@ -166,6 +166,8 @@
                     // error1 = errorCode.replace('-', ' ')
                     // error1 = error1.slice(5)
                     // error1 = error1.toUpperCase()
+                    document.getElementById('pwd1').value = ''
+                    document.getElementById('pwd2').value = ''
                     document.getElementById('errormsg').innerHTML = error1
                 });
             }
