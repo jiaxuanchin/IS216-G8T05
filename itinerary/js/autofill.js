@@ -748,11 +748,10 @@ textarea.addEventListener("keyup", () => {
 function saveData(){
   obj = {}
   let places_list = document.getElementsByClassName('place_info')
-  console.log(places_list)
   for(item of places_list){
+    console.log(item)
     places = item.getElementsByClassName('container')
     for(place of places){
-      console.log(place)
       let val = place.getElementsByClassName('getAllVal')[0].innerHTML
       let val_list = val.split(',')
       let id = val_list[0]
@@ -805,7 +804,8 @@ function saveData(){
 
 //The following writes the data
 function writeData(id,id_rep,name,lati,lng,picture_url,track,index) {
-  firebase.database().ref('users/' + localStorage.getItem('uid') + '/destination_info/' + track+'/track_num/'  + index).set({
+  let trip_id = document.getElementById('trip_id').innerHTML
+  firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + '/'+trip_id+'/' + '/destination_info/' + '/'+track + '/'+ index).set({
       id:id,
       id_rep: id_rep,
       name : name,
