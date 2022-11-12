@@ -89,15 +89,7 @@
         </style>
   </head>
 
-  <!--save trip info START-->
-  <script>
-    let trip_id = '2022-11-21JAP' // get trip_id from user
-    document.getElementById(trip_id).innerHTML = trip_id
-  </script>
-  <html>
-    <div hidden id="trip_id"></div>
-  </html>
-  <!--save trip info END-->
+ 
 
   <body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
@@ -746,6 +738,17 @@ Zimbabwe	ZWD	dollar`
   let userid = localStorage.getItem('uid');
 </script>
 
+ <!--save trip info START-->
+  <script>
+    let trip_id = '2022-11-21JAP' // get trip_id from user
+    document.getElementById(trip_id).innerHTML = trip_id
+  </script>
+  <html>
+    <div hidden id="trip_id"></div>
+  </html>
+  <!--save trip info END-->
+
+
 <script type="module">
   // logout
   // Import the functions you need from the SDKs you need
@@ -869,6 +872,8 @@ Zimbabwe	ZWD	dollar`
   }
 });
 </script>
+
+
 
 <html>
   <button onclick="saveData()">SAVE</button>
