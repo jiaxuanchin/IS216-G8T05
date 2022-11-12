@@ -915,27 +915,26 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
   };
 
-  // Initialize Firebase
+// Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  
   let user_id = localStorage.getItem('uid')
   var database = firebase.database()
-  let cur_trip = 'none'
+
+  function first(){
+    let cur_trip = 'none'
   var leadsRef = database.ref('users');
   leadsRef.on('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       if(childSnapshot.key == user_id){
         let trip_list = childSnapshot.val()['trip']
-        for(let index in trip_list){
-          cur_trip = trip_list[index]
-        }
+        cur_trip = trip_list[trip_id]
       }
     });
     let country = cur_trip['country']
+    console.log(country)
     let start = cur_trip['startdate']
-    let end = cur_trip['enddate']
     console.log(start)
-    console.log(end)
+    let end = cur_trip['enddate']
     start = new Date(start)
     end = new Date(end)
     console.log(start)
@@ -961,9 +960,11 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
     
 //Fill calendar on page load
+  let track = 0
   document.getElementById('accordionFlushExample').innerHTML = ''
   let text = document.getElementById('result-3').innerHTML
   let date_list = text.split(',')
+  console.log(date_list.length)
   for(let i=0; i<date_list.length; i++){
     let skip_index = 0
     for(let u=0;u<3;u++){
@@ -990,7 +991,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                           <!------------- SEARCH BOX ------------->
 
                           <!--PLACE INFO START-->
-                            <div class="place_info"></div>
+                           <div class="place_info"></div>
 
                           <!--ADD PLACE INPUT BOX-->
                           <div class="search-box mb-2 ">
@@ -1010,13 +1011,128 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
     `
     document.getElementById('accordionFlushExample').appendChild(item)
     fill_origin();
-   
+    
+
+  let track_added = false
+  var leadsRef = database.ref('users/'+'/'+user_id+'/'+'/trip/'+'/'+trip_id+'/' +'destination_info');
+  leadsRef.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+  if(i == childSnapshot.key){
+    let place_info = childSnapshot.val()
+    for(let place of place_info){
+    let id = place.id
+    let name = place.name
+    let id_rep = place.id_rep
+    let picture_url = place.picture_url
+    let lati = place.lati
+    let lng = place.lng
+    let fill = document.createElement('div');
+    fill.id = id_rep + 'row'
+    fill.className = "container"
+    fill.innerHTML = `
+      <div class="row my-2">
+        <div class="col mb-2 rounded p-3 bg-light" >
+          <h3>${name}
+          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+          </h3>
+        <div>
+      </div>
+    <div class="row">
+    
+      <div class="col-4">
+        <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+        <br>
+        <div hidden class='get_distance'>${id},${lati},${lng}</div>
+        <p>
+        <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+        <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+        <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+      
+        <div class="distance" id=${id}></div>
+        </p>
+      </div>
+      
+      <div class="col-8"> 
+
+        <div class="row">
+            <!------------- Budget ------------------>
+
+          <div class="col-10">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
+                <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <!------------- Time ------------------>
+          <div class="col-10">
+            <div class="input-group mb-3 w-80">
+              <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
+              <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+    
+          <!------------- NOTE ------------------>
+          <div class="col-6">
+            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+            <br>
+            <form action="#" method="get" id="form1">
+              <input type="hidden" id=${id_rep+'notes1'}>
+              <div class="divTxt" id=${id_rep+'notes2'}></div>
+            </form>
+          </div>
+    
+          <!-------------CHECKLIST -------------->
+          <div class="col-6">
+            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+            <br>
+            <form action="#" method="get" id="form2">
+            <input type="hidden" id=${id_rep+'check1'}>
+            <div class="divCheckBox" id=${id_rep+'check2'}></div>
+            </form>
+          </div>
+          <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
+        </div>
+      </div>
+      </div>
+    </div>
+    `
+    let parent = document.getElementsByClassName('place_info')[i]
+    parent.appendChild(fill)
+  }
+      }
+      if(track_added == false){
+        track = Number(track) + 1
+        track_added = true
+      }
+    })
+});
   }
 });
+
+  }
+  first()
+//fill accordion on page load
+
+
 </script>
 
 
 
+
 <html>
+  <button onclick="empty()">empty</button>
   <button onclick="saveData()">SAVE</button>
+ 
 </html>
+
+
+
+
+
