@@ -1,365 +1,612 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
+
+  <div id="map"></div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+  <title>Itinerary</title>
+  <!-- search link -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/autofill.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWAdiErZx7DlZYzpcxulO8_OLY2rYUm4&libraries=places&v=weekly"
+    defer></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- theme meta -->
+  <meta name="theme-name" content="revolve" />
+
+  <!-- progress bar -->
+  <link rel="stylesheet" href="../css/step.css">
+
+  <!-- flight & hotel -->
+  <script src="../js/edittrip.js"></script>
   
-    <div id="map"></div>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
-    <title>Itinerary</title>
-    <!-- search link -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/autofill.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWAdiErZx7DlZYzpcxulO8_OLY2rYUm4&libraries=places&v=weekly" defer></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- calendar -->
+  <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
+  <meta name="description"
+    content="Javascript date range picker - lightweight, no jQuery. Date Range Picker can be attached to input element to pop up one or more calendars for selecting dates.">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/lightpick@latest/css/lightpick.css">
 
-     <!-- theme meta -->
-     <meta name="theme-name" content="revolve" />
+  <!-- icon -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+  <!-- other links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/vue@next"></script>
 
-    <!-- progress bar -->
-    <link rel="stylesheet" href="../css/step.css">
-   
-    <!-- calendar -->
-    <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
-    <meta name="description" content="Javascript date range picker - lightweight, no jQuery. Date Range Picker can be attached to input element to pop up one or more calendars for selecting dates.">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/lightpick@latest/css/lightpick.css">
+  <!--Google charts-->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <!-- icon -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-    <!-- other links -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://unpkg.com/vue@next"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <!-- This is the API from Firebase Realtime Database -->
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
 
-    <!--Google charts-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
-    <!-- This is the API from Firebase Realtime Database -->
-    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
-
-    <!-- nav -->
-      <!-- THEME CSS
+  <!-- nav -->
+  <!-- THEME CSS
         ================================================== -->
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-        <!-- Themify -->
-        <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Themify -->
+  <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
 
-        <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
-        <!-- main stylesheet -->
-        <link rel="stylesheet" href="css/style.css">
-        <!--calendar icon-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!--calendar icon-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <style>
+  <style>
+    .trip-name {
+      background-image: url("https://giffiles.alphacoders.com/150/15053.gif");
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 180px;
+    }
 
-          .trip-name{
-            background-image: url("https://giffiles.alphacoders.com/150/15053.gif");
-            background-repeat: no-repeat;
-            background-size: cover;
-            padding: 180px;
-          }
+    /* Budget's HR */
+    hr {
+      border-top: 2px solid rgb(77, 76, 76)
+    }
 
-          /* Budget's HR */
-          hr{
-            border-top: 2px solid rgb(77, 76, 76)
-          }
-          
-          /* For the recommended carousel */
-          .card-group{
-            height:50px;
-          }
+    /* For the recommended carousel */
+    .card-group {
+      height: 50px;
+    }
 
-          img{
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-          }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
 
-          .card{
-            margin-left: 10px;
-            margin-right: 10px;
-          }
-    
-        </style>
-  </head>
+    .card {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
 
- 
+    /*the container must be positioned relative:*/
+    .autocomplete {
+      position: relative;
+      display: inline-block;
+    }
 
-  <body onload="checklogin()">
+    input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    input[type=text] {
+      background-color: #f1f1f1;
+      width: 100%;
+    }
+
+    input[type=submit] {
+      background-color: DodgerBlue;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+      background-color: #e9e9e9;
+    }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+      background-color: DodgerBlue !important;
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+
+
+<body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
-  <header class="header-top bg-grey"> 
-    <nav class="navbar navbar-expand-md navigation-2 navigation py-1"> 
-      <div class="container-fluid"> 
-        <a class="navbar-brand text-uppercase py-0" href="home2.html"> 
-          <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4"> 
-        </a> 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
-          <span class="ti-menu" style="color: white;"></span> 
-        </button> 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
-          <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0"> 
-            <li class="nav-item mx-2"> 
-              <a href="../home2.html" class="nav-link text-white">Home</a> 
-            </li> 
-            <li class="nav-item mx-2"> 
-              <a href="../createtrip.html" class="nav-link text-white">Add New Trip</a> 
-            </li> 
-            <li class="nav-item mx-2"> 
-              <a href="../profile.html" class="nav-link text-white">Profile</a> 
-            </li> 
-            <li class="nav-item mx-2"> 
-              <a class="nav-link text-white" id="logout" style="cursor: pointer;">Log out</a> 
-            </li> 
-          </ul> 
+  <header class="header-top bg-grey">
+    <nav class="navbar navbar-expand-md navigation-2 navigation py-1">
+      <div class="container-fluid">
+        <a class="navbar-brand text-uppercase py-0" href="home2.html">
+          <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="ti-menu" style="color: white;"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul id="menu" class="menu navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-2">
+              <a href="../home2.html" class="nav-link text-white">Home</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="../createtrip.html" class="nav-link text-white">Add New Trip</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="../profile.html" class="nav-link text-white">Profile</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link text-white" id="logout" style="cursor: pointer;">Log out</a>
+            </li>
+          </ul>
           <!-- <form class="d-flex" role="search"> 
             <input class="form-control" type="search" placeholder="Search" aria-label="Search"> 
             <button type="button" class="btn btn-primary"><i class="ti-search"></i></button> 
-          </form> --> 
-        </div> 
-      </div> 
-    </nav> 
-  </header>
-
-<!-- content -->
-
-    <!-- Itinerary heading -->
-    <!-- Banner --> 
-    <section class="trip-name shadow" > 
-      <div class="card w-50 h-200 mx-auto shadow">
-        <div class="card-body ">
-
-          <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
-          <h5 class="card-content" style="text-align:left"> 
-            <i style="font-size:24px" class="fa">&#xf073;</i> 
-            <p id="result-2" style="display:inline">&nbsp;</p></i> 
-          </h5> 
-          <br>
+          </form> -->
         </div>
       </div>
-      </div> 
-      
-    </section>
+    </nav>
+  </header>
 
+  <!-- content -->
 
-    <br><br>
-
-    <!--------------------------- progress bar ------------------------------>
-    <div class="container"> 
-      <div class="row justify-content-center"> 
-          <div class="col-11 col-sm-9 col-md-7  
-          col-lg-6 col-xl-5 text-center p-0 mt-2 mb-2"> 
-              <div class="px-0 pt-3 pb-0 mt-2 mb-2"> 
-                  <form id="form"> 
-                      <ul id="progressbar" class="d-flex justify-content-center"> 
-                          <li class="active" id="step1"> 
-                              <strong>Step 1</strong> 
-                          </li> 
-                          <li class="active" id="step2"><strong>Step 2</strong></li> 
-                          <li  class="active" id="step3"><strong>Step 3</strong></li> 
-                          
-                      </ul> 
-                      <fieldset> 
-                          <div class="finish"> 
-                          </div> 
-                      </fieldset> 
-                  </form> 
-              </div> 
-          </div> 
-      </div> 
-    </div>
-
-    <!-------------------------------------Itinerary----------------------------->
-    
-    <div class="itinerary-heading d-flex justify-content-center mb-3">
-      <div class="container ">
-        <div class="row ">
-
-          <div class="col">
-            <h1><strong>Itinerary</strong></h1>
+  <!-- Itinerary heading -->
+  <!-- Banner -->
+  <section class="trip-name shadow">
+    <div class="card w-50 h-200 mx-auto shadow">
+      <div class="card-body ">
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1>
+              <h5 class="card-content" style="text-align:left">
+                <i style="font-size:24px" class="fa">&#xf073;</i>
+                <p id="result-2" style="display:inline">&nbsp;</p></i>
+              </h5>
+              <br>
+            </div>
+            <div class="col-4" style="margin-top: 30px;">
+              <button type="button" data-bs-toggle="modal" data-bs-target="#flightModal"
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"
+                onclick="call_all_airlines_api()">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <span>Flights</span>
+              </button>
+              <br>
+              <button type="button" data-bs-toggle="modal" data-bs-target="#hotelModal"
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;">
+                <i class="fa fa-bed" aria-hidden="true"></i>
+                <span>Hotel</span>
+              </button>
+              <button type="button"
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"
+                onclick="window.open('../new_restrictions.html','_blank')">
+                <i class="fa fa-exclamation" aria-hidden="true"></i>
+                <span>View restrictions</span>
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="col">
-              <div class="row">
-                <div class="col d-flex" >
-                  
-                  <!----------------------- CALENDAR ----------------------->
-                  <div class="container justify-content-end d-flex">
-                    <button type="button" id="demo-2" class="btn btn-outline-secondary" class="form-control form-control-sm" >
-                      <i style="font-size:24px" class="fa">&#xf073; 
-                      <p id="result-2" style="display:inline">&nbsp;</p></i> 
-                    </button>
-                    <button class="btn btn-primary" onclick="fill_template()">Confirm Date</button>
-                  </div>
-                  <!-- end calendar -->
 
+  <br><br>
+
+  <!--------------------------- progress bar ------------------------------>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-11 col-sm-9 col-md-7  
+          col-lg-6 col-xl-5 text-center p-0 mt-2 mb-2">
+        <div class="px-0 pt-3 pb-0 mt-2 mb-2">
+          <form id="form">
+            <ul id="progressbar" class="d-flex justify-content-center">
+              <li class="active" id="step1">
+                <strong>Step 1</strong>
+              </li>
+              <li class="active" id="step2"><strong>Step 2</strong></li>
+              <li class="active" id="step3"><strong>Step 3</strong></li>
+
+            </ul>
+            <fieldset>
+              <div class="finish">
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------------------------- flight & hotel modal ------------------------------>
+  <div class="modal fade" id="flightModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div id="noflightexists">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add your flight</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <h5>Departure</h5>
+                <label for="airlinesFrom">Select an airline</label>
+                <select name="airlinesFrom" id="airlineF" style="width:100%;">
+
+                </select>
+                <br><br>
+                <span class="form-floating">
+                  <input type="text" class="form-control" id="floatingFrom" placeholder="Singapore">
+                  <label for="floatingFrom">Flight Number</label>
+                </span>
+                <div>
+                  <label for="fromdt">Date</label>
+                  <input type="date" id="fromdt" class="form-control">
                 </div>
               </div>
-          </div>  
+              <hr>
+              <div class="mb-3">
+                <h5>Return</h5>
+                <label for="airlinesTo">Select an airline</label>
+                <select name="airlinesTo" id="airlineT" style="width:100%;">
 
+                </select>
+                <br><br>
+                <span class="form-floating">
+                  <input type="text" class="form-control" id="floatingTo" placeholder="Seoul">
+                  <label for="floatingTo">Flight Number</label>
+                </span>
+                <div>
+                  <label for="todt">Date</label>
+                  <input type="date" id="todt" class="form-control">
+                </div>
+              </div>
+              <div class="mb-3">
+                <div id="flighterrormsg" style="display: none;color:red">
+                  <h4>Departing or arriving airport is not the same as destinations</h4>
+                  <br><br>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" style="color:white;" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="call_airlines_schedule_api()"
+              style="float:right;">Find
+              flight</button>
+          </div>
+          <div id="result" style="display: none;">
+            <table id="searchresult" class="table">
+            </table>
+            <span class="form-floating">
+              <button type="button" id="addflight" class="btn btn-primary"
+                style="float:right;margin-bottom: 10px; margin-right: 20px;" onclick="updateFlight()">Add
+                flight</button>
+            </span>
+          </div>
         </div>
-      </div>  
+      </div>
+      <div id="flightexists" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Flight details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="existresult">
+              <table id="existsearchresult" class="table">
+              </table>
+              <span class="form-floating">
+                <button type="button" id="editflight" class="btn btn-primary"
+                  style="float:right;margin-bottom: 10px; margin-right: 20px;">Edit flight</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                  style="color:white;">Close</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <!------------------------------------ ACCORDION--------------------------------------------->
-    <input type="hidden" id="origin_lat" name="origin_lat" value="None" /> 
-    <input type="hidden" id="origin_lng" name="origin_lng" value="None" /> 
-    <input type="hidden" id="place_id" name="place_id" value="None" /> 
-    <input type="hidden" id="recommended_track" name="recommended_track" value="None" /> 
-    <div class="container">
-      <div class="accordion accordion-flush" id="accordionFlushExample">
+  </div>
+
+  <div class="modal fade" id="hotelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div id="hotelnotexist">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add your hotel</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <input type="text" id="myCityInput" style="display: none;">
+                <form autocomplete="off">
+                  <div class="autocomplete" class="form-floating" style="width: 100%;">
+                    <label for="myHotelInput">Hotel Name</label>
+                    <textarea class="form-control" id="myHotelInput" type="text" name="myHotel"></textarea>
+                  </div>
+                </form>
+                <div>
+                  <label for="fromstay">From</label>
+                  <input type="date" id="fromstay" class="form-control">
+                </div>
+                <div>
+                  <label for="tostay">To</label>
+                  <input type="date" id="tostay" class="form-control">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="color:white;">Close</button>
+            <button id="addhotel" type="button" class="btn btn-primary" onclick="updateHotel()" style="float:right;">Add
+              Hotel</button>
+          </div>
+        </div>
+      </div>
+      <div id="hotelexist" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Hotel details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table id="existhotelresult" class="table">
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button id="edithotel" type="button" class="btn btn-primary" style="float:right;">Edit Hotel</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="color:white;">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-------------------------------------Itinerary----------------------------->
+
+  <div class="itinerary-heading d-flex justify-content-center mb-3">
+    <div class="container ">
+      <div class="row ">
+
+        <div class="col">
+          <h1><strong>Itinerary</strong></h1>
+        </div>
+
+        <div class="col">
+          <div class="row">
+            <div class="col d-flex">
+
+              <!----------------------- CALENDAR ----------------------->
+              <div class="container justify-content-end d-flex">
+                <button type="button" id="demo-2" class="btn btn-outline-secondary"
+                  class="form-control form-control-sm">
+                  <i style="font-size:24px" class="fa">&#xf073;
+                    <p id="result-2" style="display:inline">&nbsp;</p>
+                  </i>
+                </button>
+                <button class="btn btn-primary" onclick="fill_template()">Confirm Date</button>
+              </div>
+              <!-- end calendar -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!------------------------------------ ACCORDION--------------------------------------------->
+  <input type="hidden" id="origin_lat" name="origin_lat" value="None" />
+  <input type="hidden" id="origin_lng" name="origin_lng" value="None" />
+  <input type="hidden" id="place_id" name="place_id" value="None" />
+  <input type="hidden" id="recommended_track" name="recommended_track" value="None" />
+  <div class="container">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
 
 
-      </div> <!--end accordion-->
-  </div> <!--end container-->
+    </div>
+    <!--end accordion-->
+  </div>
+  <!--end container-->
   <p id="result-3" hidden></p>
   <div id="carousel_num">1</div>
 
-<!------------------------------------------Budget-------------------------------------------->
+  <!------------------------------------------Budget-------------------------------------------->
 
-<div id="budget" style="width:90%;" class="container mx-auto ">
-  <div class="row">
-    <div class="col">
-      <h1>Budgeting</h1>
+  <div id="budget" style="width:90%;" class="container mx-auto ">
+    <div class="row">
+      <div class="col">
+        <h1>Budgeting</h1>
+
+      </div>
+    </div>
+
+    <div class="row mt-4 mb-4 p-3" style="background-color:rgb(236, 236, 236); border-radius:20px;">
+      <div class="col-lg-8 col-sm-12">
+        <h3>{{to}}: $ <span id="convertedamt">{{callCovertorAPI}}</span></h3>
+        <hr>
+        Total Amount
+      </div>
+
+      <div class="col-lg-4 col-sm-12">
+        <!--Button to launch modal-->
+        <button type="button" class="btn btn-primary" style="margin-bottom: 2px; width: 230px; text-align: center;"
+          data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <h7 class="fw-bold"><i style="font-size:12px" class="fa">&#xf155;</i> Category Breakdown</h7>
+        </button><br>
+
+        <!--Modal content-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+          <div class="modal-dialog">
+
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Spending Breakdown</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <!--This is the buttons to togger the content within modal-->
+                <div class="btn-group me-2" role="group" aria-label="First group">
+                  <button v-on:click="catShowTableView()" type="button" class="btn btn-primary ">Table View</button>
+                  <button v-on:click="catShowBarView()" type="button" class="btn btn-primary">Bar View</button>
+                </div>
+
+                <br><br>
+
+                <!--Chart View-->
+                <div v-show="catBarView">
+                  <h7 class="fw-bold">Bar View</h7>
+                  <div id="bar_chart_div"></div>
+                </div>
+
+                <!--Table View-->
+                <div v-show="catTableView">
+                  <h7 class="fw-bold">Table View</h7>
+                  <div id="table_div"></div>
+                </div>
+
+              </div>
+              <!--End of modal body-->
+
+            </div>
+
+          </div>
+
+        </div>
+        <!--End of modal content-->
+
+        <!--Button to launch modal for currency-->
+        <button type="button" class="btn btn-primary" style="width: 230px; text-align: center;" data-bs-toggle="modal"
+          data-bs-target="#currencySettingModal">
+          <h7 class="fw-bold"><span>&#9881;</span> Currency Settings</h7>
+        </button>
+
+        <!--modal content for currency settings-->
+
+        <!--Start of currency setting modal content-->
+        <div class="modal fade" id="currencySettingModal" tabindex="-1" aria-labelledby="currencySettingModalLabel"
+          aria-hidden="true">
+
+          <div class="modal-dialog">
+
+            <div class="modal-content m-2">
+
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="currencySettingModalLabel">Currency Setting</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <h7 class="fw-bold">Ensuring ease budgeting</h7>
+                <p>Input in your currency settings and let us do the quick conversion for you. </p>
+                <p style="color:red;font-size:small;">Disclaimer: Changes will be saved automatically</p>
+
+                <div class="row text-center">
+
+                  <!--Drop down of currency-->
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="fromCurr">From Currency</label>
+                    <select class="form-select" id="fromCurr" v-model="from">
+                      <option v-for="curr of Object.values(currency_code_array)" v-bind:value="curr">{{curr}}</option>
+                    </select>
+                  </div>
+                  <!--End of the drop down of currency-->
+
+                  <!--Start of Output currency-->
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="toCurr">To Currency</label>
+                    <select class="form-select" id="toCurr" v-model="to">
+                      <option v-for="curr of Object.values(currency_code_array)" v-bind:value="curr">{{curr}}</option>
+                    </select>
+                  </div>
+                  <!--End of Output currency-->
+
+                </div>
+
+              </div>
+              <!--End of modal body-->
+
+            </div>
+
+          </div>
+
+        </div>
+        <!--End of modal content-->
+        <!--End of currency setting modal content-->
+      </div>
 
     </div>
   </div>
-    
-  <div class="row mt-4 mb-4 p-3" style="background-color:rgb(236, 236, 236); border-radius:20px;">
-          <div class="col-lg-8 col-sm-12">
-              <h3>{{to}}: $ <span id="convertedamt">{{callCovertorAPI}}</span></h3>
-              <hr>
-              Total Amount
-          </div>
 
-          <div class="col-lg-4 col-sm-12">
-              <!--Button to launch modal-->
-              <button type="button" class="btn btn-primary" style="margin-bottom: 2px; width: 230px; text-align: center;"  data-bs-toggle="modal" data-bs-target="#exampleModal"><h7 class="fw-bold"><i style="font-size:12px" class="fa">&#xf155;</i> Category Breakdown</h7></button><br>
-              
-              <!--Modal content-->
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                  <div class="modal-dialog">
-                  
-                      <div class="modal-content">
-                  
-                          <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">Spending Breakdown</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-
-                          <div class="modal-body">
-
-                              <!--This is the buttons to togger the content within modal-->
-                              <div class="btn-group me-2" role="group" aria-label="First group">
-                                  <button v-on:click="catShowTableView()" type="button" class="btn btn-primary ">Table View</button>
-                                  <button v-on:click="catShowBarView()" type="button" class="btn btn-primary">Bar View</button>
-                              </div>
-
-                              <br><br>
-
-                              <!--Chart View-->
-                              <div v-show="catBarView">
-                                  <h7 class="fw-bold">Bar View</h7>
-                                  <div id="bar_chart_div"></div>
-                              </div>
-
-                              <!--Table View-->
-                              <div v-show="catTableView">
-                                  <h7 class="fw-bold">Table View</h7>
-                                  <div id="table_div"></div>
-                              </div>
-
-                          </div><!--End of modal body-->
-                  
-                      </div>
-                  
-                  </div>
-              
-              </div> <!--End of modal content-->
-
-              <!--Button to launch modal for currency-->
-              <button type="button" class="btn btn-primary" style="width: 230px; text-align: center;" data-bs-toggle="modal" data-bs-target="#currencySettingModal"><h7 class="fw-bold"><span>&#9881;</span> Currency Settings</h7></button>
-
-              <!--modal content for currency settings-->
-
-              <!--Start of currency setting modal content-->
-              <div class="modal fade" id="currencySettingModal" tabindex="-1" aria-labelledby="currencySettingModalLabel" aria-hidden="true">
-
-                  <div class="modal-dialog">
-                  
-                      <div class="modal-content m-2">
-                  
-                          <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="currencySettingModalLabel">Currency Setting</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-
-                          <div class="modal-body">
-
-                              <h7 class="fw-bold">Ensuring ease budgeting</h7>
-                              <p>Input in your currency settings and let us do the quick conversion for you. </p>
-                              <p style="color:red;font-size:small;">Disclaimer: Changes will be saved automatically</p>
-
-                              <div class="row text-center">
-
-                                <!--Drop down of currency-->
-                                <div class="input-group mb-3">
-                                  <label class="input-group-text" for="fromCurr">From Currency</label>
-                                  <select class="form-select" id="fromCurr" v-model="from">
-                                      <option v-for="curr of Object.values(currency_code_array)" v-bind:value="curr">{{curr}}</option>
-                                  </select>
-                                </div>
-                                <!--End of the drop down of currency-->
-
-                                <!--Start of Output currency-->
-                                <div class="input-group mb-3">
-                                  <label class="input-group-text" for="toCurr">To Currency</label>
-                                  <select class="form-select" id="toCurr" v-model="to">
-                                    <option v-for="curr of Object.values(currency_code_array)" v-bind:value="curr">{{curr}}</option>
-                                  </select>
-                                </div>
-                                <!--End of Output currency-->
-
-                              </div>
-
-                          </div><!--End of modal body-->
-                  
-                      </div>
-                  
-                  </div>
-              
-              </div> <!--End of modal content-->
-              <!--End of currency setting modal content-->
-          </div>
-      
-  </div>
-</div>
-
-<!------------------------------------------Footer-------------------------------------------->
-<section class="footer-2 section-padding gray-bg pb-3">
-  <div class="row">
+  <!------------------------------------------Footer-------------------------------------------->
+  <section class="footer-2 section-padding gray-bg pb-3">
+    <div class="row">
       <!-- Grid column -->
       <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
-          <h4 class="mb-4 font-weight-bold">
-              <i class="fa fa-map-marker fx-2" aria-hidden="true"></i> 
-              <span style="color:#575769">81 Victoria St, Singapore 188065</span>
-          </h4>
-          <br>
-          <h4 class="mb-4 font-weight-bold">
-              <i class="fa fa-phone fx-2" aria-hidden="true"></i> 
-              <span style="color:#575769">+65 6782 9653</span>
-          </h4>
-          <br>
-          <h4 class="mb-4 font-weight-bold">
-              <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
-              <span style="color:#575769">support@adventuretime.com</span>
-          </h4>
+        <h4 class="mb-4 font-weight-bold">
+          <i class="fa fa-map-marker fx-2" aria-hidden="true"></i>
+          <span style="color:#575769">81 Victoria St, Singapore 188065</span>
+        </h4>
+        <br>
+        <h4 class="mb-4 font-weight-bold">
+          <i class="fa fa-phone fx-2" aria-hidden="true"></i>
+          <span style="color:#575769">+65 6782 9653</span>
+        </h4>
+        <br>
+        <h4 class="mb-4 font-weight-bold">
+          <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
+          <span style="color:#575769">support@adventuretime.com</span>
+        </h4>
       </div>
       <!-- Grid column -->
 
@@ -370,159 +617,163 @@
 
       <!-- Grid column -->
       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
-      <h2 class="mb-4 font-weight-bold">About the company</h2>
-      <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential travellers to travel with ease!</p>
-      <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
-      <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
-      <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
-      <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
+        <h2 class="mb-4 font-weight-bold">About the company</h2>
+        <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential
+          travellers to travel with ease!</p>
+        <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
+        <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
       </div>
-  </div>   
-</section>
+    </div>
+  </section>
 
 
-    
-      
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-    <!-- calendar script -->
-    <script async src="https://buttons.github.io/buttons.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
-    <script type="text/javascript" src="calendar/docs/demo.js"></script>
-    <!-- THEME JAVASCRIPT FILES
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+  <!-- calendar script -->
+  <script async src="https://buttons.github.io/buttons.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/lightpick@latest/lightpick.js"></script>
+  <script type="text/javascript" src="calendar/docs/demo.js"></script>
+  <!-- THEME JAVASCRIPT FILES
     ================================================== -->
-    <!-- initialize jQuery Library -->
-    <script src="plugins/jquery/jquery.js"></script>
-    <!-- Bootstrap jQuery -->
-    <!-- <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- initialize jQuery Library -->
+  <script src="plugins/jquery/jquery.js"></script>
+  <!-- Bootstrap jQuery -->
+  <!-- <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="plugins/bootstrap/js/popper.min.js"></script> -->
-    <!-- Owl caeousel -->
-    <!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+  <!-- Owl caeousel -->
+  <!-- <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
     <script src="plugins/slick-carousel/slick.min.js"></script> -->
-    <script src="plugins/magnific-popup/magnific-popup.js"></script>
-    <!-- Instagram Feed Js -->
-    <script src="plugins/instafeed-js/instafeed.min.js"></script>
-    <!-- Google Map -->
-    <!-- <script src="plugins/google-map/gmap.js"></script> -->
-    <!-- main js -->
-    <script src="js/custom.js"></script>
-    <!-- CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  </body>
+  <script src="plugins/magnific-popup/magnific-popup.js"></script>
+  <!-- Instagram Feed Js -->
+  <script src="plugins/instafeed-js/instafeed.min.js"></script>
+  <!-- Google Map -->
+  <!-- <script src="plugins/google-map/gmap.js"></script> -->
+  <!-- main js -->
+  <script src="js/custom.js"></script>
+  <!-- CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
 
 <!-- search bar script -->
 <script>
   let button_drive = document.getElementById('button_drive')
-  button_drive.addEventListener('click',getDistance_Drive)
+  button_drive.addEventListener('click', getDistance_Drive)
 
   let button_transit = document.getElementById('Transit')
-  button_transit.addEventListener('click',getDistance_transit)
+  button_transit.addEventListener('click', getDistance_transit)
 
- let button_walk = document.getElementById('walking')
- button_walk.addEventListener('click',getDistance_walk)
+  let button_walk = document.getElementById('walking')
+  button_walk.addEventListener('click', getDistance_walk)
 
   let lati = document.getElementById('origin_lat')
-  lati.addEventListener('change',sayHi)
+  lati.addEventListener('change', sayHi)
 
   let long = document.getElementById('origin_lng')
-  long.addEventListener('change',sayHi)
- 
+  long.addEventListener('change', sayHi)
+
 </script>
 
 <!--Google bar charts to show-->
 <script>
-  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.load('current', { packages: ['corechart', 'bar'] });
   google.charts.setOnLoadCallback(drawBasic);
 
   function drawBasic() {
 
-      // The data here can be changed
-      var data = google.visualization.arrayToDataTable([
-          ['Activity', 'Price'],
-          ['Sentosa', 300],
-          ['Wild Wild Wet', 30],
-          ['Singapore Zoo', 300],
-          ['Adventure Colve', 2032],
-          ['Marina Bay Sands', 4503]
-      ]);
-
-      //The data here can be changed 
-      var options = {
-          title: 'Category Spending Breakdown',
-          chartArea: {width: '90%'},
-          hAxis: {
-          title: 'Price',
-          minValue: 0
-          },
-          vAxis: {
-          title: 'Activity'
-          }
-      };
-
-      var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
-
-      chart.draw(data, options);
-  }
-</script>
-
-<!--Google table charts to show-->
-<script>
-  google.charts.load('current', {'packages':['table']});
-  google.charts.setOnLoadCallback(drawTable);
-
-  function drawTable() {
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Activity');
-  data.addColumn('number', 'Price');
-  data.addRows([
+    // The data here can be changed
+    var data = google.visualization.arrayToDataTable([
+      ['Activity', 'Price'],
       ['Sentosa', 300],
       ['Wild Wild Wet', 30],
       ['Singapore Zoo', 300],
       ['Adventure Colve', 2032],
       ['Marina Bay Sands', 4503]
-  ]);
+    ]);
 
-  var table = new google.visualization.Table(document.getElementById('table_div'));
+    //The data here can be changed 
+    var options = {
+      title: 'Category Spending Breakdown',
+      chartArea: { width: '90%' },
+      hAxis: {
+        title: 'Price',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'Activity'
+      }
+    };
 
-  table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+<!--Google table charts to show-->
+<script>
+  google.charts.load('current', { 'packages': ['table'] });
+  google.charts.setOnLoadCallback(drawTable);
+
+  function drawTable() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Activity');
+    data.addColumn('number', 'Price');
+    data.addRows([
+      ['Sentosa', 300],
+      ['Wild Wild Wet', 30],
+      ['Singapore Zoo', 300],
+      ['Adventure Colve', 2032],
+      ['Marina Bay Sands', 4503]
+    ]);
+
+    var table = new google.visualization.Table(document.getElementById('table_div'));
+
+    table.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
   }
 </script>
 
 <!--Vue instance for generation of budget total amount and currency-->
 <script>
 
-// Changing the exchange rate
-function convert(from,to,amt) {
-        const options = {
-            method: 'GET',
-            url: 'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency',
-            params: { have: from, want: to, amount: amt },
-            headers: {
-                'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
-                'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
-            }
-        };
+  // Changing the exchange rate
+  function convert(from, to, amt) {
+    const options = {
+      method: 'GET',
+      url: 'https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency',
+      params: { have: from, want: to, amount: amt },
+      headers: {
+        'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+        'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+      }
+    };
 
-        axios.request(options)
-            .then(function (response) {
-                console.log(response.data)
-                onchangecurrency(response.data)
-            })
-            .catch(function (error) {
-                // In case of any error, see what it's about
-                console.log(error)
-            })
-    }
-    function onchangecurrency(data) {
-        let result = data.new_amount;
-        document.getElementById("convertedamt").innerText = result;
-        return result;
-    }
+    axios.request(options)
+      .then(function (response) {
+        console.log(response.data)
+        onchangecurrency(response.data)
+      })
+      .catch(function (error) {
+        // In case of any error, see what it's about
+        console.log(error)
+      })
+  }
+  function onchangecurrency(data) {
+    let result = data.new_amount;
+    document.getElementById("convertedamt").innerText = result;
+    return result;
+  }
 
-// Currency Exchange Drop down list ==> Vanilla JS
-var currency_code_str =`Afghanistan	AF	AFG	Afghan Afghani	AFN
+  // Currency Exchange Drop down list ==> Vanilla JS
+  var currency_code_str = `Afghanistan	AF	AFG	Afghan Afghani	AFN
 ÅLand Islands	AX	ALA	Euro	EUR
 Albania	AL	ALB	Albanian Lek	ALL
 Algeria	DZ	DZA	Algerian Dinar	DZD
@@ -780,53 +1031,53 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
   //Cleaning the data
   countries_info = currency_code_str.split(/[\r\n]/gm)
-    console.log(countries_info)
+  console.log(countries_info)
 
-    country_array_of_obj = [] // need to add here
+  country_array_of_obj = [] // need to add here
 
-    for(country of countries_info){
-        country = country.split("\t")
-        country_code = country[1]
-        country_array_of_obj[country_code] = country[4]
-    }
+  for (country of countries_info) {
+    country = country.split("\t")
+    country_code = country[1]
+    country_array_of_obj[country_code] = country[4]
+  }
   country_array_of_obj = country_array_of_obj.sort()
 
-  function UpdateFromCurrency(country_code){
+  function UpdateFromCurrency(country_code) {
     country_curr = country_array_of_obj[country_code]
     budget.from = country_curr
   }
 
   const budget = Vue.createApp({
-      data(){
-          return{
-            //data from the grey budget table
-              currency: "",
-              catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
-              catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
+    data() {
+      return {
+        //data from the grey budget table
+        currency: "",
+        catTableView: true,  // this is only for the category portion! Need to create for the day to day portion too
+        catBarView: false, // this is only for the category portion! Need to create for the day to day portion too
 
-              //data from the currency settings
-              currency_code_array: country_array_of_obj,
-              from: "", // Input the place that there are going to
-              to:"SGD" , // Assuming that users are from SG
-              amount: 16000000 //This amount needs to be the sum of all the other amounts of the budget
-          }
+        //data from the currency settings
+        currency_code_array: country_array_of_obj,
+        from: "", // Input the place that there are going to
+        to: "SGD", // Assuming that users are from SG
+        amount: 16000000 //This amount needs to be the sum of all the other amounts of the budget
+      }
+    },
+    methods: {
+      catShowTableView() {
+        this.catTableView = true
+        this.catBarView = false
       },
-      methods: {
-          catShowTableView(){
-              this.catTableView = true
-              this.catBarView = false
-          },
-          catShowBarView(){
-              this.catTableView = false
-              this.catBarView = true
-          }
-      },
+      catShowBarView() {
+        this.catTableView = false
+        this.catBarView = true
+      }
+    },
     computed: {
-      vueUpdatingToCurrency(){
+      vueUpdatingToCurrency() {
         this.currency = this.to
       },
       callCovertorAPI() {
-          arr = convert(this.from,this.to,this.amount);
+        arr = convert(this.from, this.to, this.amount);
       }
 
       // updatingAmountToConvert(){
@@ -850,39 +1101,40 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
 
 <script>
-  function getDatesFireBase(startDate, endDate){
+  function getDatesFireBase(startDate, endDate) {
     const dates = []
     let currentDate = startDate
     const addDays = function (days) {
-        const date = new Date(this.valueOf())
-        date.setDate(date.getDate() + days)
-        return date
+      const date = new Date(this.valueOf())
+      date.setDate(date.getDate() + days)
+      return date
     }
-    while (currentDate <= endDate){
-        dates.push(currentDate)
-        currentDate = addDays.call(currentDate, 1)
+    while (currentDate <= endDate) {
+      dates.push(currentDate)
+      currentDate = addDays.call(currentDate, 1)
     }
     dates[0] = dates[0]
-    return dates   
-}
+    return dates
+  }
   function checkLogin() {
-      if (localStorage.getItem('uid') == null) {
-          window.location.href = 'login.html';
-      }
+    if (localStorage.getItem('uid') == null) {
+      window.location.href = 'login.html';
+    }
   }
   console.log(localStorage.getItem('uid'))
   let userid = localStorage.getItem('uid');
 </script>
 
- <!--save trip info START-->
-  <script>
-    let trip_id = '2022-11-21JAP' // get trip_id from user
-    document.getElementById(trip_id).innerHTML = trip_id
-  </script>
-  <html>
-    <div hidden id="trip_id"></div>
-  </html>
-  <!--save trip info END-->
+<!--save trip info START-->
+<script>
+  let trip_id = '2022-11-21JAP' // get trip_id from user
+  document.getElementById(trip_id).innerHTML = trip_id
+</script>
+<html>
+<div hidden id="trip_id"></div>
+
+</html>
+<!--save trip info END-->
 
 
 <script type="module">
@@ -890,12 +1142,12 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
   import {
-      getAuth,
-      browserLocalPersistence,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signOut,
-      setPersistence
+    getAuth,
+    browserLocalPersistence,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    setPersistence
   } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
   import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 
@@ -904,76 +1156,76 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
-      // Your configs
-      apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
-      authDomain: "adventuretime-934a2.firebaseapp.com",
-      projectId: "adventuretime-934a2",
-      storageBucket: "adventuretime-934a2.appspot.com",
-      messagingSenderId: "168230082500",
-      appId: "1:168230082500:web:6fbd2239d875c99c467691",
-      measurementId: "G-MXMNLZZLM8",
-      databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    // Your configs
+    apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+    authDomain: "adventuretime-934a2.firebaseapp.com",
+    projectId: "adventuretime-934a2",
+    storageBucket: "adventuretime-934a2.appspot.com",
+    messagingSenderId: "168230082500",
+    appId: "1:168230082500:web:6fbd2239d875c99c467691",
+    measurementId: "G-MXMNLZZLM8",
+    databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
   };
 
-// Initialize Firebase
+  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   let user_id = localStorage.getItem('uid')
   var database = firebase.database()
 
-  function first(){
+  function first() {
     let cur_trip = 'none'
-  var leadsRef = database.ref('users');
-  leadsRef.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.key == user_id){
-        let trip_list = childSnapshot.val()['trip']
-        cur_trip = trip_list[trip_id]
-      }
-    });
-    let country = cur_trip['country']
-    console.log(country)
-    let start = cur_trip['startdate']
-    console.log(start)
-    let end = cur_trip['enddate']
-    start = new Date(start)
-    end = new Date(end)
-    console.log(start)
-    console.log(end)
-    const dates = []
-    let currentDate = start
-    const addDays = function (days) {
+    var leadsRef = database.ref('users');
+    leadsRef.on('value', function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        if (childSnapshot.key == user_id) {
+          let trip_list = childSnapshot.val()['trip']
+          cur_trip = trip_list[trip_id]
+        }
+      });
+      let country = cur_trip['country']
+      console.log(country)
+      let start = cur_trip['startdate']
+      console.log(start)
+      let end = cur_trip['enddate']
+      start = new Date(start)
+      end = new Date(end)
+      console.log(start)
+      console.log(end)
+      const dates = []
+      let currentDate = start
+      const addDays = function (days) {
         const date = new Date(this.valueOf())
         date.setDate(date.getDate() + days)
         return date
-    }
-    while(currentDate <= end){
+      }
+      while (currentDate <= end) {
         dates.push(currentDate)
         currentDate = addDays.call(currentDate, 1)
-    }
-    dates[0] = dates[0]
-    document.getElementById('result-3').innerHTML = dates
+      }
+      dates[0] = dates[0]
+      document.getElementById('result-3').innerHTML = dates
 
-    let country_split = country.split("(")
-    let country_code_unclean = country_split[1]
-    let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
-    UpdateFromCurrency(country_code_clean)
+      let country_split = country.split("(")
+      let country_code_unclean = country_split[1]
+      let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
+      UpdateFromCurrency(country_code_clean)
 
-    
-//Fill calendar on page load
-  let track = 0
-  document.getElementById('accordionFlushExample').innerHTML = ''
-  let text = document.getElementById('result-3').innerHTML
-  let date_list = text.split(',')
-  console.log(date_list.length)
-  for(let i=0; i<date_list.length; i++){
-    let skip_index = 0
-    for(let u=0;u<3;u++){
-      skip_index = date_list[i].indexOf(' ',skip_index)
-      skip_index += 1
-    }
-    let date_text = date_list[i].slice(0,skip_index)
-    let item = document.createElement('div')
-    item.innerHTML = `
+
+      //Fill calendar on page load
+      let track = 0
+      document.getElementById('accordionFlushExample').innerHTML = ''
+      let text = document.getElementById('result-3').innerHTML
+      let date_list = text.split(',')
+      console.log(date_list.length)
+      for (let i = 0; i < date_list.length; i++) {
+        let skip_index = 0
+        for (let u = 0; u < 3; u++) {
+          skip_index = date_list[i].indexOf(' ', skip_index)
+          skip_index += 1
+        }
+        let date_text = date_list[i].slice(0, skip_index)
+        let item = document.createElement('div')
+        item.innerHTML = `
     <div class="accordion-item">
             <!-- header -->
             <h2 class="accordion-header" id="flush-headingOne">
@@ -1009,31 +1261,31 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             </div> <!--end accordion collaspe-->
           </div> <!--end DAY 1--></div>
     `
-    document.getElementById('accordionFlushExample').appendChild(item)
-    fill_origin();
-    
+        document.getElementById('accordionFlushExample').appendChild(item)
+        fill_origin();
 
-  let track_added = false
-  var leadsRef = database.ref('users/'+'/'+user_id+'/'+'/trip/'+'/'+trip_id+'/' +'destination_info');
-  leadsRef.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-  if(i == childSnapshot.key){
-    let place_info = childSnapshot.val()
-    for(let place of place_info){
-    let id = place.id
-    let name = place.name
-    let id_rep = place.id_rep
-    let picture_url = place.picture_url
-    let lati = place.lati
-    let lng = place.lng
-    let fill = document.createElement('div');
-    fill.id = id_rep + 'row'
-    fill.className = "container"
-    fill.innerHTML = `
+
+        let track_added = false
+        var leadsRef = database.ref('users/' + '/' + user_id + '/' + '/trip/' + '/' + trip_id + '/' + 'destination_info');
+        leadsRef.on('value', function (snapshot) {
+          snapshot.forEach(function (childSnapshot) {
+            if (i == childSnapshot.key) {
+              let place_info = childSnapshot.val()
+              for (let place of place_info) {
+                let id = place.id
+                let name = place.name
+                let id_rep = place.id_rep
+                let picture_url = place.picture_url
+                let lati = place.lati
+                let lng = place.lng
+                let fill = document.createElement('div');
+                fill.id = id_rep + 'row'
+                fill.className = "container"
+                fill.innerHTML = `
       <div class="row my-2">
         <div class="col mb-2 rounded p-3 bg-light" >
           <h3>${name}
-          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep + 'row'})"></span>
           </h3>
         <div>
       </div>
@@ -1080,41 +1332,41 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
     
           <!------------- NOTE ------------------>
           <div class="col-6">
-            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep + 'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
             <br>
             <form action="#" method="get" id="form1">
-              <input type="hidden" id=${id_rep+'notes1'}>
-              <div class="divTxt" id=${id_rep+'notes2'}></div>
+              <input type="hidden" id=${id_rep + 'notes1'}>
+              <div class="divTxt" id=${id_rep + 'notes2'}></div>
             </form>
           </div>
     
           <!-------------CHECKLIST -------------->
           <div class="col-6">
-            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
             <br>
             <form action="#" method="get" id="form2">
-            <input type="hidden" id=${id_rep+'check1'}>
-            <div class="divCheckBox" id=${id_rep+'check2'}></div>
+            <input type="hidden" id=${id_rep + 'check1'}>
+            <div class="divCheckBox" id=${id_rep + 'check2'}></div>
             </form>
           </div>
-          <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
+          <div hidden class='getAllVal'>${id},${id_rep + 'row'},${name},${lati},${lng},${picture_url},${track}</div>
         </div>
       </div>
       </div>
     </div>
     `
-    let parent = document.getElementsByClassName('place_info')[i]
-    parent.appendChild(fill)
-  }
+                let parent = document.getElementsByClassName('place_info')[i]
+                parent.appendChild(fill)
+              }
+            }
+            if (track_added == false) {
+              track = Number(track) + 1
+              track_added = true
+            }
+          })
+        });
       }
-      if(track_added == false){
-        track = Number(track) + 1
-        track_added = true
-      }
-    })
-});
-  }
-});
+    });
 
   }
   first()
@@ -1123,16 +1375,142 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
 </script>
 
+<script>
+  const firebaseConfig1 = {
+    // Your configs
+    apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+    authDomain: "adventuretime-934a2.firebaseapp.com",
+    projectId: "adventuretime-934a2",
+    storageBucket: "adventuretime-934a2.appspot.com",
+    messagingSenderId: "168230082500",
+    appId: "1:168230082500:web:6fbd2239d875c99c467691",
+    measurementId: "G-MXMNLZZLM8",
+    databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  };
 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig1);
+  checkHotelFlight();
+  let edit_hotel = document.getElementById("edithotel");
+  edit_hotel.onclick = function () {
+    call_hotel_api();
+    document.getElementById("hotelnotexist").style.display = "block";
+    document.getElementById("hotelexist").style.display = "none";
+  }
+  let edit_flight = document.getElementById("editflight");
+  edit_flight.onclick = function () {
+    document.getElementById("noflightexists").style.display = "block";
+    document.getElementById("flightexists").style.display = "none";
+  }
+  document.getElementById("myCityInput").value = sessionStorage.getItem("city");
+  document.getElementById("fromdt").value = sessionStorage.getItem("departdate")
+  document.getElementById("todt").value = sessionStorage.getItem("returndate");
+  document.getElementById("fromstay").value = sessionStorage.getItem("departdate");
+  document.getElementById("tostay").value = sessionStorage.getItem("returndate");
+  function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function (e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false; }
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function (e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
+
+  /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+  autocomplete(document.getElementById("myHotelInput"), call_hotel_api());
+</script>
 
 
 <html>
-  <button onclick="empty()">empty</button>
-  <button onclick="saveData()">SAVE</button>
- 
+<button onclick="empty()">empty</button>
+<button onclick="saveData()">SAVE</button>
+
 </html>
-
-
-
-
-

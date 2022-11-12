@@ -216,7 +216,7 @@ function country_list() {
         method: 'GET',
         url: 'https://city-list.p.rapidapi.com/api/getCountryList',
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'city-list.p.rapidapi.com'
         }
     };
@@ -413,13 +413,13 @@ function insertTripDetails() {
         let da_time = document.getElementById("da_time").innerText;
 
         depature_details = {
-            'departure-airlines': airlinesfrom, 'departure-flight-number': flightfrom, 'departure-date': fromdate,
-            'depart-airport': rd_airport, 'depart-time': rd_time, 'arrival-airport': ra_airport, 'arrival-time': ra_time
+            'arrival_airlines': airlinesfrom, 'arrival_flight_number': flightfrom, 'arrival_date': fromdate,
+            'depart_airport': rd_airport, 'depart_time': rd_time, 'arrival_airport': ra_airport, 'arrival_time': ra_time
         };
 
         arrival_details = {
-            'arrival-airlines': airlinesto, 'arrival-flight-number': flightto, 'arrival-date': todate,
-            'depart-airport': dd_airport, 'depart-time': dd_time, 'arrival-airport': da_airport, 'arrival-time': da_time
+            'departure_airlines': airlinesto, 'departure_flight_number': flightto, 'departure_date': todate,
+            'depart_airport': dd_airport, 'depart_time': dd_time, 'arrival_airport': da_airport, 'arrival_time': da_time
         };
     }
 
@@ -428,13 +428,17 @@ function insertTripDetails() {
         let fromhoteldate = document.getElementById("fromstay").value;
         let tohoteldate = document.getElementById("tostay").value;
 
-        hotellist = { 'hotel': hotel, 'start-date': fromhoteldate, 'end-date': tohoteldate };
+        hotellist = { 'hotel': hotel, 'start_date': fromhoteldate, 'end_date': tohoteldate };
     }
 
     let id = startdate + country.slice(0, 3) + city.slice(0, 3);
 
     writeUserDataWithCompletion(id, country, city, startdate, enddate, depature_details, arrival_details, hotellist);
     sessionStorage.setItem("country", country);
+    sessionStorage.setItem("city", city);
+    sessionStorage.setItem("departdate", startdate);
+    sessionStorage.setItem("returndate", enddate);
+    sessionStorage.setItem("tripId", id);
 }
 
 //The following writes the data
