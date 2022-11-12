@@ -24,6 +24,8 @@ function fill_origin(){
               document.getElementById('recommended_track').value=track
               fill_info(track)
               fill_rec(track)
+              let category = document.getElementsByClassName('category')[track]
+              category.addEventListener('change',fill_rec)
             }
             track+=1
         }
@@ -278,8 +280,6 @@ document.getElementsByClassName('recommend_header')[track].innerHTML = `
                             </select>
                           </div>
 `
-let category = document.getElementsByClassName('category')[track]
-category.addEventListener('change',fill_rec)
 }
 
 let id = document.getElementById('place_id').value
