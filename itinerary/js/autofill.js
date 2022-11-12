@@ -649,7 +649,7 @@ function callback(place, status) {
           <div class="divCheckBox" id=${id_rep+'check2'}></div>
          </form>
        </div>
-       
+       <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
      </div>
    </div>
    </div>
