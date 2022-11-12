@@ -1034,7 +1034,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
   //Cleaning the data
   countries_info = currency_code_str.split(/[\r\n]/gm)
-  console.log(countries_info)
 
   country_array_of_obj = [] // need to add here
 
@@ -1133,11 +1132,12 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 <div hidden id="trip_id"></div>
 </html>
 <script>
-  let trip_id = '2022-11-13KOR'
-  // let trip_id = localStorage.getItem('trip_id') 
+  //let trip_id = '2022-11-13KOR'
+  let trip_id = localStorage.getItem('trip_id') 
   document.getElementById('trip_id').innerHTML = trip_id
   console.log(trip_id)
 </script>
+
 <!--save trip info END-->
 
 
@@ -1172,7 +1172,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   };
 
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  //firebase.initializeApp(firebaseConfig);
   let user_id = localStorage.getItem('uid')
   var database = firebase.database()
 
