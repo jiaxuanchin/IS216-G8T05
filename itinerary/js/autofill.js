@@ -760,63 +760,52 @@ function saveData(){
       let lati = val_list[3]
       let lng = val_list[4]
       let picture_url = val_list[5]
-      let track = val_list[6]
-      if(obj[track] != undefined){
-        number = 0
-        for(item in obj[track]){
-          console.log(number)
-          number += 1
-        }
-        obj[track].push({
+      let tracker = val_list[6]
+      console.log('tracker for' + name + ' '+tracker)
+      if(obj[tracker] != undefined){
+        obj[tracker].push({
           id : id,
           id_rep : id_rep,
           name : name,
           lati: lati,
           lng : lng,
-          picture_url : picture_url
+          picture_url : picture_url,
+          tracking : tracker
         })
         
       }
       else{
-        obj[track] = [{
+        obj[tracker] = [{
           id : id,
           id_rep : id_rep,
           name : name,
           lati: lati,
           lng : lng,
-          picture_url : picture_url
+          picture_url : picture_url,
+          tracking : tracker
         }]
       }   
       }
     }
-    for(number in obj){
-      let index = 0
-      for(place of obj[number]){
-        writeData(place.id,place.id_rep,place.name,place.lati,place.lng,place.picture_url,number,index)
-        index += 1
-      }
-    }
-  }
-
-
-//get name,id,id_rep,track_num(track the accordion position)
-// <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
-
-//The following writes the data
-function writeData(id,id_rep,name,lati,lng,picture_url,track,index) {
-  let trip_id = document.getElementById('trip_id').innerHTML
-  firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + '/'+trip_id+'/' + '/destination_info/' + '/'+track + '/'+ index).set({
-      id:id,
-      id_rep: id_rep,
-      name : name,
-      lati: lati,
-      lng : lng,
-      picture_url : picture_url,
-  }, function (error) {
+    console.log(obj)
+    firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + '/'+trip_id+'/' + '/destination_info/').set( obj, function (error) {
       if (error) {
           console.log("Add Data Failed!");
       } else {
           console.log("Add Data Done!");
       }
   });
+  }
+
+
+//get name,id,id_rep,track_num(track the accordion position)
+// <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
+
+
+function empty(){
+  firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + '/'+trip_id+'/' + '/destination_info').set({})
 }
+function getData(){
+  console.log(document.getElementsByClassName('place_info'))
+}
+
