@@ -746,11 +746,13 @@ textarea.addEventListener("keyup", () => {
 
 //add
 function saveData(){
+  obj = {}
   let places_list = document.getElementsByClassName('place_info')
+  console.log(places_list)
   for(item of places_list){
     places = item.getElementsByClassName('container')
     for(place of places){
-      console.log(place.getElementsByClassName('getAllVal')[0])
+      console.log(place)
       let val = place.getElementsByClassName('getAllVal')[0].innerHTML
       let val_list = val.split(',')
       let id = val_list[0]
@@ -760,30 +762,61 @@ function saveData(){
       let lng = val_list[4]
       let picture_url = val_list[5]
       let track = val_list[6]
-      console.log(picture_url)
+      if(obj[track] != undefined){
+        number = 0
+        for(item in obj[track]){
+          console.log(number)
+          number += 1
+        }
+        obj[track].push({
+          id : id,
+          id_rep : id_rep,
+          name : name,
+          lati: lati,
+          lng : lng,
+          picture_url : picture_url
+        })
+        
+      }
+      else{
+        obj[track] = [{
+          id : id,
+          id_rep : id_rep,
+          name : name,
+          lati: lati,
+          lng : lng,
+          picture_url : picture_url
+        }]
+      }   
+      }
+    }
+    for(number in obj){
+      let index = 0
+      for(place of obj[number]){
+        writeData(place.id,place.id_rep,place.name,place.lati,place.lng,place.picture_url,number,index)
+        index += 1
+      }
     }
   }
-}
+
 
 //get name,id,id_rep,track_num(track the accordion position)
 // <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
 
 //The following writes the data
-function writeUserDataWithCompletion(id, selected_country, selected_city, start_date, end_date, departure_flight, arrival_flight, hotel) {
-  firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + id).set({
-      country: selected_country,
-      city: selected_city,
-      startdate: start_date,
-      enddate: end_date,
-      departureflight: arrival_flight,
-      arrivalflight: departure_flight,
-      hotel: hotel,
+function writeData(id,id_rep,name,lati,lng,picture_url,track,index) {
+  firebase.database().ref('users/' + localStorage.getItem('uid') + '/destination_info/' + track+'/track_num/'  + index).set({
+      id:id,
+      id_rep: id_rep,
+      name : name,
+      lati: lati,
+      lng : lng,
+      picture_url : picture_url,
   }, function (error) {
       if (error) {
           console.log("Add Data Failed!");
       } else {
           console.log("Add Data Done!");
-          window.location.href = 'restrictions.html'
       }
   });
 }
