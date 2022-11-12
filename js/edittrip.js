@@ -321,6 +321,8 @@ function checkHotelFlight() {
                                         <th>Departure Airport & Time</th>
                                         <th>Arrival Airport & Time</th>
                                     </tr> `;
+				document.getElementById("noflightexists").style.display = "none";
+                document.getElementById("flightexists").style.display = "block";
                 table.innerHTML += `<tr>
                         <td><span id='dd_flight'>${response.departure_flight_number}</span></td>
                         <td><span id='dd_flight'>${response.departure_date}</span></td>
@@ -347,8 +349,6 @@ function checkHotelFlight() {
                         <td><span id='da_airport'>${response.arrival_airport}</span>
                         <span id='da_time'>${response.arrival_time}</span></td>
                         </tr>`
-                document.getElementById("noflightexists").style.display = "none";
-                document.getElementById("flightexists").style.display = "block";
             }
         }
     });
