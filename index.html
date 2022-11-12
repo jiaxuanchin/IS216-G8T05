@@ -9,45 +9,66 @@
 
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>adventuretime</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-    <!-- theme meta -->
-    <meta name="theme-name" content="revolve" />
-
-    <!-- Favicon
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
+  <head>
+      <meta charset="utf-8">
+      <title>adventuretime</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <!-- THEME CSS
-	================================================== -->
+      <!-- theme meta -->
+      <meta name="theme-name" content="revolve" />
+
+      <!-- Favicon
+      <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
+      
+      <!-- THEME CSS
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="plugins/jquery/jquery.js"></script>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-    <!-- Themify -->
-    <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
-    <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css">
-    <link rel="stylesheet" href="plugins/slick-carousel/slick.css">
-    <!-- Slick Carousel -->
-    <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
-    <!-- main stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <!--icon-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- axios -->
-    <script src="https://unpkg.com/axios/dist/axios.js"></script>
-</head>
-<body>
+      <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <!-- Themify -->
+      <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+      <link rel="stylesheet" href="plugins/slick-carousel/slick-theme.css">
+      <link rel="stylesheet" href="plugins/slick-carousel/slick.css">
+      <!-- Slick Carousel -->
+      <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.min.css">
+      <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.default.min.css">
+      <link rel="stylesheet" href="plugins/magnific-popup/magnific-popup.css">
+      <!-- main stylesheet -->
+      <link rel="stylesheet" href="css/style.css">
+      <!--icon-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- axios -->
+      <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  </head>
+  <body>
+    <!-- Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="staticBackdropLabel">Thank you.</h3>
+          </div>
+          <div class="modal-body">
+            <p>Logout successful.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- header -->
     <header class="header-top bg-grey justify-content-center">
       <nav class="navbar navbar-expand-md navigation-2 navigation">
         <div class="container-fluid">
-          <a class="navbar-brand text-uppercase" href="home1.html">
-            <img src="images/logo.png" alt="" width="200px" style="max-width: 120px;">
+          <a class="navbar-brand text-uppercase py-0" href="home2.html">
+            <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="ti-menu" style="color: white;"></span>
@@ -67,23 +88,11 @@
     </header>
 
     <!-- Homepage nav -->
-
-    <!-- <div class="container-fluid text-white" style="background-size: cover;background-image: url(images/pano_img.png)">
-      <div class="row">
-        <div class="col-md-7">
-          <br>
-          <h1 class="text-white mx-5 pt-5">You will never travel without our trip planner again.</h1>
-          <p class="text-white mx-5 pb-5 pt-3">Build, organize, and map your itineraries in a free travel app designed for vacations & road trips</p>
-        </div>
-        <div class="col-md-5">
-          <h3 class="bg-white m-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ullam ut nam pariatur, veritatis voluptatibus sed consequuntur et illo. Vitae in ipsa maiores earum consectetur et, doloribus sunt. Ut, aspernatur.</h3>
-        </div>
-      </div>
-    </div> -->
     <div class="container-fluid text-white p-5" style="background-size: cover;background-image: url(images/pano_img.png)">
       <br>
       <h1 class="text-white mx-5 pt-5 text-center">Time for an adventure. Plan your next location.</h1>
       <p class="text-white mx-5 pb-5 pt-3 text-center">Create itineraries for your holidays, vacations & road trips. Escape. Explore. See.</p>
+      <br>
     </div>
     <br><br>
     <div class="container-sm">
@@ -199,27 +208,6 @@
         </button>
       </div>
     </div>
-
-    <!-- <div class="container d-md-block d-lg-none" style="background-size: cover;background-image: url(images/bg-1.png)">
-      <br><br><br><br><br>
-      <h3 class="text-white text-center pt-5">"It's so fast and efficient to plan my trip now!"</h3>
-      <p class="fst-italic text-white w-75 text-center mx-auto">- Jia Xuan</p>
-      <hr class="text-white">
-      <h3 class="text-white text-center">"blah blah blah"</h1>
-      <p class="fst-italic text-white w-75 text-center mx-auto">- Amanda</p>
-      <hr class="text-white">
-      <h3 class="text-white text-center">"blah blah blah"</h1>
-      <p class="fst-italic text-white w-75 text-center mx-auto">- Xiao Fang</p>
-      <hr class="text-white">
-      <h3 class="text-white text-center">"blah blah blah"</h1>
-      <p class="fst-italic text-white w-75 text-center mx-auto">- Kelly</p>
-      <hr class="text-white">
-      <h3 class="text-white text-center">"blah blah blah"</h1>
-      <p class="fst-italic text-white w-75 text-center mx-auto">- Abhisit</p>
-      <hr class="text-white">
-      <h3 class="text-white text-center">"blah blah blah"</h1>
-      <p class="fst-italic text-white w-75 text-center mx-auto pb-3">- William</p>   
-    </div>   -->
     <br>
     <br>
     
@@ -265,24 +253,38 @@
         
     </section>	
 
-  <!-- THEME JAVASCRIPT FILES
-  ================================================== -->
-  <!-- initialize jQuery Library -->
-  <script src="plugins/jquery/jquery.js"></script>
-  <!-- Bootstrap jQuery -->
-  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="plugins/bootstrap/js/popper.min.js"></script>
-  <!-- Owl caeousel -->
-  <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
-  <script src="plugins/slick-carousel/slick.min.js"></script>
-  <script src="plugins/magnific-popup/magnific-popup.js"></script>
-  <!-- Instagram Feed Js -->
-  <script src="plugins/instafeed-js/instafeed.min.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw" async defer></script>
-  <script src="plugins/google-map/gmap.js"></script>
-  <!-- main js -->
-  <script src="js/custom.js"></script>
+    <!-- THEME JAVASCRIPT FILES
+    ================================================== -->
+    <!-- Bootstrap jQuery -->
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/bootstrap/js/popper.min.js"></script>
+    <!-- Owl carousel -->
+    <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+    <script src="plugins/slick-carousel/slick.min.js"></script>
+    <script src="plugins/magnific-popup/magnific-popup.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="plugins/instafeed-js/instafeed.min.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw" async defer></script>
+    <script src="plugins/google-map/gmap.js"></script>
+    <!-- main js -->
+    <script src="js/custom.js"></script>
+    <script>
+      if (sessionStorage.getItem("logout") != null) {
+        $("#logoutModal").modal('show');
+        sessionStorage.removeItem("logout");
+      }
+      let close = document.getElementById('closeModal')
+      let modal = document.getElementById('logoutModal')
+      close.addEventListener('click', $("#closeModal").modal("hide"))
+
+      // function closeModal() {
+      //   modal.setAttribute('class', 'modal')
+      // }
+      // $("#closeModal").hide()
+      // $("#closeModal").modal("hide")
+      //close.addEventListener('click', $("#logoutModal").modal("hide"))
+    </script>
 
   </body>
 </html>
