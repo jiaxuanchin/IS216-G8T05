@@ -277,12 +277,12 @@ function updateFlight() {
     let da_time = document.getElementById("da_time").innerText;
 
     let depature_details = {
-        'arrival_airlines': airlinesfrom, 'arrival_flight_number': flightfrom, 'arrival_date': fromdate,
+        'arrival_airlines': airlinesfrom, 'arrival_flight_number': flightfrom, 'arrival_date': todate,
         'depart_airport': rd_airport, 'depart_time': rd_time, 'arrival_airport': ra_airport, 'arrival_time': ra_time
     };
 
     let arrival_details = {
-        'departure_airlines': airlinesto, 'departure_flight_number': flightto, 'departure_date': todate,
+        'departure_airlines': airlinesto, 'departure_flight_number': flightto, 'departure_date': fromdate,
         'depart_airport': dd_airport, 'depart_time': dd_time, 'arrival_airport': da_airport, 'arrival_time': da_time
     };
 
@@ -315,15 +315,8 @@ function checkHotelFlight() {
         if (snapshot.exists()) {
             let response = snapshot.val();
             if (response != "") {
-                table.innerHTML += `<tr>
-                                        <th>Flight Number</th>
-                                        <th>Date</th>
-                                        <th>Departure Airport & Time</th>
-                                        <th>Arrival Airport & Time</th>
-                                    </tr> `;
-				document.getElementById("noflightexists").style.display = "none";
-                document.getElementById("flightexists").style.display = "block";
-                table.innerHTML += `<tr>
+                let str = "";
+                str += `<tr>
                         <td><span id='dd_flight'>${response.departure_flight_number}</span></td>
                         <td><span id='dd_flight'>${response.departure_date}</span></td>
                         <td><span id='dd_airport'>${response.depart_airport}</span>
@@ -331,25 +324,10 @@ function checkHotelFlight() {
                         <td><span id='da_airport'>${response.arrival_airport}</span>
                         <span id='da_time'>${response.arrival_time}</span></td>
                         </tr>`
+                callReturnFlight(str);
             }
-            console.log(response);
-            console.log(response.arrival_time);
-        }
-    });
-    var user1 = firebase.database().ref('users/' + localStorage.getItem('uid') + "/trip/" + sessionStorage.getItem("tripId") + "/arrivalflight/");
-    user1.once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-            let response = snapshot.val();
-            if (response != "") {
-                table.innerHTML += `<tr>
-                        <td><span id='dd_flight'>${response.arrival_flight_number}</span></td>
-                        <td><span id='dd_flight'>${response.arrival_date}</span></td>
-                        <td><span id='dd_airport'>${response.depart_airport}</span>
-                        <span id='dd_time'>${response.depart_time}</span></td>
-                        <td><span id='da_airport'>${response.arrival_airport}</span>
-                        <span id='da_time'>${response.arrival_time}</span></td>
-                        </tr>`
-            }
+            //console.log(response);
+            //console.log(response.arrival_time);
         }
     });
 
@@ -372,6 +350,35 @@ function checkHotelFlight() {
                         <td>${response.end_date}</td>
                         <td>${response.hotel}</td>
                         </tr>`
+            }
+        }
+    });
+}
+
+function callReturnFlight(str) {
+    let table = document.getElementById("existsearchresult");
+    var user1 = firebase.database().ref('users/' + localStorage.getItem('uid') + "/trip/" + sessionStorage.getItem("tripId") + "/arrivalflight/");
+    user1.once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+            let response = snapshot.val();
+            if (response != "") {
+                table.innerHTML += `<tr>
+                                        <th>Flight Number</th>
+                                        <th>Date</th>
+                                        <th>Departure Airport & Time</th>
+                                        <th>Arrival Airport & Time</th>
+                                    </tr> `;
+                table.innerHTML += str;
+                table.innerHTML += `<tr>
+                        <td><span id='dd_flight'>${response.arrival_flight_number}</span></td>
+                        <td><span id='dd_flight'>${response.arrival_date}</span></td>
+                        <td><span id='dd_airport'>${response.depart_airport}</span>
+                        <span id='dd_time'>${response.depart_time}</span></td>
+                        <td><span id='da_airport'>${response.arrival_airport}</span>
+                        <span id='da_time'>${response.arrival_time}</span></td>
+                        </tr>`
+                document.getElementById("noflightexists").style.display = "none";
+                document.getElementById("flightexists").style.display = "block";
             }
         }
     });
