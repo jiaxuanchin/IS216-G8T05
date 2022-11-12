@@ -24,7 +24,7 @@
 
   <!-- flight & hotel -->
   <script src="../js/edittrip.js"></script>
-  
+
   <!-- calendar -->
   <meta name="google-site-verification" content="nERiBNqxg1sFpetHtzwMVydsumihA9YnyytsjfzYEGI" />
   <meta name="description"
@@ -306,14 +306,13 @@
               <div class="mb-3">
                 <div id="flighterrormsg" style="display: none;color:red">
                   <h4>Departing or arriving airport is not the same as destinations</h4>
-                  <br><br>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" style="color:white;" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="call_airlines_schedule_api()"
+            <button id="findflight" type="button" class="btn btn-primary" onclick="call_airlines_schedule_api()"
               style="float:right;">Find
               flight</button>
           </div>
@@ -335,6 +334,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <div id="flighterrormsg" style="display: none;color:red">
+              <h4>Departing or arriving airport is not the same as destinations</h4>
+              <br><br>
+            </div>
             <div id="existresult">
               <table id="existsearchresult" class="table">
               </table>
@@ -1172,62 +1175,62 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   let user_id = localStorage.getItem('uid')
   var database = firebase.database()
 
-  function first(){
-  let cur_trip = 'none'
-  var leadsRef = database.ref('users');
-  leadsRef.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      
-      if(childSnapshot.key == user_id){
-        let trip_list = childSnapshot.val()['trip']
-        cur_trip = trip_list[trip_id]
-      }
-    });
-    let country = cur_trip['country']
-    console.log(country)
-    let start = cur_trip['startdate']
-    console.log(start)
-    let end = cur_trip['enddate']
-    start = new Date(start)
-    end = new Date(end)
-    console.log(start)
-    console.log(end)
-    const dates = []
-    let currentDate = start
-    const addDays = function (days) {
+  function first() {
+    let cur_trip = 'none'
+    var leadsRef = database.ref('users');
+    leadsRef.on('value', function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+
+        if (childSnapshot.key == user_id) {
+          let trip_list = childSnapshot.val()['trip']
+          cur_trip = trip_list[trip_id]
+        }
+      });
+      let country = cur_trip['country']
+      console.log(country)
+      let start = cur_trip['startdate']
+      console.log(start)
+      let end = cur_trip['enddate']
+      start = new Date(start)
+      end = new Date(end)
+      console.log(start)
+      console.log(end)
+      const dates = []
+      let currentDate = start
+      const addDays = function (days) {
         const date = new Date(this.valueOf())
         date.setDate(date.getDate() + days)
         return date
-    }
-    while(currentDate <= end){
+      }
+      while (currentDate <= end) {
         dates.push(currentDate)
         currentDate = addDays.call(currentDate, 1)
-    }
-    dates[0] = dates[0]
-    document.getElementById('result-3').innerHTML = dates
+      }
+      dates[0] = dates[0]
+      document.getElementById('result-3').innerHTML = dates
 
-   // let country_split = country.split("(")
-   // let country_code_unclean = country_split[1]
-   // let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
-   // UpdateFromCurrency(country_code_clean)
+      // let country_split = country.split("(")
+      // let country_code_unclean = country_split[1]
+      // let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
+      // UpdateFromCurrency(country_code_clean)
 
-    
-//Fill calendar on page load
-  let track = 0
-  document.getElementById('accordionFlushExample').innerHTML = ''
-  let text = document.getElementById('result-3').innerHTML
-  let date_list = text.split(',')
-  console.log(date_list.length)
-  for(let i=0; i<date_list.length; i++){
-    console.log(i)
-    let skip_index = 0
-    for(let u=0;u<3;u++){
-      skip_index = date_list[i].indexOf(' ',skip_index)
-      skip_index += 1
-    }
-    let date_text = date_list[i].slice(0,skip_index)
-    let item = document.createElement('div')
-    item.innerHTML = `
+
+      //Fill calendar on page load
+      let track = 0
+      document.getElementById('accordionFlushExample').innerHTML = ''
+      let text = document.getElementById('result-3').innerHTML
+      let date_list = text.split(',')
+      console.log(date_list.length)
+      for (let i = 0; i < date_list.length; i++) {
+        console.log(i)
+        let skip_index = 0
+        for (let u = 0; u < 3; u++) {
+          skip_index = date_list[i].indexOf(' ', skip_index)
+          skip_index += 1
+        }
+        let date_text = date_list[i].slice(0, skip_index)
+        let item = document.createElement('div')
+        item.innerHTML = `
     <div class="accordion-item">
             <!-- header -->
             <h2 class="accordion-header" id="flush-headingOne">
@@ -1263,33 +1266,33 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             </div> <!--end accordion collaspe-->
           </div> <!--end DAY 1--></div>
     `
-    document.getElementById('accordionFlushExample').appendChild(item)
-    fill_origin();
-    
+        document.getElementById('accordionFlushExample').appendChild(item)
+        fill_origin();
 
-  let track_added = false
-  var leadsRef = database.ref('users/'+'/'+user_id+'/'+'/trip/'+'/'+trip_id+'/' +'destination_info');
-  leadsRef.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      console.log(childSnapshot.val())
-  if(i == childSnapshot.key){
-    let place_info = childSnapshot.val()
-    for(let place of place_info){
-    let id = place.id
-    let name = place.name
-    let id_rep = place.id_rep
-    let picture_url = place.picture_url
-    let lati = place.lati
-    let lng = place.lng
-    let tracking = place.tracking
-    let fill = document.createElement('div');
-    fill.id = id_rep + 'row'
-    fill.className = "container"
-    fill.innerHTML = `
+
+        let track_added = false
+        var leadsRef = database.ref('users/' + '/' + user_id + '/' + '/trip/' + '/' + trip_id + '/' + 'destination_info');
+        leadsRef.on('value', function (snapshot) {
+          snapshot.forEach(function (childSnapshot) {
+            console.log(childSnapshot.val())
+            if (i == childSnapshot.key) {
+              let place_info = childSnapshot.val()
+              for (let place of place_info) {
+                let id = place.id
+                let name = place.name
+                let id_rep = place.id_rep
+                let picture_url = place.picture_url
+                let lati = place.lati
+                let lng = place.lng
+                let tracking = place.tracking
+                let fill = document.createElement('div');
+                fill.id = id_rep + 'row'
+                fill.className = "container"
+                fill.innerHTML = `
       <div class="row my-2">
         <div class="col mb-2 rounded p-3 bg-light" >
           <h3>${name}
-          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep + 'row'})"></span>
           </h3>
         <div>
       </div>
@@ -1336,41 +1339,41 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
     
           <!------------- NOTE ------------------>
           <div class="col-6">
-            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep + 'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
             <br>
             <form action="#" method="get" id="form1">
-              <input type="hidden" id=${id_rep+'notes1'}>
-              <div class="divTxt" id=${id_rep+'notes2'}></div>
+              <input type="hidden" id=${id_rep + 'notes1'}>
+              <div class="divTxt" id=${id_rep + 'notes2'}></div>
             </form>
           </div>
     
           <!-------------CHECKLIST -------------->
           <div class="col-6">
-            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
             <br>
             <form action="#" method="get" id="form2">
-            <input type="hidden" id=${id_rep+'check1'}>
-            <div class="divCheckBox" id=${id_rep+'check2'}></div>
+            <input type="hidden" id=${id_rep + 'check1'}>
+            <div class="divCheckBox" id=${id_rep + 'check2'}></div>
             </form>
           </div>
-          <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
+          <div hidden class='getAllVal'>${id},${id_rep + 'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>
       </div>
     </div>
     `
-    let parent = document.getElementsByClassName('place_info')[i]
-    parent.appendChild(fill)
-  }
+                let parent = document.getElementsByClassName('place_info')[i]
+                parent.appendChild(fill)
+              }
+            }
+            if (track_added == false) {
+              track = Number(track) + 1
+              track_added = true
+            }
+          })
+        });
       }
-      if(track_added == false){
-        track = Number(track) + 1
-        track_added = true
-      }
-    })
-});
-  }
-});
+    });
 
   }
   first()
@@ -1378,16 +1381,170 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
 </script>
 
+<!--SCRIPT FOR ADD FLIGHT & HOTEL-->
+<script>
+  const firebaseConfig1 = {
+    // Your configs
+    apiKey: "AIzaSyCLWmg-X8gl75JxCVz57jOIekeqSUk6XUY",
+    authDomain: "adventuretime-934a2.firebaseapp.com",
+    projectId: "adventuretime-934a2",
+    storageBucket: "adventuretime-934a2.appspot.com",
+    messagingSenderId: "168230082500",
+    appId: "1:168230082500:web:6fbd2239d875c99c467691",
+    measurementId: "G-MXMNLZZLM8",
+    databaseURL: "https://adventuretime-934a2-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  };
 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig1);
+  checkHotelFlight();
+  let edit_hotel = document.getElementById("edithotel");
+  edit_hotel.onclick = function () {
+    call_hotel_api();
+    document.getElementById("hotelnotexist").style.display = "block";
+    document.getElementById("hotelexist").style.display = "none";
+  }
+  let edit_flight = document.getElementById("editflight");
+  edit_flight.onclick = function () {
+    document.getElementById("noflightexists").style.display = "block";
+    document.getElementById("flightexists").style.display = "none";
+  }
+  document.getElementById("myCityInput").value = sessionStorage.getItem("city");
+  document.getElementById("fromdt").value = sessionStorage.getItem("departdate")
+  document.getElementById("todt").value = sessionStorage.getItem("returndate");
+  document.getElementById("fromstay").value = sessionStorage.getItem("departdate");
+  document.getElementById("tostay").value = sessionStorage.getItem("returndate");
+
+  document.getElementById("addflight").onclick = function () {
+    let airportcity = document.getElementById("da_airport").innerText;
+    let city = document.getElementById("myCityInput").value;
+    let newairport = airportcity.slice(0, airportcity.search(","));
+
+    let returnhomeairport = document.getElementById("ra_airport").innerText;
+    let newairportreturn = returnhomeairport.slice(0, returnhomeairport.search(","));
+
+    if (newairport == city && newairportreturn == "Singapore") {
+      document.getElementById("flighterrormsg").style.display = "none";
+      document.getElementById("noflightexists").style.display = "none";
+      document.getElementById("flightexists").style.display = "block";
+      checkHotelFlight();
+    }
+    else {
+      document.getElementById("flighterrormsg").style.display = "block";
+      document.getElementById("flighterrormsg").innerHTML = "<h4>Departing or arriving airport is not the same as destinations</h4>";
+    }
+  }
+
+  document.getElementById("findflight").onclick = function () {
+    call_schedule_api();
+    document.getElementById("flighterrormsg").style.display = "none";
+  }
+
+  function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function (e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false; }
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function (e) {
+            /*insert the value for the autocomplete text field:*/
+            inp.value = this.getElementsByTagName("input")[0].value;
+            /*close the list of autocompleted values,
+            (or any other open lists of autocompleted values:*/
+            closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function (e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+    });
+    function addActive(x) {
+      /*a function to classify an item as "active":*/
+      if (!x) return false;
+      /*start by removing the "active" class on all items:*/
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      /*add class "autocomplete-active":*/
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      /*a function to remove the "active" class from all autocomplete items:*/
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
+
+  /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+  autocomplete(document.getElementById("myHotelInput"), call_hotel_api());
+</script>
 
 
 <html>
-  <button onclick="empty()">empty</button>
-  <button onclick="saveData()">SAVE</button>
-  <button onclick="getData()">get</button>
+<button onclick="empty()">empty</button>
+<button onclick="saveData()">SAVE</button>
+<button onclick="getData()">get</button>
+
 </html>
-
-
-
-
-

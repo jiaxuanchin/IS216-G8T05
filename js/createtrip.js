@@ -111,12 +111,6 @@ function call_schedule_api() {
     let departureflightno = dcode + document.getElementById("floatingFrom").value;
     let departuredate = document.getElementById("fromdt").value;
 
-    let acode = document.getElementById("airlineT").value;
-    let arrivalflightno = acode + document.getElementById("floatingTo").value;
-    let arrivaldate = document.getElementById("todt").value;
-    console.log(departureflightno);
-    console.log(arrivalflightno);
-
     let result = new Date().toISOString().slice(0, 10);
 
     const options = {
@@ -128,24 +122,8 @@ function call_schedule_api() {
         }
     };
 
-    const options1 = {
-        method: 'GET',
-        url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
-        headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
-            'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
-        }
-    };
-
-    myFunction();
     let table = document.getElementById("searchresult");
     table.innerHTML = "";
-    table.innerHTML += `<tr>
-                <th> Flight Number</th>
-                <th>Departure Airport & Time</th>
-                <th>Arrival Airport & Time</th>
-                </tr> `;
-
 
     // 2) Use Axios to call API asynchronously
     axios.request(options)
@@ -164,17 +142,43 @@ function call_schedule_api() {
             let atime = records[0].arrival.scheduledTimeLocal;
             let newatime = atime.slice(11, 16);
 
-            table.innerHTML += `<tr><td><span id='dd_flight'>${departureflightno}</span></td>
+            let string = `<tr><td><span id='dd_flight'>${departureflightno}</span></td>
                         <td><span id='dd_airport'>${records[0].departure.airport.name}</span>
                         <span id='dd_time'>${newdtime}</span></td>
                         <td><span id='da_airport'>${records[0].arrival.airport.name}</span>
                         <span id='da_time'>${newatime}</span></td>
                         </tr>`
+
+            call_schedule_api2(string);
         })
         .catch(function (error) {
             // In case of any error, see what it's about
             console.log(error)
+            document.getElementById("flighterrormsg").style.display = "block";
+            document.getElementById("flighterrormsg").innerHTML = "<h4>Invalid departure flight number</h4><br><br>";
         })
+
+    console.log("**** [END] call_schedule_api() *****")
+}
+
+function call_schedule_api2(depart_result) {
+
+    console.log("**** [START] call_schedule_api2() *****")
+
+    let table = document.getElementById("searchresult");
+    let acode = document.getElementById("airlineT").value;
+    let arrivalflightno = acode + document.getElementById("floatingTo").value;
+
+    let result = new Date().toISOString().slice(0, 10);
+
+    const options1 = {
+        method: 'GET',
+        url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
+        headers: {
+            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+        }
+    };
 
     axios.request(options1)
         .then(function (response) {
@@ -190,6 +194,15 @@ function call_schedule_api() {
             let atime = records[0].arrival.scheduledTimeLocal;
             let newatime = atime.slice(11, 16);
 
+            myFunction();
+            table.innerHTML += `<tr>
+                <th>Flight Number</th>
+                <th>Departure Airport & Time</th>
+                <th>Arrival Airport & Time</th>
+                </tr> `;
+
+            table.innerHTML += depart_result;
+
             table.innerHTML += `<tr><td><span id='rd_flight'>${arrivalflightno}</span></td>
                         <td><span id='rd_airport'>${records[0].departure.airport.name}</span> 
                         <span id='rd_time'>${newdtime}</span></td>
@@ -200,11 +213,11 @@ function call_schedule_api() {
         .catch(function (error) {
             // In case of any error, see what it's about
             console.log(error)
+            document.getElementById("flighterrormsg").style.display = "block";
+            document.getElementById("flighterrormsg").innerHTML = "<h4>Invalid return flight number</h4><br><br>";
         })
 
-
-
-    console.log("**** [END] call_schedule_api() *****")
+    console.log("**** [END] call_schedule_api2() *****")
 }
 
 function country_list() {
@@ -307,7 +320,7 @@ function call_hotel_api() {
         url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
         params: { locale: 'en-gb', name: input },
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     };
@@ -338,7 +351,7 @@ function call_hotel_api() {
                     room_number: '1'
                 },
                 headers: {
-                    'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+                    'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
                     'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             };

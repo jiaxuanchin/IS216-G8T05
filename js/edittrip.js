@@ -73,7 +73,7 @@ function call_hotel_api() {
         url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
         params: { locale: 'en-gb', name: input },
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     };
@@ -104,7 +104,7 @@ function call_hotel_api() {
                     room_number: '1'
                 },
                 headers: {
-                    'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+                    'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
                     'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             };
@@ -138,19 +138,13 @@ function call_hotel_api() {
     return arr;
 }
 
-function call_airlines_schedule_api() {
+function call_schedule_api() {
 
     console.log("**** [START] call_schedule_api() *****")
 
     let dcode = document.getElementById("airlineF").value;
     let departureflightno = dcode + document.getElementById("floatingFrom").value;
     let departuredate = document.getElementById("fromdt").value;
-
-    let acode = document.getElementById("airlineT").value;
-    let arrivalflightno = acode + document.getElementById("floatingTo").value;
-    let arrivaldate = document.getElementById("todt").value;
-    console.log(departureflightno);
-    console.log(arrivalflightno);
 
     let result = new Date().toISOString().slice(0, 10);
 
@@ -163,24 +157,8 @@ function call_airlines_schedule_api() {
         }
     };
 
-    const options1 = {
-        method: 'GET',
-        url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
-        headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
-            'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
-        }
-    };
-
-    document.getElementById("result").style.display = "block";
     let table = document.getElementById("searchresult");
     table.innerHTML = "";
-    table.innerHTML += `<tr>
-                <th> Flight Number</th>
-                <th>Departure Airport & Time</th>
-                <th>Arrival Airport & Time</th>
-                </tr> `;
-
 
     // 2) Use Axios to call API asynchronously
     axios.request(options)
@@ -199,17 +177,44 @@ function call_airlines_schedule_api() {
             let atime = records[0].arrival.scheduledTimeLocal;
             let newatime = atime.slice(11, 16);
 
-            table.innerHTML += `<tr><td><span id='dd_flight'>${departureflightno}</span></td>
+            let string = `<tr><td><span id='dd_flight'>${departureflightno}</span></td>
                         <td><span id='dd_airport'>${records[0].departure.airport.name}</span>
                         <span id='dd_time'>${newdtime}</span></td>
                         <td><span id='da_airport'>${records[0].arrival.airport.name}</span>
                         <span id='da_time'>${newatime}</span></td>
                         </tr>`
+
+            call_airlines_schedule_api(string);
         })
         .catch(function (error) {
             // In case of any error, see what it's about
             console.log(error)
+            document.getElementById("flighterrormsg").style.display = "block";
+            document.getElementById("flighterrormsg").innerHTML = "<h4 style='color:red;' class='text-center'>Invalid departure flight number</h4><br><br>";
         })
+
+    console.log("**** [END] call_schedule_api() *****")
+}
+
+function call_airlines_schedule_api(depart_result) {
+
+    console.log("**** [START] call_schedule_api2() *****")
+
+    let table = document.getElementById("searchresult");
+    let acode = document.getElementById("airlineT").value;
+    let arrivalflightno = acode + document.getElementById("floatingTo").value;
+
+    let result = new Date().toISOString().slice(0, 10);
+
+    const options1 = {
+        method: 'GET',
+        url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
+        headers: {
+            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+        }
+    };
+    console.log(table);
 
     axios.request(options1)
         .then(function (response) {
@@ -225,21 +230,32 @@ function call_airlines_schedule_api() {
             let atime = records[0].arrival.scheduledTimeLocal;
             let newatime = atime.slice(11, 16);
 
+            //myFunction();
+            document.getElementById("result").style.display = "block";
+            table.innerHTML += `<tr>
+                <th>Flight Number</th>
+                <th>Departure Airport & Time</th>
+                <th>Arrival Airport & Time</th>
+                </tr> `;
+
+            table.innerHTML += depart_result;
+
             table.innerHTML += `<tr><td><span id='rd_flight'>${arrivalflightno}</span></td>
                         <td><span id='rd_airport'>${records[0].departure.airport.name}</span> 
                         <span id='rd_time'>${newdtime}</span></td>
                         <td><span id='ra_airport'>${records[0].arrival.airport.name}</span> 
                         <span id='ra_time'>${newatime}</span></td>
                         </tr>`
+            console.log(table.innerHTML);
         })
         .catch(function (error) {
             // In case of any error, see what it's about
             console.log(error)
+            document.getElementById("flighterrormsg").style.display = "block";
+            document.getElementById("flighterrormsg").innerHTML = "<h4 style='color:red;' class='text-center'>Invalid return flight number</h4><br><br>";
         })
 
-
-
-    console.log("**** [END] call_schedule_api() *****")
+    console.log("**** [END] call_schedule_api2() *****")
 }
 
 function updateFlight() {
@@ -294,17 +310,17 @@ function updateHotel() {
 function checkHotelFlight() {
     let table = document.getElementById("existsearchresult");
     table.innerHTML = "";
-    table.innerHTML += `<tr>
-    <th>Flight Number</th>
-    <th>Date</th>
-    <th>Departure Airport & Time</th>
-    <th>Arrival Airport & Time</th>
-    </tr> `;
     var user = firebase.database().ref('users/' + localStorage.getItem('uid') + "/trip/" + sessionStorage.getItem("tripId") + "/departureflight/");
     user.once('value').then((snapshot) => {
         if (snapshot.exists()) {
             let response = snapshot.val();
             if (response != "") {
+                table.innerHTML += `<tr>
+                                        <th>Flight Number</th>
+                                        <th>Date</th>
+                                        <th>Departure Airport & Time</th>
+                                        <th>Arrival Airport & Time</th>
+                                    </tr> `;
                 table.innerHTML += `<tr>
                         <td><span id='dd_flight'>${response.departure_flight_number}</span></td>
                         <td><span id='dd_flight'>${response.departure_date}</span></td>
@@ -331,12 +347,11 @@ function checkHotelFlight() {
                         <td><span id='da_airport'>${response.arrival_airport}</span>
                         <span id='da_time'>${response.arrival_time}</span></td>
                         </tr>`
+                document.getElementById("noflightexists").style.display = "none";
+                document.getElementById("flightexists").style.display = "block";
             }
         }
     });
-
-    document.getElementById("noflightexists").style.display = "none";
-    document.getElementById("flightexists").style.display = "block";
 
     let hoteltable = document.getElementById("existhotelresult");
     hoteltable.innerHTML = "";

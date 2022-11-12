@@ -69,7 +69,7 @@
                             <a class="nav-link text-white" id="logout" style="cursor: pointer;">Log out</a>
                         </li>
                     </ul>
-                    
+
                     <!-- <form class="d-flex" role="search">
                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
                 <button type="button" class="btn btn-primary"><i class="ti-search"></i></button>
@@ -223,7 +223,7 @@
                     <div>
                         <!-- <li><button class="button-add-flight" id="AddFlightBtn">Add your
                                 flight(s)</button></li> -->
-                        
+
                         <button class="button-add-flight" id="AddFlightBtn" style="color: #ce8460;">
                             <i class="fa fa-plus" aria-hidden="true"> &nbsp; Add your flight(s)</i>
                         </button>
@@ -234,161 +234,172 @@
                         <div id="flight-detail" style="display: none;">
                             <hr style="color:black;background-color:black;border: 1px solid black;">
 
-                                <h5>Add your flight</h5>
-                                <hr style="color:black;background-color:black;border: 1px solid black;">
+                            <h5>Add your flight</h5>
+                            <hr style="color:black;background-color:black;border: 1px solid black;">
 
-                                <div class="container">
-                                    <div class="row">
+                            <div class="container">
+                                <div class="row">
 
-                                        <div class="col-sm-6">
-                                            <h5>Departure</h5>
-                                            <label for="airlinesFrom">Select an airline</label>
-                                            <select name="airlinesFrom" id="airlineF" style="width:100%;">
-                
-                                            </select>
-                                            <br><br>
-                                            <span class="form-floating">
-                                                <input type="text" class="form-control" id="floatingFrom" placeholder="Singapore">
-                                                <label for="floatingFrom">Flight Number</label>
-                                            </span>
-                                            <div>
-                                                <label for="fromdt">Date</label>
-                                                <input type="date" id="fromdt" class="form-control">
-                                            </div>
-                                            <hr style="color:black;background-color:black;border: 1px solid black;">
+                                    <div class="col-sm-6">
+                                        <h5>Departure</h5>
+                                        <label for="airlinesFrom">Select an airline</label>
+                                        <select name="airlinesFrom" id="airlineF" style="width:100%;">
+
+                                        </select>
+                                        <br><br>
+                                        <span class="form-floating">
+                                            <input type="text" class="form-control" id="floatingFrom"
+                                                placeholder="Singapore">
+                                            <label for="floatingFrom">Flight Number</label>
+                                        </span>
+                                        <div>
+                                            <label for="fromdt">Date</label>
+                                            <input type="date" id="fromdt" class="form-control">
                                         </div>
-
-                                        <div class="col-sm-6">
-                                            <h5>Return</h5>
-                                            <label for="airlinesTo">Select an airline</label>
-                                            <select name="airlinesTo" id="airlineT" style="width:100%;">
-                
-                                            </select>
-                                            <br><br>
-                                            <span class="form-floating">
-                                                <input type="text" class="form-control" id="floatingTo" placeholder="Seoul">
-                                                <label for="floatingTo">Flight Number</label>
-                                            </span>
-                                            <div>
-                                                <label for="todt">Date</label>
-                                                <input type="date" id="todt" class="form-control">
-                                            </div>
-                                            <hr style="color:black;background-color:black;border: 1px solid black;">
-                                        </div>
-
+                                        <hr style="color:black;background-color:black;border: 1px solid black;">
                                     </div>
 
-                                    <div class="row">
-                                        <span class="form-floating d-flex justify-content-center">
-                                            <button type="button" class="btn me-2" style="background-color:#dda288; border-style: none;" onclick="call_schedule_api()">Find
-                                                flight</button>
-                                            <button type="button" class="btn btn-secondary" style="border-style: none;" id="closeflight">Close</button>
+                                    <div class="col-sm-6">
+                                        <h5>Return</h5>
+                                        <label for="airlinesTo">Select an airline</label>
+                                        <select name="airlinesTo" id="airlineT" style="width:100%;">
+
+                                        </select>
+                                        <br><br>
+                                        <span class="form-floating">
+                                            <input type="text" class="form-control" id="floatingTo" placeholder="Seoul">
+                                            <label for="floatingTo">Flight Number</label>
+                                        </span>
+                                        <div>
+                                            <label for="todt">Date</label>
+                                            <input type="date" id="todt" class="form-control">
+                                        </div>
+                                        <hr style="color:black;background-color:black;border: 1px solid black;">
+                                    </div>
+
+                                </div>
+
+                                <div id="flighterrormsg" style="display: none;color:red">
+                                    <h4>Departing or arriving airport is not the same as destinations</h4>
+                                    <br><br>
+                                </div>
+
+                                <div class="row">
+                                    <span class="form-floating d-flex justify-content-center">
+                                        <button id="findflight" type="button" class="btn me-2"
+                                            style="background-color:#dda288; border-style: none;">Find
+                                            flight</button>
+                                        <button type="button" class="btn btn-secondary" style="border-style: none;"
+                                            id="closeflight">Close</button>
+                                    </span>
+                                </div>
+
+                                <div class="row">
+                                    <div id="result" style="display: none;" class="mt-3">
+                                        <table id="searchresult" class="table">
+                                        </table>
+                                        <span class="form-floating">
+                                            <button type="button" id="finaladd" class="btn text-dark"
+                                                style="background-color:#fbe0c3;">Add flight</button>
                                         </span>
                                     </div>
-
-                                    <div class="row">
-                                        <div id="result" style="display: none;" class="mt-3">
-                                            <table id="searchresult" class="table">
-                                            </table>
-                                            <span class="form-floating">
-                                                <button type="button" id="finaladd" class="btn text-dark" style="background-color:#fbe0c3;">Add flight</button>
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
-                        
+                            </div>
 
-                            </div>
-                            </div>
-                        
 
                         </div>
                     </div>
-                        <!-- <li><button class="button-add-flight" id="myHotelBtn">Add hotel</button>
-                        </li> -->
 
-                        
-                        <button class="button-add-flight mt-3" id="myHotelBtn" style="color: #ce8460;">
-                            <i class="fa fa-plus" aria-hidden="true"> &nbsp; Add hotel</i>
-                        </button>
-
-                        <div id="hotel-detail" style="display: none;" class="mt-3">
-                            <h5>Add hotel</h5>
-                            <hr style="color:black;background-color:black;border: 1px solid black;">
-                            <form autocomplete="off">
-                                <div class="autocomplete" class="form-floating" style="width: 100%;">
-                                    <label for="myHotelInput">Hotel Name</label>
-                                    <textarea class="form-control" id="myHotelInput" type="text"
-                                        name="myHotel"></textarea>
-                                </div>
-                            </form>
-                            <div>
-                                <label for="fromstay">From</label>
-                                <input type="date" id="fromstay" class="form-control">
-                            </div>
-                            <div>
-                                <label for="tostay">To</label>
-                                <input type="date" id="tostay" class="form-control">
-                            </div>
-                            <br><br>
-                            <span class="form-floating">
-                                <button type="button" class="btn btn-primary text-dark" id="addhotel" style="background-color:#fbe0c3; border-style: none;">
-                                    Add hotel
-                                </button>
-                                <button type="button" class="btn btn-secondary" style="border-style: none;" id="closehotel">Close</button>
-                            </span>
-                        </div>
-                    </div>
 
                 </div>
-                <fieldset>
-                    <input type="button" name="next-step" class="next-step" value="Next Step"
-                        onclick="insertTripDetails()" />
-                </fieldset>
+            </div>
+            <!-- <li><button class="button-add-flight" id="myHotelBtn">Add hotel</button>
+                        </li> -->
+
+
+            <button class="button-add-flight mt-3" id="myHotelBtn" style="color: #ce8460;">
+                <i class="fa fa-plus" aria-hidden="true"> &nbsp; Add hotel</i>
+            </button>
+
+            <div id="hotel-detail" style="display: none;" class="mt-3">
+                <h5>Add hotel</h5>
+                <hr style="color:black;background-color:black;border: 1px solid black;">
+                <form autocomplete="off">
+                    <div class="autocomplete" class="form-floating" style="width: 100%;">
+                        <label for="myHotelInput">Hotel Name</label>
+                        <textarea class="form-control" id="myHotelInput" type="text" name="myHotel"></textarea>
+                    </div>
+                </form>
+                <div>
+                    <label for="fromstay">From</label>
+                    <input type="date" id="fromstay" class="form-control">
+                </div>
+                <div>
+                    <label for="tostay">To</label>
+                    <input type="date" id="tostay" class="form-control">
+                </div>
+                <br><br>
+                <span class="form-floating">
+                    <button type="button" class="btn btn-primary text-dark" id="addhotel"
+                        style="background-color:#fbe0c3; border-style: none;">
+                        Add hotel
+                    </button>
+                    <button type="button" class="btn btn-secondary" style="border-style: none;"
+                        id="closehotel">Close</button>
+                </span>
+            </div>
+            <fieldset>
+                <input type="button" name="next-step" class="next-step" style="" value="Next Step"
+                    onclick="insertTripDetails()" />
+            </fieldset>
+        </div>
+    </div>
+
+
+    <!--footer-->
+    <section class="footer-2 section-padding gray-bg pb-5 px-3">
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
+                <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
+                    <i class="fa fa-map-marker fx-2" aria-hidden="true"></i>
+                    <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">81
+                        Victoria St, Singapore 188065</span>
+                </h4>
+                <br>
+                <h4 class="mb-4 font-weight-bold">
+                    <i class="fa fa-phone fx-2" aria-hidden="true"></i>
+                    <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">+65 6782
+                        9653</span>
+                </h4>
+                <br>
+                <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
+                    <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
+                    <span
+                        style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">support@adventuretime.com</span>
+                </h4>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none" />
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
+                <h2 class="mb-4 font-weight-bold" style="color: #1c1c1c;font-family: 'Unna', serif; text-align: left">
+                    About the company</h2>
+                <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to
+                    help
+                    potential travellers to travel with ease!</p>
+                <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+                <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+                <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+                <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #000;"></i></a>
             </div>
         </div>
-    </div>
-
-<!--footer-->
-<section class="footer-2 section-padding gray-bg pb-5 px-3">
-    <div class="row">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
-            <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
-                <i class="fa fa-map-marker fx-2" aria-hidden="true"></i>
-                <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">81 Victoria St, Singapore 188065</span>
-            </h4>
-            <br>
-            <h4 class="mb-4 font-weight-bold">
-                <i class="fa fa-phone fx-2" aria-hidden="true"></i>
-                <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">+65 6782 9653</span>
-            </h4>
-            <br>
-            <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
-                <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
-                <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">support@adventuretime.com</span>
-            </h4>
-        </div>
-        <!-- Grid column -->
-
-        <hr class="w-100 clearfix d-md-none" />
-
-        <!-- Grid column -->
-        <hr class="w-100 clearfix d-md-none" />
-
-        <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
-            <h2 class="mb-4 font-weight-bold" style="color: #1c1c1c;font-family: 'Unna', serif; text-align: left">About the company</h2>
-            <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to
-                help
-                potential travellers to travel with ease!</p>
-            <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
-            <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
-            <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
-            <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #000;"></i></a>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- THEME JAVASCRIPT FILES
 ================================================== -->
@@ -481,9 +492,28 @@
         }
 
         close.onclick = function () {
-            flightmodal.style.display = "none";
-            flightbtn.style.display = "block";
-            document.getElementById("flightstatus").innerText = "Added";
+            let airportcity = document.getElementById("da_airport").innerText;
+            let city = document.getElementById("myCityInput").value;
+            let newairport = airportcity.slice(0, airportcity.search(","));
+
+            let returnhomeairport = document.getElementById("ra_airport").innerText;
+            let newairportreturn = returnhomeairport.slice(0, returnhomeairport.search(","));
+            console.log(newairportreturn);
+            console.log(newairport);
+            console.log(city);
+
+            if (newairport == city && newairportreturn == "Singapore") {
+                document.getElementById("flighterrormsg").style.display = "none";
+                flightmodal.style.display = "none";
+                flightbtn.style.display = "block";
+                document.getElementById("flightstatus").innerText = "Added";
+                let str = `<i class="fa fa-check" aria-hidden="true"> &nbsp; Flights added</i>`;
+                document.getElementById("AddFlightBtn").innerHTML = str;
+            }
+            else {
+                document.getElementById("flighterrormsg").style.display = "block";
+                document.getElementById("flighterrormsg").innerHTML = "<h4 style='color:red;' class='text-center'>Departing or arriving airport is not the same as destinations</h4><br><br>";
+            }
         }
 
         closeflight.onclick = function () {
@@ -500,6 +530,8 @@
             hotelmodal.style.display = "none";
             hotelbtn.style.display = "block";
             document.getElementById("hotelstatus").innerText = "Added";
+            let str = `<i class="fa fa-check" aria-hidden="true"> &nbsp; Hotel added</i>`;
+            document.getElementById("myHotelBtn").innerHTML = str;
         }
 
         function myFunction() {
@@ -507,6 +539,11 @@
             if (x.style.display === "none") {
                 x.style.display = "block";
             }
+        }
+
+        document.getElementById("findflight").onclick = function () {
+            call_schedule_api();
+            document.getElementById("flighterrormsg").style.display = "none";
         }
     </script>
 
@@ -585,7 +622,7 @@
                     }
                     if (num == 1) {
                         doc.style.display = "block";
-                        autocomplete(document.getElementById("myCityInput"), city_list(), 2);
+                        //autocomplete(document.getElementById("myCityInput"), city_list(), 2);
                     }
                 }
             });
