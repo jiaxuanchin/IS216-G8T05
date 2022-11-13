@@ -250,6 +250,7 @@
                 <i class="fa fa-bed" aria-hidden="true"></i> 
                 <span>Hotel</span> 
               </button> 
+              <br>
               <button type="button" 
                 style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;" 
                 onclick="window.open('../new_restrictions.html','_blank')"> 
@@ -1250,6 +1251,10 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       //country data
       let country_split = country.split("(")
       let country_code_unclean = country_split[1]
+
+      let start_str = start.getDate() + "/"+ start.getMonth() + "/" + start.getFullYear();
+      let end_str = end.getDate() + "/"+ end.getMonth() + "/" + end.getFullYear()
+      document.getElementById('result-2').innerText = start_str + " to " + end_str;
       document.getElementById("data_country").innerText = country_split[0]
       let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
       UpdateFromCurrency(country_code_clean)

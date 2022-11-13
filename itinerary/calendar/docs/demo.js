@@ -1,8 +1,8 @@
 
 var rangeText = function (start, end) {
         var str = '';
-        str += start ? start.format('D/M/YYYY') + ' to ' : '';
-        str += end ? end.format('D/M/YYYY') : '...';
+        str += start ? start.format('DD/MM/YYYY') + ' to ' : '';
+        str += end ? end.format('DD/MM/YYYY') : '...';
         
         return str;
 
