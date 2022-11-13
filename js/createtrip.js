@@ -320,8 +320,8 @@ function call_hotel_api() {
         url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
         params: { locale: 'en-gb', name: input },
         headers: {
-            'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
-            'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+            'X-RapidAPI-Key': 'd476316f40msh335b915d4cd836ep140697jsnb10f214fe0da',
+			'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     };
 
@@ -351,8 +351,8 @@ function call_hotel_api() {
                     room_number: '1'
                 },
                 headers: {
-                    'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
-                    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+                    'X-RapidAPI-Key': 'd476316f40msh335b915d4cd836ep140697jsnb10f214fe0da',
+					'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             };
 
