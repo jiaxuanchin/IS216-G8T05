@@ -237,6 +237,14 @@
             sessionStorage.setItem("tripId",item);
             window.location.href = 'itinerary/itinerary.html';
         }
+
+        let logout = document.getElementById('logout')
+        logout.addEventListener('click', logout1)
+        function logout1() {
+            localStorage.removeItem('uid')
+            sessionStorage.setItem('logout', true)
+            window.location.href = 'index.html'
+        };
     </script>
 
     <script type="module">
@@ -273,17 +281,6 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
-        document.getElementById('logout')
-            .addEventListener('click', function () {
-                signOut(auth).then(() => {
-                    alert("Sign out successful")
-                    localStorage.removeItem('uid')
-                    window.location.href = 'home1.html';
-                }).catch((error) => {
-                    // An error happened.
-                    console.log(error);
-                });
-            });
     </script>
 </body>
 

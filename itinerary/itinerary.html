@@ -221,8 +221,8 @@
 
   <!-- Itinerary heading --> 
   <!-- Banner --> 
-  <section class="trip-name shadow px-0" id="overview"> 
-    <div class="card w-75 h-200 mx-auto shadow"> 
+  <section class="trip-name shadow px-0 " style="height:60%" id="overview"> 
+    <div class="card w-75 h-220 mx-auto shadow"> 
       <div class="card-body"> 
         <div class="container"> 
           <div class="row"> 
@@ -1224,6 +1224,9 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let id = place.id
                 let name = place.name
                 let id_rep = place.id_rep.slice(0,place.id_rep.length-3)
+                let note_text = place.note_text
+                let note_id = id_rep + 'notes2'
+                console.log(note_id)
                 console.log(id_rep+'budget')
                 let picture_url = place.picture_url
                 let lati = place.lati
@@ -1232,19 +1235,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let fill = document.createElement('div');
                 let note_list = place.note_list 
                 let note_add = ''
-                if(note_list != undefined){
-                  console.log(note_list)
-                  note_add = document.createElement('div')
-                  for(item of note_list){
-                    console.log(item,"return the item here")
-                    let item_text = item[0]
-                    let item_id = item[1]
-                    note_add.innerHTML += `<div class="d-flex" id=${item_id}>
-                 <span class="textarea" contenteditable ">${item_text}</span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${item_id})></span>
-                  </div><br>`
-                  console.log(item_id,"item id from itinerary here")
-                }
-                }
 
                 let budget = place.budget
                 total_budget += budget
@@ -1301,18 +1291,13 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                   
               <!------------- NOTE ------------------>
               <div class="col-10 mx-0">
-                <div class="d-flex">
-                <i class="fa fa-sticky-note"> Add Notes: </i>
-                  <br>
-                  <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable "></div>
-                </div><br>
-                <br>
-                <form action="#" method="get" id="form1">
-                  <input type="hidden" id=${id_rep+'notes1'}>
-                  <div class="divTxt" id=${id_rep+'notes2'}>`+ note_add.innerHTML + `
-                    </div>
-                </form>
-              </div>
+          <div class="d-flex">
+          <i class="fa fa-sticky-note"> Add Notes: </i>
+            <br>
+            <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable ">${note_text}</div>
+          </div><br>
+          <br>
+        </div>
 
 
           <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
