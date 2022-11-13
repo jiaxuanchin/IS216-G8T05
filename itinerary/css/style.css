@@ -194,6 +194,7 @@ h6, .h6 {
 body {
   background: #fff;
   color: #575769;
+  overflow-x: hidden;
 }
 
 html, body {
@@ -673,7 +674,6 @@ overlay search
 }
 
 .content {
-  width: 85%;
   margin: 0 auto;
   padding-left: 170px;
 }

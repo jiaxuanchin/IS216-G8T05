@@ -149,29 +149,22 @@
     }
   </style>
 </head>
-
-
-
-
-
-
     <!-- side bar -->
-    <div class="sidebar " style="background-color:#344648;">
-      <a class="navbar-brand text-uppercase py-0  d-flex justify-content-center"  href="home2.html">
-        <img src="images/logo.png" alt="" width="80px" style="max-width: 84px; " >
-      </a>
-      <a class="active text-white text-center"  href="#overview">Trip Overview</a>
-        <div id="dropdown-trip">
+    <div class="sidebar d-none d-md-block" style="background-color:#344648;">
+    <a class="navbar-brand text-uppercase py-2  d-flex justify-content-center"  href="home2.html">
+      <img src="images/logo.png" alt="" width="80px" style="max-width: 80px; " class="ms-1">
+    </a>
+    <a class="active text-white text-center"  href="#overview">Trip Overview</a>
+      <div id="dropdown-trip">
 
-        </div>
-      <a href="#itinerary" class="sidebar-link text-white text-center">Itinerary</a>
-      <a href="#budget" class="sidebar-link text-white text-center">Budget</a>
+      </div>
+    <a href="#itinerary" class="sidebar-link text-white text-center">Itinerary</a>
+    <a href="#budget" class="sidebar-link text-white text-center">Budget</a>
 
-    </div>
-   
-
-    <div class="content">
-      <body onload="checklogin()">
+  </div>
+  <!-- content -->
+  <div class="content">
+<body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
   <header class="header-top bg-grey " >
     <nav class="navbar navbar-expand-md navigation-2 navigation py-1">
@@ -179,6 +172,9 @@
         <!-- <a class="navbar-brand text-uppercase py-0" href="home2.html">
           <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
         </a> -->
+        <a class="navbar-brand text-uppercase py-0 d-sm-block d-md-block d-lg-none" href="home2.html">
+          <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="ti-menu" style="color: white;"></span>
@@ -190,6 +186,9 @@
             </li>
             <li class="nav-item mx-2">
               <a href="../createtrip.html" class="nav-link text-white">Add New Trip</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="../new_restrictions.html" class="nav-link text-white">Restrictions</a>
             </li>
             <li class="nav-item mx-2">
               <a href="../profile.html" class="nav-link text-white">Profile</a>
@@ -206,9 +205,7 @@
       </div>
     </nav>
   </header>
-
-  <!-- content -->
-
+ 
 
     <!-- Itinerary heading -->
   <!-- Banner -->
@@ -610,44 +607,50 @@
     </div>
   </div>
 
-  <!------------------------------------------Footer-------------------------------------------->
-  <section class="footer-2 section-padding gray-bg pb-3">
-    <div class="row">
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
-        <h4 class="mb-4 font-weight-bold">
-          <i class="fa fa-map-marker fx-2" aria-hidden="true"></i>
-          <span style="color:#575769">81 Victoria St, Singapore 188065</span>
-        </h4>
-        <br>
-        <h4 class="mb-4 font-weight-bold">
-          <i class="fa fa-phone fx-2" aria-hidden="true"></i>
-          <span style="color:#575769">+65 6782 9653</span>
-        </h4>
-        <br>
-        <h4 class="mb-4 font-weight-bold">
-          <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
-          <span style="color:#575769">support@adventuretime.com</span>
-        </h4>
+
+    <!--footer-->
+    <section class="footer-2 section-padding gray-bg pb-5 px-3">
+      <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-4 mx-auto mt-3">
+              <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
+                  <i class="fa fa-map-marker fx-2" aria-hidden="true"></i>
+                  <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">81
+                      Victoria St, Singapore 188065</span>
+              </h4>
+              <br>
+              <h4 class="mb-4 font-weight-bold">
+                  <i class="fa fa-phone fx-2" aria-hidden="true"></i>
+                  <span style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">+65 6782
+                      9653</span>
+              </h4>
+              <br>
+              <h4 class="mb-4 font-weight-bold" style="line-height: 28px;">
+                  <i class="fa fa-envelope fx-2" aria-hidden="true"></i>
+                  <span
+                      style="color:#575769; font-family: 'Unna', serif;font-weight: 600;font-size: 20px;">adventuretimeis216@gmail.com</span>
+              </h4>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
+              <h2 class="mb-4 font-weight-bold" style="color: #1c1c1c;font-family: 'Unna', serif; text-align: left">
+                  About the company</h2>
+              <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to
+                  help
+                  potential travellers to travel with ease!</p>
+              <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+              <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+              <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true" style="color: #000;"></i></a>&nbsp
+              <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #000;"></i></a>
+          </div>
       </div>
-      <!-- Grid column -->
-
-      <hr class="w-100 clearfix d-md-none" />
-
-      <!-- Grid column -->
-      <hr class="w-100 clearfix d-md-none" />
-
-      <!-- Grid column -->
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1 mb-1">
-        <h2 class="mb-4 font-weight-bold">About the company</h2>
-        <p>Feeling motivated to travel during these pandemic times, we have founded Adventure Time to help potential
-          travellers to travel with ease!</p>
-        <a href="#"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp
-        <a href="#"><i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i></a>
-      </div>
-    </div>
   </section>
 </div>
 
@@ -767,7 +770,7 @@
 
 <!--Vue instance for generation of budget total amount and currency-->
 <script>
-
+  
   // Changing the exchange rate
   function convert(from, to, amt) {
     const options = {
@@ -1141,11 +1144,21 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   }
   function checkLogin() {
     if (localStorage.getItem('uid') == null) {
-      window.location.href = 'login.html';
+      console.log("I AM HERE")
+      window.location.href = '../login.html';
     }
   }
-  console.log(localStorage.getItem('uid'))
-  let userid = localStorage.getItem('uid');
+  //console.log(localStorage.getItem('uid'))
+  //let userid = localStorage.getItem('uid');
+
+  //logout
+  let logout = document.getElementById('logout')
+  logout.addEventListener('click', logout1)
+  function logout1() {
+      localStorage.removeItem('uid')
+      sessionStorage.setItem('logout', true)
+      window.location.href = '../index.html'
+  };
 </script>
 
 <!--save trip info START-->
