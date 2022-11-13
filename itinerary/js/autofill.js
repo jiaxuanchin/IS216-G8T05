@@ -367,8 +367,12 @@ function callback(place, status) {
       <div class="row">
   
         <!------------- NOTE ------------------>
-        <div class="col-6 mx-0">
-          <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+        <div class="col-10 mx-0">
+          <div class="d-flex">
+          <i class="fa fa-sticky-note"> Add Notes: </i>
+            <br>
+            <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable "></div>
+          </div><br>
           <br>
           <form action="#" method="get" id="form1">
             <input type="hidden" id=${id_rep+'notes1'}>
@@ -646,15 +650,19 @@ function callback(place, status) {
 
     <div class="row">
 
-      <!------------- NOTE ------------------>
-      <div class="col-6  mx-0"">
-        <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
-        <br>
-        <form action="#" method="get" id="form1">
-          <input type="hidden" id=${id_rep+'notes1'}>
-          <div class="divTxt" id=${id_rep+'notes2'}></div>
-        </form>
-      </div>
+    <!------------- NOTE ------------------>
+        <div class="col-10 mx-0">
+          <div class="d-flex">
+          <i class="fa fa-sticky-note"> Add Notes: </i>
+            <br>
+            <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable "></div>
+          </div><br>
+          <br>
+          <form action="#" method="get" id="form1">
+            <input type="hidden" id=${id_rep+'notes1'}>
+            <div class="divTxt" id=${id_rep+'notes2'}></div>
+          </form>
+        </div>
 
       
       <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
@@ -672,34 +680,34 @@ function callback(place, status) {
   }
   }
 
-function addFormField(id) {
-    console.log(id)
-    id_origin = id
-    id = id.id
-    id2 = id.slice(0,id.length-1) +'2'
-    to_add = document.createElement('div')
-    to_add.className = 'input_field' + id_origin.id
+// function addFormField(id) {
+//     console.log(id)
+//     id_origin = id
+//     id = id.id
+//     id2 = id.slice(0,id.length-1) +'2'
+//     to_add = document.createElement('div')
+//     to_add.className = 'input_field' + id_origin.id
     
-    current_input = document.getElementsByClassName('input_field' + id_origin.id)
-    if(current_input.length == 0){
-      to_add.id = 'input_field'+ id_origin.id + 1
-    }
-    else{
-      cur_num_class = current_input[current_input.length-1].id
-      cur_num = cur_num_class[cur_num_class.length - 1]
-      console.log(cur_num)
-      to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
-    }
-    to_add.innerHTML = `<div class="d-flex">
-            <span class="textarea" contenteditable "></span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
-            </div><br>`
-    div_element = document.getElementById(id2)
-    div_element.appendChild(to_add)
-  }
+//     current_input = document.getElementsByClassName('input_field' + id_origin.id)
+//     if(current_input.length == 0){
+//       to_add.id = 'input_field'+ id_origin.id + 1
+//     }
+//     else{
+//       cur_num_class = current_input[current_input.length-1].id
+//       cur_num = cur_num_class[cur_num_class.length - 1]
+//       console.log(cur_num)
+//       to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
+//     }
+//     to_add.innerHTML = `<div class="d-flex">
+//             <span class="textarea" contenteditable "></span>
+//             </div><br>`
+//     div_element = document.getElementById(id2)
+//     div_element.appendChild(to_add)
+//   }
 
-function removeFormField(id) {
-  document.getElementById(id.id).remove()
-}
+// function removeFormField(id) {
+//   document.getElementById(id.id).remove()
+// }
 
 
 // note  on enter
