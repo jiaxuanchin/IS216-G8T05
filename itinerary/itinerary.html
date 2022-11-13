@@ -1210,10 +1210,11 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       dates[0] = dates[0]
       document.getElementById('result-3').innerHTML = dates
 
-      // let country_split = country.split("(")
-      // let country_code_unclean = country_split[1]
-      // let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
-      // UpdateFromCurrency(country_code_clean)
+      //country data
+      let country_split = country.split("(")
+      let country_code_unclean = country_split[1]
+      let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
+      UpdateFromCurrency(country_code_clean)
 
 
       //Fill calendar on page load
@@ -1287,13 +1288,19 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let lng = place.lng
                 let tracking = place.tracking
                 let fill = document.createElement('div');
+
+                let budget = place.budget
+                let time = place.time
+                let note = place.note
+                let check_box = place.check_box
+
                 fill.id = id_rep + 'row'
                 fill.className = "container"
                 fill.innerHTML = `
       <div class="row my-2">
         <div class="col mb-2 rounded p-3 bg-light" >
           <h3>${name}
-          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep + 'row'})"></span>
+          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep})"></span>
           </h3>
         <div>
       </div>
@@ -1320,7 +1327,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
           <div class="col-10">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
-                <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'">
+                <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
             </div>
           </div>
 
@@ -1331,7 +1338,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
           <div class="col-10">
             <div class="input-group mb-3 w-80">
               <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
-              <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'">
+              <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
             </div>
           </div>
         </div>
@@ -1344,7 +1351,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             <br>
             <form action="#" method="get" id="form1">
               <input type="hidden" id=${id_rep + 'notes1'}>
-              <div class="divTxt" id=${id_rep + 'notes2'}></div>
+              <div class="divTxt" id=${id_rep + 'notes2'} value="${note}"></div>
             </form>
           </div>
     
@@ -1353,11 +1360,11 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
             <br>
             <form action="#" method="get" id="form2">
-            <input type="hidden" id=${id_rep + 'check1'}>
+            <input type="hidden" id=${id_rep + 'check1'} value="${check_box}">
             <div class="divCheckBox" id=${id_rep + 'check2'}></div>
             </form>
           </div>
-          <div hidden class='getAllVal'>${id},${id_rep + 'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
+          <div hidden class='getAllVal'>${id},${id_rep},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>
       </div>
