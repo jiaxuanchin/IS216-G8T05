@@ -451,7 +451,7 @@ fill += `
     <div class="carousel-inner">
   `
 var 
-  count_of_card = 1
+nt_of_card = 1
 
 for(item of results){
   
@@ -469,9 +469,9 @@ for(item of results){
 
   if(count_of_card === 1){
     
-    // carousel-item "active"
-    // card 1
-    // count_of_card ++
+    //carousel-item "active"
+    //card 1
+    //count_of_card ++
 
     fill += `
     <div class="carousel-item ${active_status} mt-2" >
