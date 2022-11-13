@@ -87,6 +87,11 @@ body, p {
   font-weight: 400;
 }
 
+.container{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 /* add time background */
 input[type=text]{
   background-color: #f0f1f4 !important;

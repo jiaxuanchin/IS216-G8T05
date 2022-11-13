@@ -208,10 +208,11 @@
   </header>
 
   <!-- content -->
- 
+
 
     <!-- Itinerary heading -->
   <!-- Banner -->
+  <button onchange='saveData()'>SAVE</button>
   <section class="trip-name shadow" id="overview">
     <div class="card w-50 h-200 mx-auto shadow">
       <div class="card-body ">
@@ -428,10 +429,6 @@
       </div>
     </div>
   </div>
-
-  <button onclick="empty()">empty</button>
-  <button onclick="saveData()">SAVE</button>
-  <button onclick="getData()">get</button>
 
   <!-------------------------------------Itinerary----------------------------->
 
@@ -1306,7 +1303,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
               for (let place of place_info) {
                 let id = place.id
                 let name = place.name
-                let id_rep = place.id_rep
+                let id_rep = place.id_rep.slice(0,place.id_rep.length-3)
+                console.log(id_rep+'budget')
                 let picture_url = place.picture_url
                 let lati = place.lati
                 let lng = place.lng
@@ -1315,6 +1313,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let note_list = place.note_list 
                 let note_add = ''
                 if(note_list != undefined){
+                  console.log(note_list)
                   note_add = document.createElement('div')
                   for(item of note_list){
                     let item_text = item[0]
@@ -1336,7 +1335,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       <div class="row my-2">
         <div class="col mb-2 rounded p-3 bg-light" >
           <h3>${name}
-          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep + 'row'})"></span>
+          <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
           </h3>
         <div>
       </div>
@@ -1360,26 +1359,26 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
         <div class="row">
             <!------------- Budget ------------------>
 
-          <div class="col-10">
-            <div class="input-group mb-3">
-                <span class="input-group-text" >Budget</span>
-                <input type="number" class="form-control" id="${id_rep} + 'budget'" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
-            </div>
-          </div>
+            
 
-        </div>
+<div class="col-10">
+  <div class="input-group mb-3">
+      <span class="input-group-text">Budget</span>
+      <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}" value=${budget}>
+  </div>
+</div>
 
-        <div class="row">
-          <!------------- Time ------------------>
-          <div class="col-10">
-            <div class="input-group mb-3 w-80">
-              <span class="input-group-text" >Time</span>
-              <input type="text" class="form-control" id="${id_rep} + 'time'" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
-            </div>
-          </div>
-        </div>
+</div>
 
-        <div class="row">
+<div class="row">
+<!------------- Time ------------------>
+<div class="col-10">
+  <div class="input-group mb-3 w-80">
+    <span class="input-group-text">Time</span>
+    <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}" value=${budget}>
+  </div>
+</div>
+</div>
     
           <!------------- NOTE ------------------>
           <div class="col-6">
@@ -1402,7 +1401,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             <div class="divCheckBox" id=${id_rep + 'check2'}></div>
             </form>
           </div>
-          <div hidden class='getAllVal'>${id},${id_rep},${name},${lati},${lng},${picture_url},${tracking}</div>
+          <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>
       </div>
@@ -1589,6 +1588,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
 
 <html>
-
+<button onclick="empty()">empty</button>
+<button onclick="saveData()">SAVE</button>
+<button onclick="getData()">get</button>
 
 </html>

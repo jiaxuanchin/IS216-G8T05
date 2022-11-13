@@ -321,7 +321,7 @@ function callback(place, status) {
     <div class="row my-2">
       <div class="col mb-2 rounded p-3 bg-light" >
         <h3>${name}
-         <span style='float:right' class='fa fa-trash ' onClick=" removePlace(${id_rep+'row'}) "></span>
+         <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
         </h3>
       <div>
     </div>
@@ -347,8 +347,8 @@ function callback(place, status) {
 
         <div class="col-10">
           <div class="input-group mb-3">
-          <span class="input-group-text">Budget</span>
-          <input type="number" class="form-control" placeholder="budget"  id="${id_rep} + 'budget'" aria-label="budget" aria-describedby="${id_rep} + 'activity'" >
+              <span class="input-group-text">Budget</span>
+              <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}">
           </div>
         </div>
 
@@ -358,8 +358,8 @@ function callback(place, status) {
         <!------------- Time ------------------>
         <div class="col-10">
           <div class="input-group mb-3 w-80">
-          <span class="input-group-text" >Time</span>
-          <input type="text" class="form-control" placeholder="time" aria-label="time" id="${id_rep} + 'time'" aria-describedby="${id_rep} + 'time'" >
+            <span class="input-group-text">Time</span>
+            <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}">
           </div>
         </div>
       </div>
@@ -400,8 +400,6 @@ function callback(place, status) {
   
 
 function removePlace(id){
-console.log('hello')
-console.log(id)
 document.getElementById(id.id).remove()
 }
 
@@ -453,7 +451,7 @@ fill += `
     <div class="carousel-inner">
   `
 var 
-count_of_card = 1
+  count_of_card = 1
 
 for(item of results){
   
@@ -471,9 +469,9 @@ for(item of results){
 
   if(count_of_card === 1){
     
-    //carousel-item "active"
-    //card 1
-    //count_of_card ++
+    // carousel-item "active"
+    // card 1
+    // count_of_card ++
 
     fill += `
     <div class="carousel-item ${active_status} mt-2" >
@@ -637,8 +635,8 @@ function callback(place, status) {
 
       <div class="col-10">
         <div class="input-group mb-3">
-        <span class="input-group-text" >Budget</span>
-        <input type="number" class="form-control" placeholder="budget" id="${id_rep} + 'budget'" aria-label="budget" aria-describedby="${id_rep} + 'activity'" >
+            <span class="input-group-text">Budget</span>
+            <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}">
         </div>
       </div>
 
@@ -648,8 +646,8 @@ function callback(place, status) {
       <!------------- Time ------------------>
       <div class="col-10">
         <div class="input-group mb-3 w-80">
-        <span class="input-group-text" >Time</span>
-        <input type="text" class="form-control" placeholder="time" aria-label="time" id="${id_rep} + 'time'" aria-describedby="${id_rep} + 'time'" >
+          <span class="input-group-text">Time</span>
+          <input type="text" class="form-control" placeholder="Add time" aria-label="time" id="${id_rep}time">
         </div>
       </div>
     </div>
@@ -708,8 +706,7 @@ function addFormField(id) {
       console.log(cur_num)
       to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
     }
-    console.log(to_add.id)
-    to_add.innerHTML = `<div class="d-flex" id=${to_add.id}>
+    to_add.innerHTML = `<div class="d-flex">
             <span class="textarea" contenteditable "></span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
             </div><br>`
     div_element = document.getElementById(id2)
@@ -823,6 +820,7 @@ function saveData(){
       let notes = note_id.getElementsByClassName('textarea')
       let note_list = []
       for(note of notes){
+        console.log(note.parentNode.id)
         note_list.push([note.innerHTML,note.parentNode.id])
       }
       let name = val_list[2]
@@ -830,6 +828,9 @@ function saveData(){
       let lng = val_list[4]
       let picture_url = val_list[5]
       let tracker = val_list[6]
+      console.log(id_rep)
+      console.log(id_rep.slice(0,id_rep.length-3)+"budget")
+      console.log(document.getElementById(id_rep.slice(0,id_rep.length-3)+"budget"))
       let budget = document.getElementById(id_rep.slice(0,id_rep.length-3)+"budget").value
       let time = document.getElementById(id_rep.slice(0,id_rep.length-3)+"time").value
   
