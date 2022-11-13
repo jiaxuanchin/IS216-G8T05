@@ -147,6 +147,10 @@
       background-color: DodgerBlue !important;
       color: #ffffff;
     }
+
+    body{
+      overflow: visible;
+    }
   </style>
 </head>
 
@@ -161,16 +165,14 @@
         <img src="images/logo.png" alt="" width="80px" style="max-width: 84px; " >
       </a>
       <a class="active text-white text-center"  href="#overview">Trip Overview</a>
-        <div id="dropdown-trip">
 
-        </div>
       <a href="#itinerary" class="sidebar-link text-white text-center">Itinerary</a>
       <a href="#budget" class="sidebar-link text-white text-center">Budget</a>
 
     </div>
    
 
-    <div class="content">
+  <div class="content">
       <body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
   <header class="header-top bg-grey " >
@@ -213,43 +215,45 @@
     <!-- Itinerary heading -->
   <!-- Banner -->
   <button onclick='saveData()'>SAVE</button>
-  <section class="trip-name shadow" id="overview">
-    <div class="card w-50 h-200 mx-auto shadow">
-      <div class="card-body ">
-        <div class="container">
-          <div class="row">
-            <div class="col-8">
-              <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1>
-              <h5 class="card-content" style="text-align:left">
-                <i style="font-size:24px" class="fa">&#xf073;</i>
-                <p id="result-2" style="display:inline">&nbsp;</p></i>
-              </h5>
-              <br>
-            </div>
-            <div class="col-4" style="margin-top: 30px;">
-              <button type="button" data-bs-toggle="modal" data-bs-target="#flightModal"
-                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"
-                onclick="call_all_airlines_api()">
-                <i class="fa fa-plane" aria-hidden="true"></i>
-                <span>Flights</span>
-              </button>
-              <br>
-              <button type="button" data-bs-toggle="modal" data-bs-target="#hotelModal"
-                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;">
-                <i class="fa fa-bed" aria-hidden="true"></i>
-                <span>Hotel</span>
-              </button>
-              <button type="button"
-                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"
-                onclick="window.open('../new_restrictions.html','_blank')">
-                <i class="fa fa-exclamation" aria-hidden="true"></i>
-                <span>View restrictions</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Itinerary heading --> 
+  <!-- Banner --> 
+  <section class="trip-name shadow px-0" id="overview"> 
+    <div class="card w-75 h-200 mx-auto shadow"> 
+      <div class="card-body"> 
+        <div class="container"> 
+          <div class="row"> 
+            <div class="col-md-8"> 
+              <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
+              <h5 class="card-content" style="text-align:left"> 
+                <i style="font-size:24px" class="fa">&#xf073;</i> 
+                <p id="result-2" style="display:inline">&nbsp;</p></i> 
+              </h5> 
+              <br> 
+            </div> 
+            <div class="col-md-4" style="margin-top: 30px;"> 
+              <button type="button" data-bs-toggle="modal" data-bs-target="#flightModal" 
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;" 
+                onclick="call_all_airlines_api()"> 
+                <i class="fa fa-plane" aria-hidden="true"></i> 
+                <span>Flights</span> 
+              </button> 
+              <br> 
+              <button type="button" data-bs-toggle="modal" data-bs-target="#hotelModal" 
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"> 
+                <i class="fa fa-bed" aria-hidden="true"></i> 
+                <span>Hotel</span> 
+              </button> 
+              <button type="button" 
+                style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;" 
+                onclick="window.open('../new_restrictions.html','_blank')"> 
+                <i class="fa fa-exclamation" aria-hidden="true"></i> 
+                <span>View restrictions</span> 
+              </button> 
+            </div> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
   </section>
 
 
@@ -649,6 +653,8 @@
       </div>
     </div>
   </section>
+
+
 </div>
 
  
@@ -1323,31 +1329,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                   </div><br>`
                 }
                 }
-                else{
-                  note_list = ''
-                  note_add = ''
-                }
-
-
-                let check_list = place.check_list 
-                let check_add = ''
-                if(check_list != undefined){
-                  console.log(note_list)
-                  check_add = document.createElement('div')
-                  for(item of note_list){
-                    let item_text = item[0]
-                    let item_id = item[1]
-                    check_add.innerHTML += `<div class="d-flex" id=${item_id}>
-                 <span class="textarea" contenteditable ">${item_text}</span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${item_id})></span>
-                  </div><br>`
-                }
-                }
-                else{
-                  note_list = ''
-                  note_add = ''
-                }
-
-
 
                 let budget = place.budget
                 let time = place.time
@@ -1419,15 +1400,13 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
     
           <!-------------CHECKLIST -------------->
           <div class="col-6">
-            <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep + 'check1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
             <br>
-            <form action="#" method="get" id="form1">
-              <input type="hidden" id=${id_rep + 'check1'}>
-              <div class="divTxt" id=${id_rep + 'check2'}>`+ check_add.innerHTML
-              +`</div>
+            <form action="#" method="get" id="form2">
+            <input type="hidden" id=${id_rep + 'check1'} value="${check_box}">
+            <div class="divCheckBox" id=${id_rep + 'check2'}></div>
             </form>
           </div>
-
           <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>

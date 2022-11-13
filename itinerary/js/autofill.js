@@ -451,7 +451,7 @@ fill += `
     <div class="carousel-inner">
   `
 var 
-nt_of_card = 1
+count_of_card = 1
 
 for(item of results){
   
@@ -815,7 +815,6 @@ function saveData(){
       let val_list = val.split(',')
       let id = val_list[0]
       let id_rep = val_list[1]
-
       let id_notes = id_rep.slice(0,id_rep.length-3) + 'notes2'
       let note_id = document.getElementById(id_notes)
       let notes = note_id.getElementsByClassName('textarea')
@@ -824,16 +823,6 @@ function saveData(){
         console.log(note.parentNode.id)
         note_list.push([note.innerHTML,note.parentNode.id])
       }
-
-      id_check = id_rep.slice(0,id_rep.length-3) + 'check2'
-      let check_id = document.getElementById(id_check)
-      let checks = note_id.getElementsByClassName('textarea')
-      let check_list = []
-      for(check of checks){
-        console.log(check.parentNode.id)
-        check_list.push([check.innerHTML,check.parentNode.id])
-      }
-
       let name = val_list[2]
       let lati = val_list[3]
       let lng = val_list[4]
@@ -856,8 +845,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note_list : note_list,
-          check_list : check_list
+          note_list : note_list
         })
         
       }
@@ -872,8 +860,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note_list : note_list,
-          check_list : check_list
+          note_list : note_list
         }]
       }   
       }
