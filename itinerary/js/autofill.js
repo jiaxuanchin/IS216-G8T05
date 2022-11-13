@@ -453,7 +453,7 @@ fill += `
     <div class="carousel-inner">
   `
 var 
-nt_of_card = 1
+count_of_card = 1
 
 for(item of results){
   
