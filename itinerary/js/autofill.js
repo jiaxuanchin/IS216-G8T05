@@ -887,5 +887,14 @@ function getData(){
   console.log(document.getElementsByClassName('place_info'))
 }
 
+//logout 
+let logout = document.getElementById('logout') 
+logout.addEventListener('click', logout1) 
+function logout1() { 
+    localStorage.removeItem('uid') 
+    sessionStorage.setItem('logout', true) 
+    window.location.href = '../index.html' 
+};
+
 
 
