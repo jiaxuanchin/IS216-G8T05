@@ -87,6 +87,16 @@ body, p {
   font-weight: 400;
 }
 
+/* add time background */
+input[type=text]{
+  background-color: #f0f1f4 !important;
+}
+
+/* carousel */
+.card-group{
+  height: 70px !important;
+}
+
 .input,
 .textarea {
   border: 1px solid #ccc;
@@ -1496,3 +1506,4 @@ footer
   }
 }
 /*# sourceMappingURL=style.css.map */
+
