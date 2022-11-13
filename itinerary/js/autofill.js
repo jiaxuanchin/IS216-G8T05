@@ -367,7 +367,7 @@ function callback(place, status) {
       <div class="row">
   
         <!------------- NOTE ------------------>
-        <div class="col-6">
+        <div class="col-6 mx-0">
           <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
           <br>
           <form action="#" method="get" id="form1">
@@ -647,7 +647,7 @@ function callback(place, status) {
     <div class="row">
 
       <!------------- NOTE ------------------>
-      <div class="col-6">
+      <div class="col-6  mx-0"">
         <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
         <br>
         <form action="#" method="get" id="form1">
