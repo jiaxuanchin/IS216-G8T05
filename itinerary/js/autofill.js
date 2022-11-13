@@ -484,10 +484,10 @@ for(item of results){
           <div class="col-md-4 p-0">
               <img src="${photo}" class="rounded" alt="...">
           </div>
-          <div class="col-md-7 p-0">
+          <div class="col-md-7 px-2">
               <div class="card-body p-1">
                   <h5 class="card-title text-truncate mb-0">${name}</h5>
-                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm p-1" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
+                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm p-1" style="font-size:10px;position:absolute; type="submit" class="add_recommend">ADD!</button>
               </div>
           </div>
       </div>
@@ -504,10 +504,10 @@ for(item of results){
           <div class="col-md-4 p-0">
               <img src="${photo}" class="rounded" alt="...">
           </div>
-          <div class="col-md-7 p-0">
+          <div class="col-md-7 px-2">
               <div class="card-body p-1">
                   <h5 class="card-title text-truncate mb-0">${name}</h5>
-                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
+                  <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:10px;position:absolute; type="submit" class="add_recommend">ADD!</button>
               </div>
           </div>
       </div>
@@ -524,10 +524,10 @@ for(item of results){
               <div class="col-md-4 p-0">
                   <img src="${photo}" class="rounded" alt="...">
               </div>
-              <div class="col-md-7 p-0">
+              <div class="col-md-7 px-2">
                   <div class="card-body p-1">
                       <h5 class="card-title text-truncate mb-0">${name}</h5>
-                      <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:5px;position:absolute; type="submit" class="add_recommend">ADD!</button>
+                      <button value=${place_id} onclick='add_rec(this,${num},${id})' class="btn btn-primary  btn-sm  p-1 fs-7" style="font-size:10px;position:absolute; type="submit" class="add_recommend">ADD!</button>
                   </div>
               </div>
           </div>
@@ -750,8 +750,7 @@ function removeCheckBox(id2) {
 $(id2.id).remove();
 }
 
-// $(document).keypress(function(e) { if(e.keyCode === 13) { e.preventDefault(); return false; } });
-// Dealing with Input width
+// note and checkbox on enter
 let el = document.querySelector(".input-wrap .input");
 let widthMachine = document.querySelector(".input-wrap .width-machine");
 el.addEventListener("keyup", () => {
@@ -770,6 +769,9 @@ let textarea = document.querySelector(".resize-ta");
 textarea.addEventListener("keyup", () => {
   textarea.style.height = calcHeight(textarea.value) + "px";
 });
+
+
+
 
 //add
 function saveData(){
@@ -846,4 +848,6 @@ function empty(){
 function getData(){
   console.log(document.getElementsByClassName('place_info'))
 }
+
+
 

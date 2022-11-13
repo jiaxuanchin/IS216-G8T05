@@ -127,7 +127,7 @@ function retrieveTrip() {
 }
 
 function retrieveTripDetails(item) {
-    var user = firebase.database().ref('users/'+ localStorage.getItem('uid') + '/trip/' + item);
+    var user = firebase.database().ref('users/' + localStorage.getItem('uid') + '/trip/' + item);
     user.once('value').then((snapshot) => {
         if (snapshot.exists()) {
             let response = snapshot.val();
@@ -155,17 +155,20 @@ function retrieveTripDetails(item) {
                 day: 'numeric', month: 'short', year: 'numeric'
             }).replace(/ /g, ' ');
 
+
             let img = `https://firebasestorage.googleapis.com/v0/b/adventuretime-934a2.appspot.com/o/countryimg%2F${response.country}.jpg?alt=media&token=424a7755-5b93-495b-b7ac-ec2b8c26b72c`;
             let string = `<div class="student-seat col-md-6">
                             <div class="card item">
-                                <a href=""><img src="${img}" class="card-img-top img-card" alt="${newcountry}">
+                                <div id="seeitinerary"><img src="${img}" class="card-img-top img-card" alt="${newcountry}"
+                                onerror="javascript:this.src='https://firebasestorage.googleapis.com/v0/b/adventuretime-934a2.appspot.com/o/countryimg%2FOTHERS.jpg?alt=media&token=890b1556-2697-403f-bc81-db48d4e94c00'">
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <h3>${city}, ${newcountry}</h3>
-                                            <p>${formattedstartDate} - ${formattedendDate}</p>
+                                            <h3 onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${city}, ${newcountry}</h3>
+                                            <p onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${formattedstartDate} - ${formattedendDate}</p>
                                         </p>
+                                        <p id='tripId' style='display:none;'>${item}</p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>`;
             list.innerHTML += string;
