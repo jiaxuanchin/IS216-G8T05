@@ -9,10 +9,8 @@ function getData() {
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
     var urlencoded = new URLSearchParams();
-    // urlencoded.append("client_id", "ILfIbHwTBTHJ4G9fdKlvbb1iFUogVOvG");
-    // urlencoded.append("client_secret", "1gHMAkx0CPATWhM0");
-    urlencoded.append("client_id", "Ffy13s2TnobRzyguoV54fkufTADbQIgH");
-    urlencoded.append("client_secret", "FFyNvcR95j5qkqgV");
+    urlencoded.append("client_id", "WIHYA1V2udoGJ6wByMGX7nLA8K3eIO6A");
+    urlencoded.append("client_secret", "FnOetCMokkHNTXZO");
     urlencoded.append("grant_type", "client_credentials");
 
     var requestOptions = {
@@ -70,10 +68,10 @@ function getInfo() {
             //   }
             //}
 
-            //Area Access Restrictions
+            //AREA ACCESS RESTRICTION
             const object = obj.data.areaAccessRestriction;
 
-            //Declaration Documents
+            //DECLARATION DOCUMENTS
             if (object.declarationDocuments.text === undefined) {
                 declaration_documents.innerHTMLL = `<p>NIL</p>`
             } else {
@@ -81,7 +79,7 @@ function getInfo() {
             }
             // declaration_documents.innerHTML = object.declarationDocuments.text
 
-            //Entry
+            //ENTRY
             entry_text.innerHTML = object.entry.text
             if (object.entry.ban == 'Yes') {
                 entry_ban.innerHTML = `<span class="badge text-bg-success">${object.entry.ban}</span>`
@@ -93,7 +91,7 @@ function getInfo() {
             // entry_ban.innerHTML = object.entry.ban
             entry_referencelink.innerHTML = `<a href='${object.entry.referenceLink}'>${object.entry.referenceLink}</a><br>`
 
-            //Travel Test
+            //TRAVEL TEST
             //traveltest_requirement.innerHTML = object.travelTest.isRequired
             if (object.travelTest.isRequired == 'Yes') {
                 traveltest_requirement.innerHTML = `<span class="badge text-bg-success test-style">${object.travelTest.isRequired}</span>
@@ -116,7 +114,7 @@ function getInfo() {
             // }
             //traveltest_link.innerHTML = `<a href='${object.travelTest.referenceLink}'>${object.travelTest.referenceLink}</a>`
 
-            //Travel Vaccination
+            //TRAVEL VACCINATION
             //travelvacc_requirement.innerHTML = object.travelVaccination.isRequired
             if (object.travelVaccination.isRequired == 'Yes') {
                 travelvacc_requirement.innerHTML = `<span class="badge text-bg-success">${object.travelVaccination.isRequired}</span><br><br>
@@ -134,7 +132,7 @@ function getInfo() {
             //travelvacc_details.innerHTML = object.travelVaccination.details
             //travelvacc_age.innerHTML = object.travelVaccination.minimumAge
 
-            //Quarantine Modality
+            //QUARANTINE MODALITY
             travelqt_text.innerHTML = object.travelQuarantineModality.text
             //travelqt_eligible.innerHTML = object.travelQuarantineModality.eligiblePerson
             if (object.travelQuarantineModality.eligiblePerson != 'None') {
@@ -152,7 +150,7 @@ function getInfo() {
             // travelqt_duration.innerHTML = object.travelQuarantineModality.duration
             // travelqt_link.innerHTML = `<a href='${object.travelQuarantineModality.referenceLink}'>${object.travelQuarantineModality.referenceLink}</a>`
 
-            //Tracing Application
+            //TRACING APPLICATION
             //traceapp.innerHTML = object.tracingApplication.isRequired
             if (object.tracingApplication.isRequired == 'Yes') {
                 traceapp.innerHTML = `<span class="badge text-bg-success">${object.tracingApplication.isRequired}</span>
@@ -173,11 +171,11 @@ function getInfo() {
                 traceapp.innerHTML = `<span class="badge text-bg-danger">${object.tracingApplication.isRequired}</span>`
             }
 
-            //Country's Regulations
+            //MASK REGULATION
             mask_text.innerHTML = object.masks.text
             mask_requirement.innerHTML = object.masks.isRequired
 
-            //Exit
+            //EXIT
             //(!("key" in obj)); // true if "key" doesn't exist in object
             // if (!("object.exit.text" in object.exit)) {
             if (object.exit.text === undefined) {
