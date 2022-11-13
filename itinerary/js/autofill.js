@@ -771,6 +771,7 @@ function saveData(){
           lng : lng,
           picture_url : picture_url,
           tracking : tracker
+          
         })
         
       }
