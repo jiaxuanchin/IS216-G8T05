@@ -367,7 +367,7 @@ function callback(place, status) {
       <div class="row">
   
         <!------------- NOTE ------------------>
-        <div class="col-6">
+        <div class="col-6 mx-0">
           <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
           <br>
           <form action="#" method="get" id="form1">
@@ -376,15 +376,7 @@ function callback(place, status) {
           </form>
         </div>
   
-        <!-------------CHECKLIST -------------->
-        <div class="col-6">
-          <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-          <br>
-          <form action="#" method="get" id="form2">
-          <input type="hidden" id=${id_rep+'check1'}>
-          <div class="divCheckBox" id=${id_rep+'check2'}></div>
-          </form>
-        </div>
+        
         <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
       </div>
     </div>
@@ -655,7 +647,7 @@ function callback(place, status) {
     <div class="row">
 
       <!------------- NOTE ------------------>
-      <div class="col-6">
+      <div class="col-6  mx-0"">
         <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
         <br>
         <form action="#" method="get" id="form1">
@@ -664,15 +656,7 @@ function callback(place, status) {
         </form>
       </div>
 
-      <!-------------CHECKLIST -------------->
-      <div class="col-6">
-        <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-        <br>
-        <form action="#" method="get" id="form2">
-        <input type="hidden" id=${id_rep+'check1'}>
-        <div class="divCheckBox" id=${id_rep+'check2'}></div>
-        </form>
-      </div>
+      
       <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
     </div>
   </div>
@@ -717,38 +701,8 @@ function removeFormField(id) {
   document.getElementById(id.id).remove()
 }
 
-function addCheckbox(id) {
 
-  id_origin = id
-  id = id.id
-  id2 = id.slice(0,id.length-1) +'2'
-  to_add = document.createElement('div')
-  to_add.className = 'check_field' + id_origin.id
-  
-    current_input = document.getElementsByClassName('check_field'+id_origin.id)
-    if(current_input.length == 0){
-      to_add.id = 'check_field'+ id_origin.id + 1
-    }
-    else{
-      cur_num_class = current_input[current_input.length-1].id
-      cur_num = cur_num_class[cur_num_class.length - 1]
-      console.log(cur_num)
-      to_add.id =  'check_field' + id_origin.id + (Number(cur_num)+1)
-    }
-    console.log(to_add.id)
-    to_add.innerHTML = to_add.innerHTML = `<div class="d-flex "> 
-                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" style="display:inline-block";><span class="textarea"  contenteditable ></span>
-                  <span style="margin:5px;" class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
-                  </div><br>`
-    div_element = document.getElementById(id2)
-    div_element.appendChild(to_add)
-  }
-
-function removeCheckBox(id2) {
-$(id2.id).remove();
-}
-
-// note and checkbox on enter
+// note  on enter
 let el = document.querySelector(".input-wrap .input");
 let widthMachine = document.querySelector(".input-wrap .width-machine");
 el.addEventListener("keyup", () => {

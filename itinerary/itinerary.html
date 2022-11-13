@@ -219,11 +219,9 @@
   <!-- content -->
 
 
-    <!-- Itinerary heading -->
-  <!-- Banner -->
-  <button onclick='saveData()'>SAVE</button>
-  <!-- Itinerary heading --> 
-  <!-- Banner --> 
+
+
+
   <!-- Itinerary heading --> 
   <!-- Banner --> 
   <section class="trip-name shadow px-0" id="overview"> 
@@ -232,7 +230,7 @@
         <div class="container"> 
           <div class="row"> 
             <div class="col-md-8"> 
-              <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
+              <h1 class="card-title" style="text-align:left;">Trip to <span id="data_country">South Korea</span></h1> 
               <h5 class="card-content" style="text-align:left"> 
                 <i style="font-size:24px" class="fa">&#xf073;</i> 
                 <p id="result-2" style="display:inline">&nbsp;</p></i> 
@@ -247,11 +245,12 @@
                 <span>Flights</span> 
               </button> 
               <br> 
-              <button type="button" data-bs-toggle="modal" data-bs-target="#hotelModal" 
+              <button type="button" id="openHotelModal" data-bs-toggle="modal" data-bs-target="#hotelModal" 
                 style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;"> 
                 <i class="fa fa-bed" aria-hidden="true"></i> 
                 <span>Hotel</span> 
               </button> 
+              <br>
               <button type="button" 
                 style="background: none;color: inherit;border: none;padding: 5px;font: inherit;cursor: pointer;outline: inherit;" 
                 onclick="window.open('../new_restrictions.html','_blank')"> 
@@ -445,10 +444,8 @@
 
   <!-------------------------------------Itinerary----------------------------->
 
-  <div id="itinerary" class="itinerary-heading d-flex justify-content-center mb-3">
-    <div class="container ">
+  <div id="itinerary" style="width:90%" class="container mx-auto mb-3">
       <div class="row ">
-
         <div class="col">
           <h1><strong>Itinerary</strong></h1>
         </div>
@@ -466,6 +463,7 @@
                   </i>
                 </button>
                 <button class="btn btn-primary" onclick="fill_template()">Confirm Date</button>
+                <button class="btn btn-secondary text-white mx-1" onclick='saveData()'>SAVE</button>
               </div>
               <!-- end calendar -->
 
@@ -474,7 +472,6 @@
         </div>
 
       </div>
-    </div>
   </div>
 
   <!------------------------------------ ACCORDION--------------------------------------------->
@@ -482,7 +479,7 @@
   <input type="hidden" id="origin_lng" name="origin_lng" value="None" />
   <input type="hidden" id="place_id" name="place_id" value="None" />
   <input type="hidden" id="recommended_track" name="recommended_track" value="None" />
-  <div class="container">
+  <div class="container mx-auto" style="width:90%">
     <div class="accordion accordion-flush" id="accordionFlushExample">
     </div>
     <!--end accordion-->
@@ -1254,6 +1251,11 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       //country data
       let country_split = country.split("(")
       let country_code_unclean = country_split[1]
+
+      let start_str = start.getDate() + "/"+ start.getMonth() + "/" + start.getFullYear();
+      let end_str = end.getDate() + "/"+ end.getMonth() + "/" + end.getFullYear()
+      document.getElementById('result-2').innerText = start_str + " to " + end_str;
+      document.getElementById("data_country").innerText = country_split[0]
       let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
       UpdateFromCurrency(country_code_clean)
 
@@ -1354,7 +1356,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 total_budget += budget
                 let time = place.time
                 let note = place.note
-                let check_box = place.check_box
 
                 fill.id = id_rep + 'row'
                 fill.className = "container"
@@ -1385,30 +1386,27 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
         <div class="row">
             <!------------- Budget ------------------>
+              <div class="col-10">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Budget</span>
+                    <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}" value=${budget}>
+                </div>
+              </div>
 
-            
+              </div>
 
-<div class="col-10">
-  <div class="input-group mb-3">
-      <span class="input-group-text">Budget</span>
-      <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}" value=${budget}>
-  </div>
-</div>
-
-</div>
-
-<div class="row">
-<!------------- Time ------------------>
-<div class="col-10">
-  <div class="input-group mb-3 w-80">
-    <span class="input-group-text">Time</span>
-    <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}" value=${time}>
-  </div>
-</div>
-</div>
-    
+              <div class="row">
+              <!------------- Time ------------------>
+              <div class="col-10">
+                <div class="input-group mb-3 w-80">
+                  <span class="input-group-text">Time</span>
+                  <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}" value=${time}>
+                </div>
+              </div>
+              </div>
+                  
           <!------------- NOTE ------------------>
-          <div class="col-6">
+          <div class="col-6 p-0 mx-0">
             <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep + 'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
             <br>
             <form action="#" method="get" id="form1">
@@ -1418,16 +1416,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
               +`</div>
             </form>
           </div>
-    
-          <!-------------CHECKLIST -------------->
-          <div class="col-6">
-            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-            <br>
-            <form action="#" method="get" id="form2">
-            <input type="hidden" id=${id_rep + 'check1'} value="${check_box}">
-            <div class="divCheckBox" id=${id_rep + 'check2'}></div>
-            </form>
-          </div>
+
           <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>
@@ -1476,7 +1465,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   checkHotelFlight();
   let edit_hotel = document.getElementById("edithotel");
   edit_hotel.onclick = function () {
-    call_hotel_api();
     document.getElementById("hotelnotexist").style.display = "block";
     document.getElementById("hotelexist").style.display = "none";
   }
@@ -1514,6 +1502,10 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   document.getElementById("findflight").onclick = function () {
     call_schedule_api();
     document.getElementById("flighterrormsg").style.display = "none";
+  }
+  
+  document.getElementById("openHotelModal").onclick = function () {
+    autocomplete(document.getElementById("myHotelInput"), call_hotel_api());
   }
 
   function autocomplete(inp, arr) {
@@ -1612,9 +1604,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       closeAllLists(e.target);
     });
   }
-
-  /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-  autocomplete(document.getElementById("myHotelInput"), call_hotel_api());
 </script>
 
 
