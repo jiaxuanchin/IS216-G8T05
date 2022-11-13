@@ -233,8 +233,8 @@
         console.log(localStorage.getItem('uid'))
         let userid = localStorage.getItem('uid');
         
-        function openItinerary() {
-            sessionStorage.setItem("tripId",document.getElementById("tripId").innerText);
+        function openItinerary(item) {
+            sessionStorage.setItem("tripId",item);
             window.location.href = 'itinerary/itinerary.html';
         }
 
