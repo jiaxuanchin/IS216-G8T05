@@ -10,8 +10,8 @@ function getData() {
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
   var urlencoded = new URLSearchParams();
-  urlencoded.append("client_id", "WIHYA1V2udoGJ6wByMGX7nLA8K3eIO6A");
-  urlencoded.append("client_secret", "FnOetCMokkHNTXZO");
+  urlencoded.append("client_id", "VNpZ5dQcxmAGLeHVu6kGmlG829LU8Bj2");
+  urlencoded.append("client_secret", "0fvTTv2cFsPbO5Sj");
   urlencoded.append("grant_type", "client_credentials");
 
   var requestOptions = {
