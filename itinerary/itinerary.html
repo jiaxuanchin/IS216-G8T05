@@ -152,14 +152,33 @@
 
 
 
-<body onload="checklogin()">
+
+
+
+    <!-- side bar -->
+    <div class="sidebar " style="background-color:#344648;">
+      <a class="navbar-brand text-uppercase py-0  d-flex justify-content-center"  href="home2.html">
+        <img src="images/logo.png" alt="" width="80px" style="max-width: 84px; " >
+      </a>
+      <a class="active text-white text-center"  href="#overview">Trip Overview</a>
+        <div id="dropdown-trip">
+
+        </div>
+      <a href="#itinerary" class="sidebar-link text-white text-center">Itinerary</a>
+      <a href="#budget" class="sidebar-link text-white text-center">Budget</a>
+
+    </div>
+   
+
+    <div class="content">
+      <body onload="checklogin()">
   <!----------------------------------------header-------------------------------------------------->
-  <header class="header-top bg-grey">
+  <header class="header-top bg-grey " >
     <nav class="navbar navbar-expand-md navigation-2 navigation py-1">
       <div class="container-fluid">
-        <a class="navbar-brand text-uppercase py-0" href="home2.html">
+        <!-- <a class="navbar-brand text-uppercase py-0" href="home2.html">
           <img src="images/logo.png" alt="" width="80px" style="max-width: 100px;" class="ms-4">
-        </a>
+        </a> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="ti-menu" style="color: white;"></span>
@@ -189,13 +208,11 @@
   </header>
 
   <!-- content -->
-  
 
 
-
-  <!-- Itinerary heading -->
+    <!-- Itinerary heading -->
   <!-- Banner -->
-  <section class="trip-name shadow">
+  <section class="trip-name shadow" id="overview">
     <div class="card w-50 h-200 mx-auto shadow">
       <div class="card-body ">
         <div class="container">
@@ -414,7 +431,7 @@
 
   <!-------------------------------------Itinerary----------------------------->
 
-  <div class="itinerary-heading d-flex justify-content-center mb-3">
+  <div id="itinerary" class="itinerary-heading d-flex justify-content-center mb-3">
     <div class="container ">
       <div class="row ">
 
@@ -453,14 +470,12 @@
   <input type="hidden" id="recommended_track" name="recommended_track" value="None" />
   <div class="container">
     <div class="accordion accordion-flush" id="accordionFlushExample">
-
-
     </div>
     <!--end accordion-->
   </div>
   <!--end container-->
   <p id="result-3" hidden></p>
-  <div id="carousel_num">1</div>
+  <div id="carousel_num" hidden>1</div>
 
   <!------------------------------------------Budget-------------------------------------------->
 
@@ -633,7 +648,9 @@
       </div>
     </div>
   </section>
+</div>
 
+ 
 
 
 
