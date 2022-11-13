@@ -219,11 +219,9 @@
   <!-- content -->
 
 
-    <!-- Itinerary heading -->
-  <!-- Banner -->
-  <button onclick='saveData()'>SAVE</button>
-  <!-- Itinerary heading --> 
-  <!-- Banner --> 
+
+
+
   <!-- Itinerary heading --> 
   <!-- Banner --> 
   <section class="trip-name shadow px-0" id="overview"> 
@@ -232,7 +230,7 @@
         <div class="container"> 
           <div class="row"> 
             <div class="col-md-8"> 
-              <h1 class="card-title" style="text-align:left;">Trip to South Korea</h1> 
+              <h1 class="card-title" style="text-align:left;">Trip to <span id="data_country">South Korea</span></h1> 
               <h5 class="card-content" style="text-align:left"> 
                 <i style="font-size:24px" class="fa">&#xf073;</i> 
                 <p id="result-2" style="display:inline">&nbsp;</p></i> 
@@ -445,10 +443,8 @@
 
   <!-------------------------------------Itinerary----------------------------->
 
-  <div id="itinerary" class="itinerary-heading d-flex justify-content-center mb-3">
-    <div class="container ">
+  <div id="itinerary" style="width:90%" class="container mx-auto mb-3">
       <div class="row ">
-
         <div class="col">
           <h1><strong>Itinerary</strong></h1>
         </div>
@@ -466,6 +462,7 @@
                   </i>
                 </button>
                 <button class="btn btn-primary" onclick="fill_template()">Confirm Date</button>
+                <button class="btn btn-secondary text-white mx-1" onclick='saveData()'>SAVE</button>
               </div>
               <!-- end calendar -->
 
@@ -474,7 +471,6 @@
         </div>
 
       </div>
-    </div>
   </div>
 
   <!------------------------------------ ACCORDION--------------------------------------------->
@@ -482,7 +478,7 @@
   <input type="hidden" id="origin_lng" name="origin_lng" value="None" />
   <input type="hidden" id="place_id" name="place_id" value="None" />
   <input type="hidden" id="recommended_track" name="recommended_track" value="None" />
-  <div class="container">
+  <div class="container mx-auto" style="width:90%">
     <div class="accordion accordion-flush" id="accordionFlushExample">
     </div>
     <!--end accordion-->
@@ -1254,6 +1250,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       //country data
       let country_split = country.split("(")
       let country_code_unclean = country_split[1]
+      document.getElementById("data_country").innerText = country_split[0]
       let country_code_clean = country_code_unclean.substring(0, country_code_unclean.length - 1)
       UpdateFromCurrency(country_code_clean)
 
