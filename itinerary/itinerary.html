@@ -1308,6 +1308,18 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let lng = place.lng
                 let tracking = place.tracking
                 let fill = document.createElement('div');
+                let note_list = place.note_list 
+                let note_add = ''
+                if(note_list != undefined){
+                  note_add = document.createElement('div')
+                  for(item of note_list){
+                    let item_text = item[0]
+                    let item_id = item[1]
+                    note_add.innerHTML += `<div class="d-flex" id=${item_id}>
+                 <span class="textarea" contenteditable ">${item_text}</span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${item_id})></span>
+                  </div><br>`
+                }
+                }
 
                 let budget = place.budget
                 let time = place.time
@@ -1371,7 +1383,9 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             <br>
             <form action="#" method="get" id="form1">
               <input type="hidden" id=${id_rep + 'notes1'}>
-              <div class="divTxt" id=${id_rep + 'notes2'} value="${note}"></div>
+              <div class="divTxt" id=${id_rep + 'notes2'}>`+ note_add.innerHTML
+                
+              +`</div>
             </form>
           </div>
     
