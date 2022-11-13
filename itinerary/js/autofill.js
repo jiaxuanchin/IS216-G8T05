@@ -708,7 +708,8 @@ function addFormField(id) {
       console.log(cur_num)
       to_add.id =  'input_field' + id_origin.id + (Number(cur_num)+1)
     }
-    to_add.innerHTML = `<div class="d-flex ">
+    console.log(to_add.id)
+    to_add.innerHTML = `<div class="d-flex" id=${to_add.id}>
             <span class="textarea" contenteditable "></span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${to_add.id})></span>
             </div><br>`
     div_element = document.getElementById(id2)
@@ -817,6 +818,13 @@ function saveData(){
       let val_list = val.split(',')
       let id = val_list[0]
       let id_rep = val_list[1]
+      let id_notes = id_rep.slice(0,id_rep.length-3) + 'notes2'
+      let note_id = document.getElementById(id_notes)
+      let notes = note_id.getElementsByClassName('textarea')
+      let note_list = []
+      for(note of notes){
+        note_list.push([note.innerHTML,note.parentNode.id])
+      }
       let name = val_list[2]
       let lati = val_list[3]
       let lng = val_list[4]
@@ -824,8 +832,7 @@ function saveData(){
       let tracker = val_list[6]
       let budget = document.getElementById(id_rep.slice(0,id_rep.length-3)+"budget").value
       let time = document.getElementById(id_rep.slice(0,id_rep.length-3)+"time").value
-      let note = document.getElementById(id_rep.slice(0,id_rep.length-3)+"notes2").innerText
-      let check_box = document.getElementById(id_rep.slice(0,id_rep.length-3)+"check2").innerText
+  
       if(obj[tracker] != undefined){
         obj[tracker].push({
           id : id,
@@ -837,8 +844,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note: note,
-          check_box: check_box
+          note_list : note_list
         })
         
       }
@@ -853,8 +859,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note: note,
-          check_box: check_box
+          note_list : note_list
         }]
       }   
       }
