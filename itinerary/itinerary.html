@@ -208,7 +208,7 @@
   </header>
 
   <!-- content -->
-
+ 
 
     <!-- Itinerary heading -->
   <!-- Banner -->
@@ -429,10 +429,11 @@
     </div>
   </div>
 
-  <!-------------------------------------Itinerary----------------------------->
   <button onclick="empty()">empty</button>
-<button onclick="saveData()">SAVE</button>
-<button onclick="getData()">get</button>
+  <button onclick="saveData()">SAVE</button>
+  <button onclick="getData()">get</button>
+
+  <!-------------------------------------Itinerary----------------------------->
 
   <div id="itinerary" class="itinerary-heading d-flex justify-content-center mb-3">
     <div class="container ">
@@ -1361,8 +1362,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
           <div class="col-10">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
-                <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
+                <span class="input-group-text" >Budget</span>
+                <input type="number" class="form-control" id="${id_rep} + 'budget'" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
             </div>
           </div>
 
@@ -1372,8 +1373,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
           <!------------- Time ------------------>
           <div class="col-10">
             <div class="input-group mb-3 w-80">
-              <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
-              <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
+              <span class="input-group-text" >Time</span>
+              <input type="text" class="form-control" id="${id_rep} + 'time'" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
             </div>
           </div>
         </div>
