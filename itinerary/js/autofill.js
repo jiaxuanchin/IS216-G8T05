@@ -347,8 +347,8 @@ function callback(place, status) {
 
         <div class="col-10">
           <div class="input-group mb-3">
-              <span class="input-group-text">Budget</span>
-              <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep}budget">
+          <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
+          <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
           </div>
         </div>
 
@@ -358,8 +358,8 @@ function callback(place, status) {
         <!------------- Time ------------------>
         <div class="col-10">
           <div class="input-group mb-3 w-80">
-            <span class="input-group-text">Time</span>
-            <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep}time">
+          <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
+          <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
           </div>
         </div>
       </div>
@@ -637,8 +637,8 @@ function callback(place, status) {
 
       <div class="col-10">
         <div class="input-group mb-3">
-            <span class="input-group-text">Budget</span>
-            <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep}budget">
+        <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
+        <input type="number" class="form-control" placeholder="budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'" value=${budget}>
         </div>
       </div>
 
@@ -648,8 +648,8 @@ function callback(place, status) {
       <!------------- Time ------------------>
       <div class="col-10">
         <div class="input-group mb-3 w-80">
-          <span class="input-group-text">Time</span>
-          <input type="text" class="form-control" placeholder="Add time" aria-label="time" id="${id_rep}time">
+        <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
+        <input type="text" class="form-control" placeholder="time" aria-label="time" aria-describedby="${id_rep} + 'time'" value="${time}"">
         </div>
       </div>
     </div>
