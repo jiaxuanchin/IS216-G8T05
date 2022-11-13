@@ -1264,6 +1264,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
       let text = document.getElementById('result-3').innerHTML
       let date_list = text.split(',')
       console.log(date_list.length)
+      var total_budget = 0
+      
       for (let i = 0; i < date_list.length; i++) {
         console.log(i)
         let skip_index = 0
@@ -1320,6 +1322,8 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             console.log(childSnapshot.val())
             if (i == childSnapshot.key) {
               let place_info = childSnapshot.val()
+              
+
               for (let place of place_info) {
                 let id = place.id
                 let name = place.name
@@ -1336,15 +1340,18 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                   console.log(note_list)
                   note_add = document.createElement('div')
                   for(item of note_list){
+                    console.log(item,"return the item here")
                     let item_text = item[0]
                     let item_id = item[1]
                     note_add.innerHTML += `<div class="d-flex" id=${item_id}>
                  <span class="textarea" contenteditable ">${item_text}</span><span style='margin: 5px;' class='fa fa-trash' onclick=removeFormField(${item_id})></span>
                   </div><br>`
+                  console.log(item_id,"item id from itinerary here")
                 }
                 }
 
                 let budget = place.budget
+                total_budget += budget
                 let time = place.time
                 let note = place.note
                 let check_box = place.check_box
@@ -1437,10 +1444,14 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
             }
           })
         });
+        console.log(total_budget,"HEREE IS THE TOTAL BUDGET")
+        budget.amount  = total_budget
       }
     });
-
+    
+    
   }
+  
   first()
 
 
