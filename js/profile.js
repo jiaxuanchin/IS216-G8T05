@@ -158,14 +158,15 @@ function retrieveTripDetails(item) {
             let img = `https://firebasestorage.googleapis.com/v0/b/adventuretime-934a2.appspot.com/o/countryimg%2F${response.country}.jpg?alt=media&token=424a7755-5b93-495b-b7ac-ec2b8c26b72c`;
             let string = `<div class="student-seat col-md-6">
                             <div class="card item">
-                                <a href=""><img src="${img}" class="card-img-top img-card" alt="${newcountry}">
+                                <div id="seeitinerary"><img src="${img}" class="card-img-top img-card" alt="${newcountry}">
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <h3>${city}, ${newcountry}</h3>
-                                            <p>${formattedstartDate} - ${formattedendDate}</p>
+                                            <h3 onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${city}, ${newcountry}</h3>
+                                            <p onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${formattedstartDate} - ${formattedendDate}</p>
                                         </p>
+                                        <p id='tripId' style='display:none;'>${item}</p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>`;
             list.innerHTML += string;

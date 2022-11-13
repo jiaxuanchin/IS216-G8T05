@@ -92,7 +92,7 @@
                             <br><br>
                             <div class="form-row text-center">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary" onclick="editProfile()">Edit</button>
+                                    <button type="submit" class="btn" style="background-color:#ce8460;" onclick="editProfile()">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -102,11 +102,11 @@
                             <input type="file" id="files" name="files[]" multiple />
                             <br><br>
                             <label for="newemail">Email :</label><br>
-                            <input type="email" id="newemail" class="w-100">
+                            <input type="email" id="newemail" class="w-100" disabled>
                             <br><br>
                             <div class="form-row text-center">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary"
+                                    <button type="submit" class="btn" style="background-color:#ce8460;"
                                         onclick="updateProfile()">Change</button>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                 <div class="profile-page">
                     <div id="initial" class="col-md-12 d-flex">
                         <h1>My Trip</h1>
-                        <button class="btn btn-primary ml-auto" type="button"
+                        <button class="btn ml-auto" type="button" style="background-color:#ce8460;"
                             onclick="window.location.href='createtrip.html';">Create trip NOW</button>
                     </div>
                 </div>
@@ -142,6 +142,7 @@
             </div>
         </div>
     </div>
+    <br><br>
 
 
     <!--footer-->
@@ -221,6 +222,11 @@
         }
         console.log(localStorage.getItem('uid'))
         let userid = localStorage.getItem('uid');
+        
+        function openItinerary() {
+            sessionStorage.setItem("tripId",document.getElementById("tripId").innerText);
+            window.location.href = 'itinerary/itinerary.html';
+        }
     </script>
 
     <script type="module">
