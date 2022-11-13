@@ -163,10 +163,10 @@ function retrieveTripDetails(item) {
                                 onerror="javascript:this.src='https://firebasestorage.googleapis.com/v0/b/adventuretime-934a2.appspot.com/o/countryimg%2FOTHERS.jpg?alt=media&token=890b1556-2697-403f-bc81-db48d4e94c00'">
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <h3 onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${city}, ${newcountry}</h3>
-                                            <p onclick="openItinerary()" style='color:blue;text-decoration: underline;'>${formattedstartDate} - ${formattedendDate}</p>
+                                            <h3 onclick="openItinerary(${item})" style='color:blue;text-decoration: underline;'>${city}, ${newcountry}</h3>
+                                            <p onclick="openItinerary(${item})" style='color:blue;text-decoration: underline;'>${formattedstartDate} - ${formattedendDate}</p>
                                         </p>
-                                        <p id='tripId' style='display:none;'>${item}</p>
+                                        <p style='display:none;'>${item}</p>
                                     </div>
                                 </div>
                             </div>
