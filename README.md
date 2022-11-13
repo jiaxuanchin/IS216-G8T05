@@ -12,5 +12,7 @@ How to Install and Run the Project:
 4. You can navigate the website now
 
 Navigate path:
+
 Path 1: Index → Sign Up → Login → Home → Add New Trip → Restrictions → Itinerary → Logout
+
 Path 2: Index → Login → Home → Profile → Itinerary → Logout
