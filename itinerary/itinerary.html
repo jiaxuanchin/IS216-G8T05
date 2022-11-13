@@ -1454,8 +1454,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
   checkHotelFlight();
   let edit_hotel = document.getElementById("edithotel");
   edit_hotel.onclick = function () {
-    /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-	autocomplete(document.getElementById("myHotelInput"), call_hotel_api());
     document.getElementById("hotelnotexist").style.display = "block";
     document.getElementById("hotelexist").style.display = "none";
   }
