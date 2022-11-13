@@ -1344,7 +1344,6 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
                 let budget = place.budget
                 let time = place.time
                 let note = place.note
-                let check_box = place.check_box
 
                 fill.id = id_rep + 'row'
                 fill.className = "container"
@@ -1375,28 +1374,25 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
 
         <div class="row">
             <!------------- Budget ------------------>
+              <div class="col-10">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Budget</span>
+                    <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}" value=${budget}>
+                </div>
+              </div>
 
-            
+              </div>
 
-<div class="col-10">
-  <div class="input-group mb-3">
-      <span class="input-group-text">Budget</span>
-      <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep+'budget'}" value=${budget}>
-  </div>
-</div>
-
-</div>
-
-<div class="row">
-<!------------- Time ------------------>
-<div class="col-10">
-  <div class="input-group mb-3 w-80">
-    <span class="input-group-text">Time</span>
-    <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}" value=${time}>
-  </div>
-</div>
-</div>
-    
+              <div class="row">
+              <!------------- Time ------------------>
+              <div class="col-10">
+                <div class="input-group mb-3 w-80">
+                  <span class="input-group-text">Time</span>
+                  <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep+'time'}" value=${time}>
+                </div>
+              </div>
+              </div>
+                  
           <!------------- NOTE ------------------>
           <div class="col-6">
             <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep + 'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
@@ -1408,16 +1404,7 @@ Zimbabwe	ZW	ZWE	Zimbabwean Dollar	ZWL
               +`</div>
             </form>
           </div>
-    
-          <!-------------CHECKLIST -------------->
-          <div class="col-6">
-            <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep + 'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-            <br>
-            <form action="#" method="get" id="form2">
-            <input type="hidden" id=${id_rep + 'check1'} value="${check_box}">
-            <div class="divCheckBox" id=${id_rep + 'check2'}></div>
-            </form>
-          </div>
+
           <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${tracking}</div>
         </div>
       </div>
