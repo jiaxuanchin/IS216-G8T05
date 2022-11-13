@@ -374,10 +374,6 @@ function callback(place, status) {
             <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable "></div>
           </div><br>
           <br>
-          <form action="#" method="get" id="form1">
-            <input type="hidden" id=${id_rep+'notes1'}>
-            <div class="divTxt" id=${id_rep+'notes2'}></div>
-          </form>
         </div>
   
         
@@ -658,10 +654,6 @@ function callback(place, status) {
             <div class="textarea mx-1" id=${id_rep+'notes2'} contenteditable "></div>
           </div><br>
           <br>
-          <form action="#" method="get" id="form1">
-            <input type="hidden" id=${id_rep+'notes1'}>
-            <div class="divTxt" id=${id_rep+'notes2'}></div>
-          </form>
         </div>
 
       
@@ -778,13 +770,10 @@ function saveData(){
       let id = val_list[0]
       let id_rep = val_list[1]
       let id_notes = id_rep.slice(0,id_rep.length-3) + 'notes2'
-      let note_id = document.getElementById(id_notes)
-      let notes = note_id.getElementsByClassName('textarea')
-      let note_list = []
-      for(note of notes){
-        console.log(note.parentNode.id)
-        note_list.push([note.innerHTML,note.parentNode.id])
-      }
+      console.log(document.getElementById(id_notes).innerHTML)
+      let note_text = document.getElementById(id_notes).innerHTML
+      console.log(note_text)
+
       let name = val_list[2]
       let lati = val_list[3]
       let lng = val_list[4]
@@ -807,7 +796,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note_list : note_list
+          note_text : note_text
         })
         
       }
@@ -822,7 +811,7 @@ function saveData(){
           tracking : tracker,
           budget: budget,
           time: time,
-          note_list : note_list
+          note_text : note_text
         }]
       }   
       }
