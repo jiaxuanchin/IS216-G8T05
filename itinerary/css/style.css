@@ -419,6 +419,8 @@ blockquote {
   display: none;
 }
 
+
+
 .navbar-nav .nav-link {
   transition: all 500ms ease;
   -moz-transition: all 500ms ease;
@@ -430,6 +432,7 @@ blockquote {
   font-size: 14px;
   font-weight: 600;
   padding: 25px 0px;
+ 
 }
 .navbar-nav .nav-link:hover {
   color: #ce8460 !important;
@@ -647,11 +650,21 @@ overlay search
     width: 70%;
   }
 }
+
 .sidebar {
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
+  background-color: #344648;
+  display: inline-block;
+  line-height: 26px;
+  letter-spacing: 1px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+    
 }
 
 .content {
@@ -1153,6 +1166,13 @@ overlay search
     bottom: 0px;
   }
 }
+
+
+
+.sidebar-link:hover{
+  color: #ce8460 !important;
+}
+/* 
 .sidebar-widget .widget-title {
   text-transform: uppercase;
   font-size: 16px;
@@ -1201,7 +1221,7 @@ overlay search
   padding: 5px 12px;
   display: inline-block;
   margin-bottom: 5px;
-}
+} */
 
 .follow-socials a {
   width: 50px;
@@ -1218,12 +1238,12 @@ overlay search
   color: #fff;
 }
 
-.sidebar-post-item span {
+/* .sidebar-post-item span {
   font-size: 12px;
 }
 .sidebar-post-item img {
   width: 100px;
-}
+} */
 
 .post-meta li {
   text-transform: uppercase;
@@ -1507,3 +1527,63 @@ footer
 }
 /*# sourceMappingURL=style.css.map */
 
+/* side bar */
+/* Toggle Styles */
+ 
+    /* The side navigation menu */
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 170px;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    
+    /* Sidebar links */
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 20px;
+      text-decoration: none;
+      /* padding-left: 50px; */
+    }
+    
+    /* Active/current link */
+    /* .sidebar a.active {
+      color: #ce8460 !important;
+    } */
+    
+    /* Links on mouse-over */
+    .sidebar a:hover {
+      /* background-color: #555; */
+      /* color: white; */
+      color: #ce8460 !important;
+    }
+    
+    /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+    div.content {
+      margin-left: 170px;
+      padding: 0px ;
+      height: 1000px;
+    }
+    
+    /* On screens that are less than 700px wide, make the sidebar into a topbar */
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .sidebar a {float: left;}
+      div.content {margin-left: 0;}
+    }
+    
+    /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }

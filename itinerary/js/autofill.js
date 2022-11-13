@@ -301,6 +301,7 @@ service = new google.maps.places.PlacesService(map);
 service.getDetails(request, callback);
 
 function callback(place, status) {
+
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     if(place.photos[0] != undefined){
       picture_url = place.photos[0].getUrl({
@@ -313,6 +314,7 @@ function callback(place, status) {
    for(let i=0;i<10;i++){
     id_rep = id_rep.replace('-','_')
    }
+   console.log(id_rep,"ID REPP EHRE")
    fill.id = id_rep + 'row'
    fill.className = "container";
    fill.innerHTML = `
@@ -345,8 +347,8 @@ function callback(place, status) {
 
         <div class="col-10">
           <div class="input-group mb-3">
-              <span class="input-group-text" id="${id_rep} + 'budget'">Budget</span>
-              <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" aria-describedby="${id_rep} + 'activity'">
+              <span class="input-group-text">Budget</span>
+              <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep}budget">
           </div>
         </div>
 
@@ -356,8 +358,8 @@ function callback(place, status) {
         <!------------- Time ------------------>
         <div class="col-10">
           <div class="input-group mb-3 w-80">
-            <span class="input-group-text" id="${id_rep} + 'time'">Time</span>
-            <input type="text" class="form-control" placeholder="Add time" aria-label="time" aria-describedby="${id_rep} + 'time'">
+            <span class="input-group-text">Time</span>
+            <input type="text" class="form-control" placeholder="Add time" aria-label="time" 'time'" id="${id_rep}time">
           </div>
         </div>
       </div>
@@ -394,6 +396,8 @@ function callback(place, status) {
   }
   }
   }
+
+  
 
 function removePlace(id){
 console.log('hello')
@@ -448,7 +452,8 @@ fill += `
   <div id=${id} class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
   `
-var count_of_card = 1
+var 
+nt_of_card = 1
 
 for(item of results){
   
@@ -597,62 +602,83 @@ function callback(place, status) {
    for(let i=0;i<10;i++){
     id_rep = id_rep.replace('-','_')
    }
-   console.log(id_rep)
+   console.log(id_rep, "id rep here2 ")
    let name = place.name
    let fill = document.createElement('div');
    fill.id = id_rep + 'row'
    fill.className = "container";
    fill.innerHTML = `
-   <div class="row my-2" id=''>
-     <div class="col mb-2 rounded p-3 bg-light" >
-       <h3>
-          ${name}
-           <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
-       </h3>
-     <div>
-     
-   </div>
-  
-  <div class="row" > 
-   <div class="col-4">
-     <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
-     <br>
-     <div hidden class='get_distance'>${id},${lati},${lng}</div>
-     <p>
-     <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
-     <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
-     <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
-   
-     <div class="distance" id=${id}></div>
-     </p>
-   </div>
-  
-   <div class="col-8"> 
-     <div class="row">
-  
-       <div class="col-6">
-         <!------------- NOTE ------------------>
-         <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
-         <br>
-         <form action="#" method="get" id="form1">
-           <input type="hidden" id=${id_rep+'notes1'}>
-           <div class="divTxt" id=${id_rep+'notes2'}></div>
-         </form>
-       </div>
-  
-       <!-------------CHECKLIST -------------->
-       <div class="col-6">
-         <button class="btn btn-new-grey mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
-         <br>
-         <form action="#" method="get" id="form2">
-          <input type="hidden" id=${id_rep+'check1'}>
-          <div class="divCheckBox" id=${id_rep+'check2'}></div>
-         </form>
-       </div>
-       <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
-     </div>
-   </div>
-   </div>
+    <div class="row my-2">
+    <div class="col mb-2 rounded p-3 bg-light" >
+      <h3>${name}
+        <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+      </h3>
+    <div>
+  </div>
+  <div class="row">
+
+  <div class="col-4">
+    <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
+    <br>
+    <div hidden class='get_distance'>${id},${lati},${lng}</div>
+    <p>
+    <button value=${id} onclick='getDistance_Drive(this)' class="btn" id="button_drive"><i class="fa fa-car"></i>car</button>
+    <button value=${id} onclick='getDistance_transit(this)' class="btn " id ='Transit'><i class="fa fa-subway"></i>public transport</button>
+    <button value=${id} onclick='getDistance_walk(this)' class="btn" id="walking"><i class="fas fa-walking"></i>walking</button>
+
+    <div class="distance" id=${id}></div>
+    </p>
+  </div>
+
+  <div class="col-8"> 
+
+    <div class="row">
+        <!------------- Budget ------------------>
+
+      <div class="col-10">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Budget</span>
+            <input type="number" class="form-control" placeholder="Add budget" aria-label="budget" id="${id_rep}budget">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <!------------- Time ------------------>
+      <div class="col-10">
+        <div class="input-group mb-3 w-80">
+          <span class="input-group-text">Time</span>
+          <input type="text" class="form-control" placeholder="Add time" aria-label="time" id="${id_rep}time">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <!------------- NOTE ------------------>
+      <div class="col-6">
+        <button class="btn btn-new-grey mb-3" href="#" onClick="addFormField(${id_rep+'notes1'}); return false;">+Note &nbsp;<i class="fa fa-sticky-note"></i></button>
+        <br>
+        <form action="#" method="get" id="form1">
+          <input type="hidden" id=${id_rep+'notes1'}>
+          <div class="divTxt" id=${id_rep+'notes2'}></div>
+        </form>
+      </div>
+
+      <!-------------CHECKLIST -------------->
+      <div class="col-6">
+        <button class="btn btn-new-grey  mb-3" href="#" onClick="addCheckbox(${id_rep+'check1'}); return false;">+Checklist &nbsp;<i class="fa fa-check-square"></i></button>
+        <br>
+        <form action="#" method="get" id="form2">
+        <input type="hidden" id=${id_rep+'check1'}>
+        <div class="divCheckBox" id=${id_rep+'check2'}></div>
+        </form>
+      </div>
+      <div hidden class='getAllVal'>${id},${id_rep+'row'},${name},${lati},${lng},${picture_url},${track}</div>
+    </div>
+  </div>
+  </div>
   </div>
   `
    //let parent = document.getElementById('place_info')
@@ -660,6 +686,7 @@ function callback(place, status) {
    console.log(parent)
    parent.appendChild(fill)
   }
+  
   }
   }
 
@@ -743,6 +770,38 @@ textarea.addEventListener("keyup", () => {
   textarea.style.height = calcHeight(textarea.value) + "px";
 });
 
+//side bar
+$("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
+$("#menu-toggle-2").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled-2");
+  $('#menu ul').hide();
+});
+
+function initMenu() {
+  $('#menu ul').hide();
+  $('#menu ul').children('.current').parent().show();
+  //$('#menu ul:first').show();
+  $('#menu li a').click(
+     function() {
+        var checkElement = $(this).next();
+        if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+           return false;
+        }
+        if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+           $('#menu ul:visible').slideUp('normal');
+           checkElement.slideDown('normal');
+           return false;
+        }
+     }
+  );
+}
+$(document).ready(function() {
+  initMenu();
+});
 
 
 
@@ -763,7 +822,10 @@ function saveData(){
       let lng = val_list[4]
       let picture_url = val_list[5]
       let tracker = val_list[6]
-      console.log('tracker for' + name + ' '+tracker)
+      let budget = document.getElementById(id_rep.slice(0,id_rep.length-3)+"budget").value
+      let time = document.getElementById(id_rep.slice(0,id_rep.length-3)+"time").value
+      let note = document.getElementById(id_rep.slice(0,id_rep.length-3)+"notes2").innerText
+      let check_box = document.getElementById(id_rep.slice(0,id_rep.length-3)+"check2").innerText
       if(obj[tracker] != undefined){
         obj[tracker].push({
           id : id,
@@ -772,8 +834,11 @@ function saveData(){
           lati: lati,
           lng : lng,
           picture_url : picture_url,
-          tracking : tracker
-          
+          tracking : tracker,
+          budget: budget,
+          time: time,
+          note: note,
+          check_box: check_box
         })
         
       }
@@ -785,7 +850,11 @@ function saveData(){
           lati: lati,
           lng : lng,
           picture_url : picture_url,
-          tracking : tracker
+          tracking : tracker,
+          budget: budget,
+          time: time,
+          note: note,
+          check_box: check_box
         }]
       }   
       }
