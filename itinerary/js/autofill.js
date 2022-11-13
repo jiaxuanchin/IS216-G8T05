@@ -321,7 +321,7 @@ function callback(place, status) {
     <div class="row my-2">
       <div class="col mb-2 rounded p-3 bg-light" >
         <h3>${name}
-         <span style='float:right' class='fa fa-trash ' onClick="removePlace(${id_rep+'row'})"></span>
+         <span style='float:right' class='fa fa-trash ' onClick=" removePlace(${id_rep+'row'}) "></span>
         </h3>
       <div>
     </div>
