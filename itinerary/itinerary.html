@@ -43,9 +43,6 @@
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://unpkg.com/vue@next"></script>
 
-  <!--Google charts-->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
   <!-- This is the API from Firebase Realtime Database -->
@@ -506,55 +503,6 @@
       </div>
 
       <div class="col-lg-4 col-sm-12 justify-content-end">
-        <!--Button to launch modal-->
-        <button type="button" class="btn btn-primary" style="float:right; margin-bottom: 2px; width: 230px; text-align: center;"
-          data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <h7 class="fw-bold"><i style="font-size:12px" class="fa">&#xf155;</i> Category Breakdown</h7>
-        </button><br>
-
-        <!--Modal content-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-          <div class="modal-dialog">
-
-            <div class="modal-content">
-
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Spending Breakdown</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-
-              <div class="modal-body">
-
-                <!--This is the buttons to togger the content within modal-->
-                <div class="btn-group me-2" role="group" aria-label="First group">
-                  <button v-on:click="catShowTableView()" type="button" class="btn btn-primary ">Table View</button>
-                  <button v-on:click="catShowBarView()" type="button" class="btn btn-primary">Bar View</button>
-                </div>
-
-                <br><br>
-
-                <!--Chart View-->
-                <div v-show="catBarView">
-                  <h7 class="fw-bold">Bar View</h7>
-                  <div id="bar_chart_div"></div>
-                </div>
-
-                <!--Table View-->
-                <div v-show="catTableView">
-                  <h7 class="fw-bold">Table View</h7>
-                  <div id="table_div"></div>
-                </div>
-
-              </div>
-              <!--End of modal body-->
-
-            </div>
-
-          </div>
-
-        </div>
-        <!--End of modal content-->
 
         <!--Button to launch modal for currency-->
         <button type="button" class="btn btn-primary" style="float:right; width: 230px; text-align: center;" data-bs-toggle="modal"
@@ -723,64 +671,6 @@
 
 </script>
 
-<!--Google bar charts to show-->
-<script>
-  google.charts.load('current', { packages: ['corechart', 'bar'] });
-  google.charts.setOnLoadCallback(drawBasic);
-
-  function drawBasic() {
-
-    // The data here can be changed
-    var data = google.visualization.arrayToDataTable([
-      ['Activity', 'Price'],
-      ['Sentosa', 300],
-      ['Wild Wild Wet', 30],
-      ['Singapore Zoo', 300],
-      ['Adventure Colve', 2032],
-      ['Marina Bay Sands', 4503]
-    ]);
-
-    //The data here can be changed 
-    var options = {
-      title: 'Category Spending Breakdown',
-      chartArea: { width: '90%' },
-      hAxis: {
-        title: 'Price',
-        minValue: 0
-      },
-      vAxis: {
-        title: 'Activity'
-      }
-    };
-
-    var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
-
-    chart.draw(data, options);
-  }
-</script>
-
-<!--Google table charts to show-->
-<script>
-  google.charts.load('current', { 'packages': ['table'] });
-  google.charts.setOnLoadCallback(drawTable);
-
-  function drawTable() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Activity');
-    data.addColumn('number', 'Price');
-    data.addRows([
-      ['Sentosa', 300],
-      ['Wild Wild Wet', 30],
-      ['Singapore Zoo', 300],
-      ['Adventure Colve', 2032],
-      ['Marina Bay Sands', 4503]
-    ]);
-
-    var table = new google.visualization.Table(document.getElementById('table_div'));
-
-    table.draw(data, { showRowNumber: true, width: '100%', height: '100%' });
-  }
-</script>
 
 <!--Vue instance for generation of budget total amount and currency-->
 <script>
