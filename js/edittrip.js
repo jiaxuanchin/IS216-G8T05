@@ -6,7 +6,7 @@ function call_all_airlines_api() {
         method: 'GET',
         url: 'https://iata-and-icao-codes.p.rapidapi.com/airlines',
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com'
         }
     };
@@ -73,7 +73,7 @@ function call_hotel_api() {
         url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
         params: { locale: 'en-gb', name: input },
         headers: {
-            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
+            'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
             'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     };
@@ -104,7 +104,7 @@ function call_hotel_api() {
                     room_number: '1'
                 },
                 headers: {
-                    'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
+                    'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
                     'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             };
@@ -152,7 +152,7 @@ function call_schedule_api() {
         method: 'GET',
         url: `https://aerodatabox.p.rapidapi.com/flights/number/${departureflightno}/${result}`,
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
         }
     };
@@ -210,7 +210,7 @@ function call_airlines_schedule_api(depart_result) {
         method: 'GET',
         url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
         }
     };

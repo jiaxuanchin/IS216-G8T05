@@ -51,7 +51,7 @@ function call_all_airlines_api() {
         method: 'GET',
         url: 'https://iata-and-icao-codes.p.rapidapi.com/airlines',
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'iata-and-icao-codes.p.rapidapi.com'
         }
     };
@@ -117,7 +117,7 @@ function call_schedule_api() {
         method: 'GET',
         url: `https://aerodatabox.p.rapidapi.com/flights/number/${departureflightno}/${result}`,
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
         }
     };
@@ -175,7 +175,7 @@ function call_schedule_api2(depart_result) {
         method: 'GET',
         url: `https://aerodatabox.p.rapidapi.com/flights/number/${arrivalflightno}/${result}`,
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
         }
     };
@@ -273,7 +273,7 @@ function city_list() {
         method: 'GET',
         url: 'https://city-list.p.rapidapi.com/api/getCity/' + city,
         headers: {
-            'X-RapidAPI-Key': '890cb1b4c6mshcd940a491c340d9p1ab5a5jsn14faf23b9e1f',
+            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
             'X-RapidAPI-Host': 'city-list.p.rapidapi.com'
         }
     };
@@ -320,7 +320,7 @@ function call_hotel_api() {
         url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
         params: { locale: 'en-gb', name: input },
         headers: {
-            'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
+            'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
             'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
         }
     };
@@ -351,7 +351,7 @@ function call_hotel_api() {
                     room_number: '1'
                 },
                 headers: {
-                    'X-RapidAPI-Key': '4f7618f0c7msh976688b82e5bb70p1973d0jsn25598be7fb57',
+                    'X-RapidAPI-Key': '25c1e79b86msh26ff571ca0896b4p1095cajsn6e8223b65455',
                     'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
                 }
             };
@@ -426,12 +426,12 @@ function insertTripDetails() {
         let da_time = document.getElementById("da_time").innerText;
 
         depature_details = {
-            'arrival_airlines': airlinesfrom, 'arrival_flight_number': flightfrom, 'arrival_date': fromdate,
+            'arrival_airlines': airlinesfrom, 'arrival_flight_number': flightfrom, 'arrival_date': todate,
             'depart_airport': rd_airport, 'depart_time': rd_time, 'arrival_airport': ra_airport, 'arrival_time': ra_time
         };
 
         arrival_details = {
-            'departure_airlines': airlinesto, 'departure_flight_number': flightto, 'departure_date': todate,
+            'departure_airlines': airlinesto, 'departure_flight_number': flightto, 'departure_date': fromdate,
             'depart_airport': dd_airport, 'depart_time': dd_time, 'arrival_airport': da_airport, 'arrival_time': da_time
         };
     }
