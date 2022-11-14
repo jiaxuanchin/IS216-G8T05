@@ -327,7 +327,7 @@ function callback(place, status) {
     </div>
    <div class="row">
   
-    <div class="col-4">
+    <div class="col-sm-4">
       <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
       <br>
       <div hidden class='get_distance'>${id},${lati},${lng}</div>
@@ -340,7 +340,7 @@ function callback(place, status) {
       </p>
     </div>
     
-    <div class="col-8"> 
+    <div class="col-sm-8"> 
 
       <div class="row">
           <!------------- Budget ------------------>
@@ -607,7 +607,7 @@ function callback(place, status) {
   </div>
   <div class="row">
 
-  <div class="col-4">
+  <div class="col-sm-4">
     <img src=${picture_url} alt="" style="width: 150px; height: 150px;">
     <br>
     <div hidden class='get_distance'>${id},${lati},${lng}</div>
